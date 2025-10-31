@@ -1,0 +1,96 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Global: ignore everything by default
+# ──────────────────────────────────────────────────────────────────────────────
+/*
+
+# Keep this file and a few root-level helpers
+!.gitignore
+!README.md
+!anki-tex.yml
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Active course folders (EDIT THIS LIST)
+# Only these directories (and their contents, subject to the rules below) can be tracked.
+# Add/remove lines as your active courses change.
+# ──────────────────────────────────────────────────────────────────────────────
+!DiffTop/
+!PDE/
+!ComAn/
+!QFT/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# By default, still ignore everything INSIDE those folders…
+# (We’ll selectively unignore .tex next.)
+# ──────────────────────────────────────────────────────────────────────────────
+DiffTop/*
+PDE/*
+Complex/*
+QFT/*
+
+# …but allow .tex files anywhere within them (top-level and subfolders)
+!DiffTop/*.tex
+!DiffTop/**/*.tex
+
+!PDE/*.tex
+!PDE/**/*.tex
+
+!Complex/*.tex
+!Complex/**/*.tex
+
+!QFT/*.tex
+!QFT/**/*.tex
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Safety net: never commit build artifacts / heavy outputs even if patterns
+# above change later.
+# (Most are already excluded by the “only .tex” rule, but keep these for clarity.)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.pdf
+*.ps
+*.snm
+*.synctex
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# latexmk and arara
+*.latexmk
+*.dvi
+*.run.xml
+
+# minted/Pygments cache
+_minted*/
+*.pyg
+
+# Common temp/OS/editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+*~
+.idea/
+.vscode/
+
+# TeX build dirs often used by templates
+**/build/
+**/out/
+**/tmp/

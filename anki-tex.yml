@@ -1,0 +1,84 @@
+# AnkiTex Configuration Example
+
+# Course configurations
+# Each course maps file paths to an Anki deck
+courses:
+  DiffTop:
+    # Glob patterns for .tex files
+    paths:
+      - "DiffTop/**/*.tex"
+    # Target Anki deck name
+    deck: "Differential Topology"
+
+  PDE:
+    paths:
+      - "PDE/**/*.tex"
+    deck: "Partial Differential Equations"
+
+  ComplexAnalysis:
+    paths:
+      - "ComAn/**/*.tex"
+    deck: "Complex Analysis"
+
+  QFT:
+    paths:
+      - "QFT/**/*.tex"
+    deck: "Quantum Field Theory"
+
+# LaTeX environments to extract
+# Add any custom environments you use
+envs_to_extract:
+  - definition
+  - theorem
+  - proposition
+  - lemma
+  - corollary
+  - example
+  - remark
+  - problem
+  - exercise
+  - mtheorem
+  - mprop
+  - mlemma
+  - mcorollary
+  - mexample
+  - mremark
+  - mproblem
+  # Uncomment to add custom environments:
+  # - conjecture
+  # - algorithm
+  # - exercise
+
+# LLM-generated cards (future feature)
+llm_generated:
+  enabled: false
+  max_per_commit: 10
+  types:
+    - cloze
+    - why
+
+# Daily limit for new cards
+# Used for future intake throttling feature
+daily_new_limit: 40
+
+# Course priorities
+# Higher number = higher priority
+# Used for future intake throttling feature
+priorities:
+  DiffTop: 15
+  PDE: 10
+  ComplexAnalysis: 5
+  QFT: 5
+
+# Tag templates
+# Available placeholders:
+#   {sha} - commit hash (short form)
+#   {file} - file path (sanitized)
+#   {env} - environment type
+#   {course} - course name
+tags:
+  - auto
+  - from-tex
+  - commit:{sha}
+  - file:{file}
+

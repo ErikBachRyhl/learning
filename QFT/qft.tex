@@ -1,0 +1,464 @@
+\documentclass[11pt]{article}
+\input{../preamble.tex}   % path is relative to the topic folder
+
+\title{QFT}
+\author{Erik Bach Ryhl}
+\date{\today}
+
+\graphicspath{{./figures}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Extra Resources}
+\subsection{Contour Integration}
+\href{https://www.youtube.com/playlist?list=PLD2r7XEOtm-AgQStjv6dkhiidEMcp3ey5}{This YouTube Series} proves first some of the central results and then has plenty of examples!
+
+\section{Motivation and Foundation}
+\textbf{Main idea from field theory:} We get an infinite degree of freedoms \(\phi (x)\) for all \(x \in \mathcal{M}\) and the Euler-Lagrange Equation modification gives the EOM for \(\phi (x)\) \textbf{which holds at each point in space}.  
+\section{From Lattice to Field}
+Idea: Think about vacuum itself as having quantum degrees of freedom that can "propagate" (in the space of that degree of freedom – the analogy is the double slit, but just for this degree of freedom, not physical position). Then shrink the spacing between the lattice points with these degrees of freedom. Multi-index becomes a continuous parameter. But \((t, \vec{x})\) \textit{is} a parameter, not a quantum observable. It is \(\phi (t, \vec{x})\) that is the quantum observable and the parameter tells us about what part of space we are talking about.  
+
+
+\section{Path Integral}
+The goal is to work with the path integral for an anharmonic theory \begin{align*}
+    Z(J, \lambda ) = \int \mathcal{D} \phi \exp \left( i \int d x^4 \left( \frac{1}{2}\left[  \left( \partial \phi  \right)^{2} -  m^{2} \phi ^{2} \right] - \frac{\lambda }{4 !} \phi^4 + J \phi    \right)  \right) 
+\end{align*}
+
+Recall the analogous integral for the free (Gaussian) theory, which we \textit{can} actually complete
+
+\begin{proposition}[The Gaussian Integral] \label{eq:Gaussian_Integral}
+    \begin{align}
+        \int _{-\infty} ^\infty \int _{-\infty} ^\infty \cdots \int _{-\infty} ^\infty dq_1 dq_2 \cdots dq_N e^{(i /2 ) q \cdot A \cdot q + i J \cdot q} = \left( \frac{(2 \pi i)^N}{\operatorname{det}(A) } \right) ^{\frac{1}{2}} e^{- (\frac{i}{2} J \cdot A ^{-1} \cdot J)}
+    \end{align}
+\end{proposition}
+
+\subsection{A simpler problem expanded in \(\lambda \)}
+We start by considering only a single variable to integrate over and forget the path integral for a while. 
+\begin{align}\label{eq:simple_anharmonic_path_integral}
+    Z(J, \lambda) = \int d q  \exp \left( -\frac{1}{2} m^{2} q^{2} - \frac{\lambda}{4!} q ^4 + J q \right) 
+\end{align}
+
+We can split apart the integral into an exponential expansion in powers of \(\lambda \). Then we can view that power expansion not as coming from repeated differentiation under the integral sign, i.e. \begin{align*}
+    Z(J, \lambda ) &= \exp (-\frac{\lambda}{4!} \left( \frac{d}{dJ} \right) ^4) \int dq \exp \left( -\frac{1}{2} m^{2} q^{2} + Jq \right) \\
+    &= \left( \frac{2 \pi }{m^{2} } \right)^{\frac{1}{2}} \exp (-\frac{\lambda}{4!} \left( \frac{d}{dJ} \right) ^4) \exp \left( \frac{1}{2 m^{2} } J^{2}  \right), 
+\end{align*} 
+by eq. \ref{eq:Gaussian_Integral}. This is called a pertubative expansion, as far as I know, and one can expand order by order in both series to get any term of arbitrary orders in \(\lambda \) and \(J\). We will consider \begin{align*}
+    \tilde{Z}(J, \lambda ) \coloneqq \frac{Z(J, \lambda )}{Z(0, 0)},
+\end{align*}
+since all expansions share that same factor anyway. Notice that at order \(n\) in \(\lambda\), we have a term \begin{align*}
+    \left( -\frac{1}{4!} \right)^n \left( \frac{d}{dJ} \right)^{4n}
+\end{align*}
+attached to it. So if we want order \(n\) in \(\lambda \) and order \(m\) in \(J\), we in fact need to take the second series all the way up to the term that will satisfy the equation 
+\begin{align*}
+    2k - 4n = m \implies \boxed{k = \frac{m}{2} + 2n,}
+\end{align*}
+since the differentiation by \(4n\) which comes attached to the \(\lambda ^n\) term will remove \(4n\) factors of \(J\). Since \(J\) is squared in the the exponential term above, at term number \(k\) we have order \(2k\).
+
+It is manifest already by the parity of the integral that we can only have even powers of \(J\). Interpreting a \(J\) as a source / sink this also seems reasonable - we cannot propagate into thin air, only into a sink. This is good, since it keeps our formula above to have integer powers always. 
+
+So if we want \(\lambda\) to the first power and \(J\) to the fourth power, then \(n = 1\) and \(m = 4\). Hence we have to expand up to term number \(k = 4\) in the \(J\) expansion. Since it is an exponential expansion, this pulls along the factor \begin{align*}
+    \frac{1}{k!}\left( \frac{1}{2m ^{2} } \right)^k = \frac{1}{4!}\left( \frac{1}{2m ^{2} } \right)^4
+\end{align*}
+and the differentiation repeated \(4n = 1\) times of \(J^{2m} = J^8\) pulls down a combinatorial factor, \begin{align*}
+    \left( \frac{d}{dJ} \right)^{4n} J^{2k} = \frac{(2k)!}{(2k - 4n)!} J^{m} = \frac{(2k)!}{m!} J^m = \frac{8!}{4!} J^4
+\end{align*}   
+in this case. Combining, we would get \begin{align*}
+    \frac{(- \lambda )^1}{4!} \frac{1}{4!} \left( \frac{1}{2m ^{2} } \right)^4 \frac{8!}{4!} J^4 = \frac{- \lambda (8 !)}{(4!)^3 (2m^{2} )^4} J^4,
+\end{align*} 
+which is exactly what Zee gets on p. 45.
+
+\begin{proposition}
+    In the double-expansion of the series \begin{align*}
+        \tilde{Z}(J, \lambda ) =  \exp (-\frac{\lambda}{4!} \left( \frac{d}{dJ} \right) ^4) \exp \left( \frac{1}{2 m^{2} } J^{2}  \right),
+    \end{align*}
+    one can get the term of power \(n\) in \(\lambda \) and power \(m\) in \(J\) by expanding the \(J\)-series up to term number \begin{align*}
+        k = \frac{m}{2} + 2n,
+    \end{align*}     
+    and multiplying it out/acting with differentiation from the term number \(n\) in the \(\lambda \) series. This gives the general combinatorial formula for the term: \begin{align*}
+        \boxed{\left( \frac{1}{4! } \right)^{n} \left( \frac{(2k)!}{(n!)(k!)(m!)} \right) \left( \frac{1}{2m^{2} } \right) ^k \left( - \lambda \right) ^n J^m}
+    \end{align*}  
+\end{proposition}
+
+\begin{definition}[Graph Correspondence Rules]
+    By following the prescription \begin{itemize}
+        \item Vertices are made of intersections between four lines
+        \item A vertex gives a factor \((-\lambda )\)
+        \item A line gives a factor \(1 / m^{2} \)
+        \item Each external "leg" gives a factor \(J\),
+    \end{itemize}
+    we can draw diagrams to represent something (proportional) to the "physical" elements of the factor from the expansion above:
+    \begin{align*}
+        \left( \frac{1}{m^{2} } \right) ^k \left( - \lambda \right) ^n J^m
+    \end{align*}
+    Writing out that \(2k = m + 4n\), we in fact see that this correspondence is entirely a consequence of graphs with this rule obeying this relationsship:
+    \begin{align*}
+        2 \cdot \text{ number of lines } = \text{ number of legs } + 4 \cdot \text{ number of vertices }
+    \end{align*}
+    This is exactly what Zee mentions on page 45 as something one can "notice", but I think this is exactly the reason why this correspondence was discovered. After all, we calculated the double expansion from above and \textit{found} the relationship between \(k\), \(m\) and \(n\). 
+\end{definition}
+
+\subsection{A simpler problem expanded in \(J\)}
+We can also expand in \(J\) instead: \begin{align*}
+    Z(J, \lambda ) &= \int dq \exp \left( -\frac{1}{2} m^{2} q^{2} - \frac{\lambda }{4!} q^4 + J q\right) \\
+    &= \int dq \exp \left( -\frac{1}{2} m^{2} q^{2} - \frac{\lambda }{4!} q^4\right) \left( \sum_{s = 0}^\infty \frac{1}{s!} \left( J q \right)^s   \right) \\
+    &= \sum_{s = 0}^\infty \frac{1}{s!} J^s\int dq  e^{ -\frac{1}{2} m^{2} q^{2} - (\lambda / 4!) q^4} q^s
+\end{align*} 
+For reasons that I don't understand yet, we are looking at "Green's functions", and we define \begin{align*}
+    Z(J, \lambda ) = \sum_{s = 0}^\infty \frac{1}{s!} J^s\int dq  e^{ -\frac{1}{2} m^{2} q^{2} - (\lambda / 4!) q^4} q^s \equiv Z(0, 0) \sum_{s = 0}^\infty \frac{1}{s!} J^s G^{(s)},
+\end{align*}
+which essentially defines \begin{align*}
+    G^{(s)} \equiv \frac{\int dq  e^{ -\frac{1}{2} m^{2} q^{2} - (\lambda / 4!) q^4} q^s}{\int dq  e^{ -\frac{1}{2} m^{2} q^{2}}}.
+\end{align*}
+We can again expand the above integral in powers of \(\lambda \), and the thing we'll have left on the inside is exactly the \(s\)-point functions introduced in Zee's appendix to chapter I.2 (Wick contraction): \begin{align*}
+    \langle x_i x_j \rangle
+    = 
+    \frac{
+    \int_{-\infty}^{+\infty} \!\!\int_{-\infty}^{+\infty} \!\! \cdots \!\! \int_{-\infty}^{+\infty}
+    dx_1\,dx_2 \cdots dx_N\, e^{-\tfrac{1}{2}\mathbf{x} \cdot A \cdot \mathbf{x}}\, x_i x_j
+    }{
+    \int_{-\infty}^{+\infty} \!\!\int_{-\infty}^{+\infty} \!\! \cdots \!\! \int_{-\infty}^{+\infty}
+    dx_1\,dx_2 \cdots dx_N\, e^{-\tfrac{1}{2}\mathbf{x} \cdot A \cdot \mathbf{x}}
+    }
+    = A^{-1}_{ij} \tag{Zee, I.2 eq.(25)}    
+\end{align*}  
+
+The combinatorial factors we found before will therefore now be given by the combinatorics of Wick contractions. For example, to get order \(\lambda \) to the first in \(G^{(4)}\), we need to go to \(s = 8\) in the integral actually, since the \(\mathcal{O} (\lambda )\) term comes with four derivatives of \(J\) attached. The combinatorics will, as it should, work out to give exactly the same. So there are two ways to approach the integral in \ref{eq:simple_anharmonic_path_integral}: Expand in \(\lambda \) first (diagrams) or expand in \(J\) first (Green's functions). 
+
+\section{Canonical Quantization}
+\paragraph{Abstract:} Instead of starting from amplitudes and the unitarity of quantum mechanics, which leads to the path integral, one can use the quantum Hamiltonian as inspiration for generalizing quantum mechanics to fields. The main thing one has to be careful about is the fact that fields have infinite degrees of freedom, and hence things are a little different. 
+
+\subsection{Review of the Hamiltonian Formalism}
+Given a Lagrangian \begin{align*}
+    L = T - V
+\end{align*}
+we can solve the Euler-Lagrange equations \begin{align*}
+    \frac{\partial L}{\partial q} - \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q} }  \right)  = 0
+\end{align*}
+to get the relevant EOMs for our system. We define the canonical momentum as \begin{align*}
+    p \equiv \frac{\partial L}{\partial \dot{q}}.
+\end{align*}
+
+We form the Hamiltonian by the Legendre transform as \begin{align*}
+    H \equiv p \dot{q} - L
+\end{align*}
+
+Hamilton's equations of motions are given by \begin{align*}
+    &\frac{dq}{dt} = \frac{\partial H}{\partial p} = \left\{ q, H \right\} \\
+    &\frac{dp}{dt} = - \frac{\partial H}{\partial q} = \left\{ p, H \right\} 
+\end{align*}
+
+Let us set \(m = 1\) and work with the single-particle Lagrangian \begin{align*}
+    L = \frac{1}{2} \dot{q} ^{2} - V(q)
+\end{align*} 
+
+Then \(p = \dot{q} \) and \begin{align*}
+    H = \frac{1}{2}p^{2}  + V(q)
+\end{align*}
+
+Notice that for any function \(f(p, q, t)\), we have that \begin{align*}
+    \frac{d}{dt}f(p, q, t) = \frac{\partial f}{\partial p} \frac{dp}{dt} + \frac{\partial f}{\partial q} \frac{dq}{dt} + \frac{\partial f}{\partial t}.
+\end{align*}
+
+If \(q = q(t)\) and \(p = p(t)\) solves Hamilton's equations of motion, we see that
+\begin{align*}
+    \frac{d}{dt}f(p, q, t) &= \frac{\partial f}{\partial p} \frac{dp}{dt} + \frac{\partial f}{\partial q} \frac{dq}{dt} + \frac{\partial f}{\partial t}\\
+    &= \frac{\partial f}{\partial q} \frac{\partial H}{\partial p} -  \frac{\partial f}{\partial p} \frac{\partial H}{\partial q}   + \frac{\partial f}{\partial t}\\
+    &= \left( \frac{\partial}{\partial t} - \left\{ H, \cdot \right\}  \right) f
+\end{align*}
+
+If the function \(f\) isn't explicitly time-dependent, we get \begin{align*}
+    \frac{df}{dt} = - \left\{ H, f \right\}.
+\end{align*}
+This is almost quantum mechanics!
+
+
+\subsection{Quantum Hamiltonian}
+We promote \(p\) and \(q\) to quantum mechanical operators acting on states in Hilbert space. We do so by imposing the canonical commutation relation \begin{align*}
+    [p, q] = -i
+\end{align*}
+
+In this formalism, the time evolution of the expectation value of an operator dependent on \(p\) and \(q\) take on the form 
+\begin{proposition}[Heisenberg's Equation of Motion]
+    \begin{align*}
+        \frac{d}{dt} \left\langle A(t) \right\rangle  = \frac{i}{\hbar} \left\langle [H, A] \right\rangle  + \left\langle \frac{\partial A}{\partial t}  \right\rangle 
+    \end{align*}
+\end{proposition}
+
+We set \(\hbar = 1\) also, and almost always \(\partial _t A = 0\).
+
+\begin{note}
+    Zee writes that time evolution of any operator is given by \begin{align*}
+        A(t) = e^{i H t} A(0) e^{- i H t}
+    \end{align*}
+    and that this follows from what we get from \(d p / dt\) and \(dq / dt\) by using above. Understand this at some point.   
+\end{note}
+
+\subsection{Canonical Commutation Relations}
+Working with the basic Hamiltonian \begin{align*}
+    H = \frac{1}{2}p ^{2} + V(q)
+\end{align*}
+we have that \begin{align*}
+    &\frac{dq}{dt} = i [H, q] = \frac{i}{2} [p^{2} , q] = \frac{i}{2} \left( p [p, q] + [p, q]p \right) = p\\
+    &\frac{dp}{dt} = i[H, p] = i[V(q), p] = i \left( - i V(q)\partial _q (-) + i \partial _q (V(q) (-))  \right) = - V'(q)
+\end{align*}
+
+We can factor the Hamiltonian into creation and annihilation operators \textit{at a specific instance in time}: 
+\begin{align*}
+    a(t) \equiv \frac{1}{\sqrt{2 \omega }} \left( \omega q + i p \right)
+\end{align*}
+which gives the commutation relation \begin{align*}
+    [a, a ^{\dagger} ] = 1
+\end{align*}
+
+With our simple Hamiltonian above, we get \begin{align*}
+    \frac{da}{dt} = i[H, a] = - i \sqrt{\frac{\omega }{2}}  \left(i p + \frac{1}{\omega } V^{\prime} (q) \right) 
+\end{align*}
+
+When the potential is quadratic in position (i.e. the harmonic oscillator), \(V^{\prime} (q) = \omega ^{2} q\), we get that \begin{align*}
+    H = \omega \left( a ^{\dagger} a + \frac{1}{2} \right) 
+\end{align*} 
+
+\begin{note}
+    You should add some comments about the splitting of time and space, but that one can show that our measure is still Lorentz invariant if we have a Lorentz invariant Lagrangian. 
+\end{note}
+
+Had we had many particles, our Lagrangian would have been \begin{align*}
+    L = \sum_{a = 1}^N \frac{1}{2} \dot{q} _a - V(q_1, \dots , q_N)
+\end{align*}
+such that \begin{align*}
+    H = \frac{1}{2} p_a ^{2} + V(q_1, \dots , q_N)
+\end{align*}
+and the commutation relations would have been \begin{align*}
+    [p_a (t), q_b (t)] = -i \delta _{ab}
+\end{align*}
+
+\subsection{Hamiltonian Quantum Field Theory}
+
+
+
+\newpage\subsection{Example Problems}
+\begin{problem}{Zee I.8.3}
+    For the complex scalar field discussed in the text calculate \(\bra{0} \mathcal{T} \left\{ \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \right\} \ket{0}  \) 
+\end{problem}
+\paragraph{Recall from Zee} that the complex scalar field discussed has the Lagrangian density \begin{align*}
+    \mathcal{L} = \partial \varphi ^{\dagger}  \partial \varphi  - m^{2} \varphi ^{\dagger} \varphi 
+\end{align*}
+
+This gives that \begin{align*}
+    \pi (\mathbf{x}, t) \equiv \frac{\delta L}{\delta \dot{\varphi}(\mathbf{x}, t)  } = \partial _0 \varphi ^{\dagger} (\mathbf{x}, t)
+\end{align*}
+and \begin{align*}
+    [\pi (\mathbf{x}, t), \varphi (\mathbf{x}^{\prime} , t)] = - i \delta ^{(D)} (\mathbf{x}- \mathbf{x}^{\prime} )
+\end{align*}
+
+The equations of motions for the fields are \begin{align*}
+    &(\partial ^{2} + m^{2} )\varphi  = 0\\
+    &(\partial ^{2} + m^{2} ) \varphi ^{\dagger} = 0
+\end{align*}
+and the field itself can then be Fourier-expanded, but now with two independent mode-coefficients: \begin{align*}
+    \varphi (\mathbf{x}, t) = \int \frac{d^D k}{\sqrt{(2\pi )^D 2 \omega _k} } \left[ a(\mathbf{k}) e^{-i (\omega _k t - \mathbf{k} \cdot \mathbf{x})} + b^{\dagger} (\mathbf{k}) e^{i (\omega _k t - \mathbf{k}\cdot \mathbf{x})}\right] 
+\end{align*}
+
+From the commutation relations of the field, the commutation relations of \(a, a^{\dagger}\) and \(b, b^{\dagger} \) follow - they act like creation and annihilation operators. Let us now solve the problem at hand. 
+
+\begin{align*}
+    \bra{0} \mathcal{T} \left\{ \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \right\} \ket{0}  &= \bra{0} \left( \theta (x^0) \varphi (\mathbf{x}) \varphi ^{\dagger} (0) + \theta (- x^0) \varphi ^{\dagger} (0) \varphi (\mathbf{x})\right)\ket{0} 
+\end{align*}
+
+In calculating \(\varphi (\mathbf{x}) \varphi ^{\dagger} (0)\), we get four operators in the integrand (with different c-coefficients that don't matter): \(a(\mathbf{k}) a^{\dagger} (\mathbf{k}^{\prime} ), a(\mathbf{k}) b(\mathbf{k}^{\prime} ), b^{\dagger} (\mathbf{k}) a^{\dagger} (\mathbf{k}^{\prime} )\) and \(b^{\dagger} (\mathbf{k}) b (\mathbf{k})\). Sandwiching this between \(\bra{0} \) and \(\ket{0} \), the only term that survives is the one with \(a(\mathbf{k}) a^{\dagger}\).
+
+Without loss of generality, we can in these calculations set \(t = 0\), since in the canonical quantisation approach, we do not integrate out time, but instead consider instantaneous relations. Hence \begin{align*}
+    \bra{0} \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \ket{0}  &=   \iint \frac{d^D k\ d^D k^{\prime} }{(2\pi )^D 2 \sqrt{\omega _k \omega _{k^{\prime} }} } \bra{0} a(\mathbf{k}) a^{\dagger} (\mathbf{k}^{\prime} )\ket{0}  e^{i \mathbf{k} \cdot \mathbf{x}} 
+\end{align*}
+Since we have the ground state on both sides, we can use \begin{align*}
+    a(\mathbf{k})a ^{\dagger} (\mathbf{k}^{\prime} ) = [a(\mathbf{k}), a ^{\dagger} (\mathbf{k}^{\prime} )] + a ^{\dagger} (\mathbf{k}^{\prime} ) a(\mathbf{k}) = \delta ^{(D)} (\mathbf{k} - \mathbf{k}^{\prime} ) + a ^{\dagger} (\mathbf{k}^{\prime} ) a(\mathbf{k})
+\end{align*}
+to see that \begin{align*}
+    \bra{0}a(\mathbf{k})a ^{\dagger} (\mathbf{k}^{\prime} ) \ket{0} = \delta ^{(D)} (\mathbf{k}- \mathbf{k}^{\prime} ),
+\end{align*}
+such that \begin{align*}
+    \bra{0} \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \ket{0}  &=   \int \frac{d^D k }{(2\pi )^D 2 \omega _k } e^{i \mathbf{k} \cdot \mathbf{x}}
+\end{align*}
+
+By the same line of reasoning, when calculating \(\varphi ^{\dagger} (0) \varphi (\mathbf{x})\), we find \begin{align*}
+    \bra{0} \varphi ^{\dagger} (0) \varphi (\mathbf{x})\ket{0} =  \int \frac{d^D k }{(2\pi )^D 2 \omega _k } e^{-i \mathbf{k} \cdot \mathbf{x}}
+\end{align*} 
+
+Restoring time (i.e. not setting it equal to zero), we find
+\begin{align*}
+    \bra{0} \mathcal{T} \left\{ \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \right\} \ket{0} = \int \frac{d^D k }{(2\pi )^D 2 \omega _k }  \left(\theta (x^0) e^{-i (\omega _k t -  \mathbf{k} \cdot \mathbf{x})} + \theta (- x^0) e^{i(\omega _k t -  \mathbf{k}\cdot \mathbf{x})}\right) = i D(\mathbf{x}),
+\end{align*}
+where the last equality follows from Zee's equation (I.3.23) (i.e. we have chosen the causal propagator above). One could also "undo" the steps leading to (I.3.23) in Zee, and it is then legitimate to write \begin{align*}
+    \bra{0} \mathcal{T} \left\{ \varphi (\mathbf{x}) \varphi ^{\dagger} (0) \right\} \ket{0} = i D(\mathbf{x}) = i \int \frac{d^{D + 1} k}{(2\pi )^{D + 1} } \frac{e^{i k_\mu x^{\mu }}}{k^{2} - m^{2} + i \epsilon },
+\end{align*}
+but working with the Hamiltonian theory we usually keep space and time apart. This is, in other terms, completely analogous to what Zee derives in eq. (I.8.13).
+\qedst
+
+\begin{problem}{Zee I.8.4}
+    Show that \([Q, \varphi (\mathbf{x})] = - \varphi (\mathbf{x})\) 
+\end{problem}
+We have that \begin{align*}
+    Q = \int d^D k [a^{\dagger} (\mathbf{k}) a(\mathbf{k}) - b^{\dagger} (\mathbf{k}) b(\mathbf{k})].
+\end{align*}
+
+Without loss of generality, we once again evaluate the commutation relation at \(t = 0\). Using the Fourier expansion of the field, and the fact that commutators can be pulled into these integrals since they are nice enough, we see that \begin{align*}
+    [Q, \varphi (\mathbf{x})] = \iint \frac{d^D k \ d^D k^{\prime} }{\sqrt{(2 \pi )^D 2 \omega _{k^{\prime} }} } \left[\left( a^{\dagger} (\mathbf{k}) a(\mathbf{k}) - b^{\dagger} (\mathbf{k}) b(\mathbf{k}) \right), \left(a(\mathbf{k}^{\prime} ) e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}} + b^{\dagger} (\mathbf{k}^{\prime} ) e^{-i\mathbf{k}^{\prime} \cdot \mathbf{x}}  \right)  \right]
+\end{align*}
+
+Since commutators are bilinear, the commutator in the integral can be split 
+\begin{align*}
+    \left[a^{\dagger} (\mathbf{k}) a(\mathbf{k}), \left(a(\mathbf{k}^{\prime} ) e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}} + b^{\dagger} (\mathbf{k}^{\prime} ) e^{-i\mathbf{k}^{\prime} \cdot \mathbf{x}}  \right)  \right] - \left[b^{\dagger} (\mathbf{k}) b(\mathbf{k}), \left(a(\mathbf{k}^{\prime} ) e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}} + b^{\dagger} (\mathbf{k}^{\prime} ) e^{-i\mathbf{k}^{\prime} \cdot \mathbf{x}}  \right)  \right]
+\end{align*}
+
+The very first of the resulting four commutators gives
+\begin{align*}
+    \left[a^{\dagger} (\mathbf{k}) a(\mathbf{k}), a(\mathbf{k}^{\prime} )\right]e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}} &= a ^{\dagger} (\mathbf{k})\left[a(\mathbf{k}), a(\mathbf{k}^{\prime} )  \right] e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}} + \left[ a ^{\dagger} (\mathbf{k}), a(\mathbf{k}^{\prime} ) \right] a(\mathbf{k})  e^{ i\mathbf{k}^{\prime}  \cdot \mathbf{x}}\\
+    &= - \delta ^{(D)}(\mathbf{k} - \mathbf{k}^{\prime}) a(\mathbf{k}) e^{i \mathbf{k}^{\prime} \cdot \mathbf{x}}.
+\end{align*}
+
+By similar commutator manipulations, the second of the four commutators gives zero, since \(a\) and \(a ^{\dagger} \) both commute with \(b ^{\dagger} \) for all \(\mathbf{k}\). Similarly, the third commutator also gives zero. Finally, the fourth commutator is by the same type of manipulations expanded as \begin{align*}
+    -[b ^{\dagger} (\mathbf{k}) b(\mathbf{k}), b^{\dagger} (\mathbf{k}^{\prime} )] e^{- i \mathbf{k}^{\prime} \cdot \mathbf{x}} = - \delta ^{(D)} (\mathbf{k} - \mathbf{k}^{\prime} ) b ^{\dagger} (\mathbf{k}) e^{- i \mathbf{k}^{\prime} \cdot \mathbf{x}}
+\end{align*} 
+
+Hence upon integrating out \(\mathbf{k}^{\prime} \) we see that
+\begin{align*}
+    [Q, \varphi (\mathbf{x})] &= -\iint \frac{d^D k \ d^D k^{\prime} }{\sqrt{(2 \pi )^D 2 \omega _{k^{\prime} }} } \delta ^{(D)}(\mathbf{k}- \mathbf{k}^{\prime} ) (a(\mathbf{k}) e^{i \mathbf{k}^{\prime} \cdot \mathbf{x}} + b^{\dagger} (\mathbf{k}) e^{- i \mathbf{k}^{\prime} \cdot \mathbf{x}})\\
+    &= -\int \frac{d^D k}{\sqrt{(2 \pi )^D 2 \omega _{k}} } (a(\mathbf{k}) e^{i \mathbf{k} \cdot \mathbf{x}} + b^{\dagger} (\mathbf{k}) e^{- i \mathbf{k} \cdot \mathbf{x}})\\
+    &= - \varphi (\mathbf{x})
+\end{align*}
+\qedst
+
+\newpage\section{Renormalization}
+\subsection{Example Problems}
+\begin{problem}{Zee III.2.1}
+    Consider the $d$-dimensional scalar field theory
+\[
+S=\int d^{\,d}x\,
+\Bigg[
+\frac12\,(\partial_\mu\phi)(\partial^\mu\phi)
++\frac12\,m^2\phi^2
++\lambda\,\phi^4+\cdots+\lambda_n \phi^n+\cdots
+\Bigg].
+\]
+Show that
+\[
+[\phi]=\frac{d-2}{2},
+\qquad
+[\lambda_n]=\frac{n(2-d)}{2}+d.
+\]
+Note that $\phi$ is dimensionless for $d=2$.
+\end{problem}
+
+By convention we work in energy-mass units and set \([m] = 1\). Since \([m] = [k]\) through the energy-momentum relation, this leads to \([x] = -1\) through the De-Broigle wavelength. Hence if the term \begin{align*}
+    \sim d^d x \cdot m^{2} \varphi ^{2} 
+\end{align*} 
+needs to have engineering dimension equal to zero, we get the equation \begin{align*}
+    -d[x] + 2[m] + 2[\varphi ] &= -d + 2 + 2 [\varphi] = 0 \\
+    &\implies [\varphi ] = \frac{d-2}{2}
+\end{align*}
+
+For the \(\sim d^d x \cdot \lambda _n \varphi ^n\) term we get \begin{align*}
+    -d[x] + [\lambda _n] + n [\varphi ] &= -d + [\lambda _n] + \frac{n (d - 2)}{2} = 0 \\
+    &\implies [\lambda _n] = \frac{n (2 - d)}{2} + d
+\end{align*} 
+\qedst
+
+% UNDERSTAND: https://chatgpt.com/g/g-p-68b1ff2892c081918318f2b9fffbe5bf-qft/shared/c/68ffb1e6-8dd8-8329-b79b-9c86e8d477a7?owner_user_id=user-vohrHko6TaJ4PrpiBgEanQyt
+
+% Physically, we are using the causal propagator, hence we have to go above one pole and below another (this is the correct Green's function). We can always avoid hitting any of the poles as long as their real parts differ. But if their real parts are the same, our contour gets pinched inbetween, and we are forced to hit a pole; our integral becomes non-analytic. So yes, we could mathematically speaking just go above or below both poles always, and then we don't have any problem with this case - but then we are computing different Green's functions and looking at different physics (different causal structures). 
+
+\begin{problem}{Zee III.1.2}
+    Regard (1) as an analytic function of \(K^{2} \). Show that it has a cut extending from \(4 m ^{2} \) to infinity.
+\end{problem}
+Equation (1) is given by \[
+\mathcal{M}
+= \frac12\,(-i\lambda)^2\,i^{\,2}
+\int \frac{d^{4}k}{(2\pi)^{4}}\;
+\frac{1}{k^{2}-m^{2}+i\epsilon}\,
+\frac{1}{(K-k)^{2}-m^{2}+i\epsilon}\ ,
+\]
+where \(K = k_1 + k_2\). Expanding the fractions inside the integral, we find \begin{align*}
+    (k^{2} - m^{2} + i \epsilon)^{-1} (K^{2} + k^{2} - 2K k - m^{2} + i \epsilon ) ^{-1} 
+\end{align*}
+
+Letting \(K^{2} = 4m^{2} \) we get \begin{align*}
+    (k^{2} - m^{2} + i \epsilon)^{-1} (4m^{2} + k^{2} - 2\sqrt{4m ^{2} } k - m^{2} + i \epsilon ) ^{-1} 
+\end{align*} 
+
+We see that if we go on shell, that is \(k^{2} = m^{2} \), then both fractions get real part equal to zero, since \begin{align*}
+    (4m^{2} + k^{2} - 2\sqrt{4m ^{2} } k - m^{2} + i \epsilon ) ^{-1} = (4m ^{2} - 2 \cdot 2 m \cdot m + i \epsilon )^{-1} = -\frac{i}{\epsilon}
+\end{align*} 
+
+The intuition is this: both propagators have poles with real part equal to \(4m ^{2} \). With the \(i \epsilon \)-prescription, we can (usually) deform our (causal) contour to avoid both poles in the complex plane. But because we are exactly forced to go above one pole and below another to have the right causaul Green's function (we have to use the Feynman propagator from a physical perspective), then we run into an issure if the real part of our poles are identical: our contour cannot avoid the poles as we send \(\epsilon \to 0\) and will get "pinched" in-between. In other words, we will inevitably hit a pole and at that point \(\mathcal{M} \) becomes non-analytic. 
+
+Hence from \(\Re (K^{2} ) \geq 4m ^{2}\) our integration contour will have had to pass this problem, and it will then matter what path we integrate along in the complex plane: We have a branch point extending from \(4m^{2} \) to \(+ \infty\).
+
+One way that one can derive the number \(4m ^{2} \) is by thinking of when both particles are on-shell. This would mean solving \begin{align*}
+    k^{2} = m^{2}, \qquad (K - k)^{2} = m^{2} 
+\end{align*} 
+simultaneously. This gives \begin{align*}
+    K^{2} + m^{2} - 2K m = m^{2} \implies K(K - 2m) = 0 
+\end{align*}
+which implies that \(K ^{2} = 4m ^{2} \). 
+
+\begin{note}
+    There's a lot more precise statements that can be made about this problem. Specifically, one can show that the integral viewed as a function of \(K^{2} \) is proportional to an integral from 0 to 1 over a complex logarithm. One can then explicitly show that for \(K^{2} \geq 4m^{2} \) the branch point of the complex logarithm appears. Take a look at the ChatGPT conversation linked in your comment above. Try it! 
+\end{note}
+\qedst
+
+\begin{problem}{Zee III.1.3}
+    Change $\Lambda$ to $e^{\epsilon}\Lambda$. Show that for $\mathcal{M}$ not to change, to the order indicated $\lambda$ must change by
+$\delta\lambda = 6\,\epsilon\,C\,\lambda^{2} + \mathcal{O}(\lambda^{3})$, that is,
+\[
+\Lambda\,\frac{d\lambda}{d\Lambda}
+= 6\,C\,\lambda^{2} + \mathcal{O}(\lambda^{3}) \, .
+\]
+\end{problem}
+
+\paragraph{Recall from Zee} that the scattering amplitude is given by \begin{align*}
+    \mathcal{M} = - i \lambda + i C \lambda ^{2} \left[\log \left( \frac{\Lambda ^{2} }{s} \right) + \log \left( \frac{\Lambda ^{2} }{t} \right) + \log \left( \frac{\Lambda ^{2} }{u} \right)\right] + \mathcal{O} (\lambda ^3)
+\end{align*}
+
+We write it as \begin{align*}
+    \mathcal{M} = - i \lambda + i C \lambda ^{2}\log \left( \frac{\Lambda ^{6} }{stu} \right) + \mathcal{O} (\lambda ^3)
+\end{align*}
+
+Upon changing \(\Lambda \to e^{\epsilon } \Lambda  \) we get that \begin{align*}
+    \mathcal{M} &\to \mathcal{M} + \delta \mathcal{M} ^{\prime} =  - i \lambda + i C \lambda ^{2}\log \left( \frac{e ^{6 \epsilon }\Lambda ^{6} }{stu} \right) + \mathcal{O} (\lambda ^3) \\
+    &= - i \lambda + i C \lambda ^{2}\left[  \log \left( \frac{\Lambda ^6}{stu} \right) + 6 \epsilon \right]  + \mathcal{O} (\lambda ^3)
+\end{align*} 
+
+Hence if \(\lambda \to \lambda + 6 \epsilon C \lambda ^{2} + \mathcal{O} (\lambda ^3) \equiv  \lambda + \delta  \lambda \), then \begin{align*}
+    \mathcal{M}  &\to \mathcal{M} + \delta M = -i (\lambda + \delta \lambda ) + i C \lambda ^{2}\left[  \log \left( \frac{\Lambda ^6}{stu} \right) + 6 \epsilon \right]  + \mathcal{O} (\lambda ^3) \\
+    &= - i \lambda - i 6 \epsilon C \lambda ^{2} + i C \lambda ^{2}\left[  \log \left( \frac{\Lambda ^6}{stu} \right) + 6 \epsilon \right]  + \mathcal{O} (\lambda ^3)\\
+    &= \mathcal{M},
+\end{align*}
+which shows that \(\delta \mathcal{M} = 0\) to the given order of \(\lambda \).  
+
+
+
+
+
+
+% \subsubsection{Questions}
+% \begin{itemize}
+%     \item Bottom page 18 start page 19: Lorentz invariance plus second derivative in time maximum results in a certain form of the lagrangian. Why this form?
+%     \item Understand the backwards discretisation that takes place on p. 22. Refer to your notes on how Horava also introduced the double integral over \(x\) and \(y\). 
+%     \item Proving that for spacelike separation, one can "boost" without "changing anything" to \(t = x^0 = 0\) and the opposite for timelike things, where we can boost into \(\vec{x} = 0\) I think.  
+% \end{itemize}
+
+% \newpage
+
+% \begin{align*}
+%     H &= \int \frac{d^D k}{4} \left\{ (\omega _k + \frac{k^{2}}{\omega _k}) (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k - a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k}) + \frac{m^{2}}{\omega _k} (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k + a_k a_{-k} + a ^{\dagger} _k a ^{\dagger} _{-k})\right\} \\
+%     &= \int \frac{d^D k }{2 \omega _k}\left\{ (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k) - k^{2}  (a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k})\right\} 
+% \end{align*}
+
+% \begin{align*}
+%     - \omega _k + \frac{-k ^{2} + m^{2} }{\omega _k} = \frac{- \omega _k ^{2} - k^{2} + m^{2} }{\omega _k} = \frac{1}{\omega _k}(-k ^{2} - m^{2} - k^{2} + m^{2} ) = \frac{-2 k^{2} }{\omega _k}
+% \end{align*}
+
+\end{document}

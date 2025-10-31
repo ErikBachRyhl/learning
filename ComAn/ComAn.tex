@@ -1,0 +1,352 @@
+\documentclass[11pt]{article}
+\input{../preamble.tex}   % path is relative to the topic folder
+
+\title{Introduction to Complex Analysis}
+\author{Erik Bach Ryhl}
+\date{\today}
+
+\graphicspath{{./figures}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Questions and Things to Read into}
+Try and read the wikipedia page on Cauchy's Integral Formula – it is incredible how much it is connected to everything I am doing right now: Manifolds, differential forms, solutions to the laplacian operator, greens functions, QFT and ALL THE WORKS!
+
+\section{Analytic Functions}
+\begin{itemize}
+    \item Write the explicit example out of why \(f(z) = z \overline{z}\) is only analytic at \(z = 0\), hence differentiable there but \textit{not} with a continuous derivative. Show that approaching from any direction gives you a different answer.  
+\end{itemize}
+
+\subsection{Continuity}
+\begin{itemize}
+    \item Topological definition
+    \item Metric-space definition (Epsilon-delta formulation)
+    \item Equivalence of topological and metric space
+    \item Equivalent sequence formulation for metric spaces
+    \item Prove that \(f\) is continuous at \(z_0 = x_0 + iy_0 \iff \) \(u, v\) are continuous at \((x_0, y_0 )\).
+    \item A few "classic" analysis examples.
+\end{itemize}
+
+\newpage
+
+\section{Line Integrals and Harmonic Functions}
+\textbf{Lecture 24/09}
+\begin{itemize}
+    \item Exact iff closed on star shaped domains
+    \item Smooth deformations of paths leaves path integrals unchanged
+    \item Harmonic Conjugates and Differentials
+    \item Mean Value Property
+    \item Maximum Principle for complex functions
+    \item Strict Maximum Principle for real functions
+\end{itemize}
+
+\subsection{Independence of Path}
+\textbf{Key Concepts}
+\begin{itemize}
+    \item What is a differential?
+    \item Why is it interesting to consider?
+    \item What is the FCT?
+    \item What is Green's Theorem, and when does it apply?
+    \item What does it mean for a differential to be exact?
+    \item What does it mean for a differential to be closed?
+    \item When are these equivalent?
+\end{itemize} 
+
+\textbf{Key Definitions and Theorems} 
+\begin{theorem}[Maximum Principle]
+    Let \(h: D \cup \partial D \to \mathbb{C}\) be a cont. function. If we can establish a bound on the boundary, \(|h(z)| \leq  M\) for all \(z \in \partial D\), then we can put a bound on the interior. I.e. \begin{align*}
+        |h(z)| \leq  M\quad \forall z \in \partial D \implies |h(z)| \leq M \forall z \in D
+    \end{align*}
+\end{theorem}
+
+We will prove this by first concluding stuff about harmonic conjugates and their relation to differentials on star-shaped domains: 
+
+\begin{proposition}
+    Let \(D\) be star-shaped. If \(u: D \to \mathbb{R} \) is a harmonic, then \begin{align*}
+        \omega = - \partial _y u dx + \partial _x u dy
+    \end{align*}
+    is closed.
+
+    Furthermore, since \(D\) 
+\end{proposition}
+
+\textred{Revisit these key proofs and definitions in Gamelin.}
+
+\begin{definition}
+    \(h\) has the mean value property at \(z_0\) if \(A(r) = h(z_0)\). And \(h\) has the mean value property on \(D\) if \(A(r) = h(z_0)\) for \(z_0 \in D\).
+    
+    We will see that mean value property every (which is a consequence of continuity only) implies harmonic.
+\end{definition}
+
+\textbf{Questions}
+
+\textbf{Practice} 
+\begin{itemize}
+    \item Proove that closed implies exact in a star-shaped domain.
+\end{itemize}
+
+\textbf{Return Stack}
+\begin{itemize}
+    \item Proving exact iff closed on star shaped domains.
+    \item Understanding the proof of path deformation keeping the integral of a differential invariant.
+    \item Compact => functions attain maximum on the set(?)
+\end{itemize} 
+
+\newpage\section{Cauchy's Theorem and Formula}
+\subsection{Example Problems}
+\begin{problem}{Homwork 5, problem 1}
+    Say that a function \(f:\mathbb{C}\to\mathbb{C}\) is “of polynomial growth” if there exist constants \(R,C\in\mathbb{R}_{>0}\) and \(d\in\mathbb{Z}_{\ge 0}\) such that for all \(|z|\ge R\), \[|f(z)|\le C|z|^{d}.\] Using the Cauchy estimates, show that if \(f\) is of polynomial growth and analytic, then so is \(f^{(n)}\) for every \(n\ge 0\).
+\end{problem}
+
+The Cauchy estimate states that if \(f : D \to \mathbb{C} \) is analytic and bounded on \(D\)  as \(|f(z)| \leq M\) for some \(M \geq 0\), then  
+\begin{align*}
+    |f^{(n)}(z)| \leq \frac{n!}{R^n} M
+\end{align*}
+where \(R\) is the radius of some disk centered at \(z_0\) and \(|z - z_0| \leq R\). 
+
+In this case, \(f\) is assumed to be analytic and of polynomial growth. We want to show that this is then also the case for all higher derivatives of \(f\). Consider the radius \(R\) from which point onwards \(f\) grows polynomially fast when \(|z|\) is increased. Such an \(R \in R_{> 0}\) exists by hypothetis. Using the Cauchy estimate for \(f^{(n)} (z)\) for all such \(z\) with \(|z| \geq R\) and \(n \geq 0\), we can set \(M = C |z|^d\), in which case \begin{align*}
+    |f^{(n)} (z)| \leq \frac{n!}{R^n} C |z|^d \coloneqq C^{\prime} |z|^d
+\end{align*}
+
+Hence \(f^(n) : \mathbb{C} \to \mathbb{C} \) is of polynomial growth using the same radius \(R\) as holds for \(f\), and with the constant \(C^{\prime} = C(n!) /R^n \).  
+\qedst
+
+\newpage\begin{problem}{Homwork 5, problem 2}
+    Give an example of a domain \(D\subset\mathbb{C}\), a continuous function \(f: D\to\mathbb{C}\), and a rectangle \(R\subset D\) with sides parallel to the coordinate axes such that you can show (by explicit computation) that \[\int_{\partial R} f(z)\,dz \ne 0,\] so that \(f\) fails the condition of Morera’s theorem.
+\end{problem}
+Consider the function \begin{align*}
+    f(z) = f(x + i y) = i\cos (x).
+\end{align*} 
+and the path \(\gamma: [a, b] \to \mathbb{C} \) on the following sketch:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{curve1.jpeg}
+\end{figure} 
+
+Since \(\cos (x)\) is continuous for all real numbers, \(f : \mathbb{C} \to \mathbb{C} \) is certainly continous. Hence my domain is all of \(\mathbb{C} \) and the rectangle \(R\) is the blue outine in the sketch. We can split \(\gamma\) into 4 different sub-curves along the coordinate axes labelled starting with the one from the origin to \(\pi /2\) in counterclockwise order. Hence 
+\begin{align*}
+    \int _{\partial R} f(z) dz = \int_{\gamma _1} f(z)dz + \int_{\gamma _2} f(z)dz + \int_{\gamma _3} f(z)dz + \int_{\gamma _4} f(z)dz
+\end{align*}
+
+We can take \(\gamma _1 (t) = t\) with \(t \in [0, \frac{\pi}{2}]\) such that  
+\begin{align*}
+    \int _{\gamma _1} f(z) dz = \int _0 ^{\pi  /2 } i\cos (t) dx = i[\sin (x)]_0 ^{\pi /2} = i
+\end{align*}
+
+Since \(f(z) = i\cos (\pi / 2) = 0\) along \(\gamma _2\) (the vertical strip starting from \(z = \pi / 2\) and going to \(z = \pi / 2(1 + i)\)), we get no contribution from that. 
+
+Then, \(\gamma _3 (t) = \frac{\pi}{2} (1 - t) + i \frac{\pi}{2}\) with \(t \in [0, 1]\) such that \begin{align*}
+    \int _{\gamma _3} f(z) dz = - \frac{\pi }{2}\int _0 ^{1} i\cos \left( \frac{\pi}{2} (1 - t) \right) dt = - i \left( \frac{\pi}{2} \right) \left( - \frac{2}{\pi } \right)  \int _{\pi / 2} ^0 \cos (u) dt = -i 
+\end{align*}  
+
+At last, we have \(\gamma _4 (t) = i \frac{\pi}{2} (1 - t)\) with \(t \in [0, 1]\) such that \begin{align*}
+    \int _{\gamma _4} f(z) dz = \int_0 ^1 i \cos (0) \left( -i \frac{\pi}{2} \right) dt = \frac{\pi }{2} \int_0 ^1 dt = \frac{\pi}{2} 
+\end{align*}
+
+To conclude, we've found that \begin{align*}
+    \int _{\partial R} f(z) dz = \int_{\gamma _1} f(z)dz + \int_{\gamma _2} f(z)dz + \int_{\gamma _3} f(z)dz + \int_{\gamma _4} f(z)dz = i - i + \frac{\pi}{2} = \frac{\pi}{2},
+\end{align*}
+for a rectangle \(R\) with sides parallel to the coordinate axes, even though \(f: \mathbb{C} \to \mathbb{C}\) is continuous. 
+
+In hindsight it is quite obvious that one need only evaluate the integral along \(\gamma _4\), but now that has been shown by explicit computation also. 
+\qedst
+
+\begin{problem}{Homwork 5, problem 3}
+Let \(f(z)=|z|^{2}\) and \(D=\{\,z\in\mathbb{C}: |z|<2\,\}\). \begin{enumerate}[label=(\alph*)]
+\item Compute \(\displaystyle \frac{\partial f}{\partial \bar z}\).
+\item Use Pompeiu’s formula to write
+\[
+\iint_{D}\frac{z}{\,z-1\,}\,dx\,dy
+\]
+in terms of an integral over \(\partial D\) and a value of \(f\).
+\item Compute the integral and the value from part (b) to obtain an evaluation of
+\(\displaystyle \iint_{D}\frac{z}{\,z-1\,}\,dx\,dy\).
+\end{enumerate}
+\end{problem}
+\textbf{(a)} Write \(f\) as \(f(z) = |z|^{2} = z \overline{z}\) such that \(\frac{\partial f}{\partial \overline{z}} = z\).
+
+\textbf{(b)} Recall Pompeiu's formula, which holds for any complex-valued \textit{smooth} function on \(D \cup \partial D\) and \(z_0 \in D\): \begin{align*}
+    f(z_0) = \frac{1}{2\pi i}\int _{\partial D} \frac{f(z)}{z - z_0} dz - \frac{1}{\pi }\iint_{D} \frac{\partial f}{\partial \overline{z}} \frac{1}{z - z_0} dx dy 
+\end{align*} 
+We can rearrange and insert out result from part \textbf{(a)} above to find that \begin{align*}
+    \iint_{D} \frac{z}{z - z_0} dx dy = \frac{1}{2i} \int _{\partial D} \frac{f(z) }{z - 1} dz - \pi f(1) =  \frac{1}{2i} \int _{\partial D} \frac{|z|^{2} }{z - 1} dz - \pi
+\end{align*} 
+
+\textbf{(c)} On the boundary \(\partial D\), we have that \(|z|^2 = 4\) for all \(z \in \partial D\). Hence \begin{align*}
+    \frac{1}{2i} \int _{\partial D} \frac{|z|^{2} }{z - 1} dz = \frac{2}{i} \int _{\partial D} \frac{1}{z - 1} dz = \frac{2}{i} (2 \pi  i) = 4 \pi 
+\end{align*}   
+by Cauchy's formula. Thus, we find that \begin{align*}
+    \iint_{D} \frac{z}{z - z_0} dx dy = 3 \pi 
+\end{align*}
+\qedst
+
+\newpage\section{Series Expansions and Analytic Continuation}
+\lecture{14}{Wed 8 Oct}{Series and Convergence}
+
+\newpage\lecture{15}{Fri 10 Oct}{Power Series}
+
+\newpage\lecture{16}{Fri 17 Oct}{Taylor Series}
+
+
+\newpage\subsection{Example problems}
+
+\begin{problem}{Homework 6, problem 1}
+    For each of the following functions, find the power series representation centered at the given point \(z_0\), and determine its radius of convergence. \begin{enumerate}[label=(\alph*)]
+  \item \(f(z)=\dfrac{1}{z-1}\) at \(z_0=i\);
+  \item \(f(z)=Log\, z\) at \(z_0=2\).
+  
+  \smallskip
+  \emph{(Note that \(Log \, z\) is analytic in a sufficiently small disk centered at \(z_0=2\),
+  and since \(e^{Log z}=z\) for all \(z\), differentiating we find
+  \(\big(\tfrac{d}{dz}Log\, z\big)\cdot e^{Log\, z}=1\), and so \(\tfrac{d}{dz}Log\, z=\tfrac{1}{z}\).)}
+\end{enumerate}
+\end{problem}
+
+\textbf{(a)} The power series representation of a function \(g(z)\) around \(z_0\) is in general given by \begin{align*}
+    g(z) = \sum_{n = 0}^\infty \frac{g^{(n)}(z_0)}{n!} (z - z_0)^n 
+\end{align*} 
+
+In this case, we have for \(f(z)\) around \(z_0 = i\) that \begin{align*}
+    f(z) = \sum_{n = 0}^\infty \frac{f^{(n)}(i)}{n!} (z - i)^n 
+\end{align*}  
+
+Note that \(f(z)\) is analytic at all \(z \neq 1\). So for \(z \neq 1\), let us calculate the first few derivatives and try and find a pattern: \begin{align*}
+    &f^{\prime} (z) = -1 \cdot (z - 1)^{-2}\\
+    &f^{\prime\prime} (z) = (-2)(-1) \cdot (z - 1)^{-3}\\
+    &f^{\prime\prime\prime} (z) = (-3)(-2)(-1)\cdot (z - 1)^{-4}
+\end{align*}
+
+It seems that the generalisation we are looking for is \begin{align*}
+    f^{(n)} (i) = (-1)^n (n!) (i - 1)^{-(n + 1)}
+\end{align*}
+such that the power series representation of \(f\) around \(z_0 = i\) is given by \begin{align*}
+    f(z) = \sum_{n = 0}^\infty \frac{(-1)^n}{i - 1} \left( \frac{z - i}{i - 1} \right)^n
+\end{align*}
+
+We see that \begin{align*}
+    \lim_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right| = \lim_{n \to \infty} \left| \frac{(-1)^n (n!) (i - 1)^{-(n + 1)}}{(-1)^{n + 1} (n + 1)! (i - 1)^{-(n + 2)}} \right| = \lim_{n \to \infty}  \left| \frac{i - 1}{n + 1} \right| = 0,
+\end{align*}
+and hence the limit exists and we conclude that the radius of convergence of \(f(z)\) around \(z_0 = i\) is \(R = 0\).
+
+\textbf{(b)} Let \(f(z) = Log z\) now. Using the given hint/note, we have that \begin{align*}
+    &f ^{\prime} (z) = z^{-1} \\
+    &f ^{\prime\prime} (z) = -1 \cdot z^{-2}\\
+    &f ^{\prime\prime\prime} (z) = (-2)(-1) \cdot z^{-3}\\
+    &\vdots \\
+    &f ^{(n)}(z) = (-1)^{n - 1} z^{- n}
+\end{align*}
+such that the power series representation centered at \(z_0 = 2\) is given by \begin{align*}
+    f(z) = \sum_{n = 0}^\infty \frac{(-1)^{n - 1}}{2^n} (z - 2)^n
+\end{align*} 
+
+By the ratio test, we have that \begin{align*}
+    \lim_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right| = \lim_{n \to \infty} \left| \frac{(-1)^{n - 1}2^n}{(-1)^{n}2^{n + 1}} \right| = \lim_{n \to \infty} \frac{1}{2} = \frac{1}{2}
+\end{align*}
+
+Since the limit exists, it is equal to the radius of convergence, which we then conclude is \(R = \frac{1}{2}\).
+\qedst
+
+\begin{problem}{Homework 6, problem 2}
+Suppose that
+\[
+f(z)=\sum_{n=0}^{\infty} a_n z^n
+\]
+converges on an open disk of radius \(R\) centered at the origin, and on this disk
+satisfies the differential equation
+\[
+f'(z)=z\,f(z)
+\]
+for all \(|z|<R\).
+Show that the coefficients \(a_n\) must satisfy the recurrence relation
+\[
+n\,a_n = a_{n-2}\quad\text{for } n\ge 2,
+\qquad a_1=0.
+\]
+Conclude that
+\[
+f(z)=a_0\sum_{n=0}^{\infty}\frac{1}{n!\,2^{\,n}}\,z^{2n}=a_0\,e^{z^{2}/2}.
+\]
+\end{problem}
+From the differential equation, we find that \begin{align*}
+    f^{\prime} (z) = zf(z) = \sum_{n = 0}^\infty a_n z^{n + 1} \tag{1}
+\end{align*} on the disk of convergence (where such manipulations are valid). Since it is also valid to differentiate term by term within the disk of convergence, we also have that \begin{align*}
+    f^{\prime} (z) = \frac{d}{dz} \left(\sum_{n=0}^{\infty} a_n z^n  \right) = \sum_{n = 0}^\infty (n + 1)  a_{n + 1}z^n \tag{2}
+\end{align*}
+
+Since both power series are con
+
+For \(n \geq 2\), we see that the coefficient attached to \(z^n\) in (1) is \(a_n\) while in (2) it is \((n + 2)a_{n + 2}\). Since these need to be equal from the equality of the differential equation, we find that \begin{align*}
+    (n + 2) a_{n + 2} = a_n \iff n a_n = a_{n - 2} \quad \text{for } n \geq 2.
+\end{align*}
+
+From the power series (1) we see that \begin{align*}
+    f^{\prime} (z) = a_0 z + a_1 z^2 + \dots \implies f^{\prime} (0) = 0
+\end{align*}
+while from (2) we have \begin{align*}
+    f^{\prime} (z) = a_1 + 2 a_2 + 3 a_3 z^2 + \dots \implies f^{\prime} (0) = a_1
+\end{align*}
+Hence \(a_1 = 0\) and we have shown the desired recurrence relation. We can now use the recurrence relation to solve for \(a_n\). Since \(3a_3 = a_1 = 0 \) and so forth, we have that \(a_{n}\) for \(n\) odd is zero. For the even \(n\)'s we find that   
+\begin{align*}
+    &a_2 = \frac{a_0}{2}\\
+    &a_4 = \frac{a_2}{4} = \frac{a_0}{4 \cdot 2}\\
+    &a_6 = \frac{a_4}{6} = \frac{a_0}{6 \cdot 4 \cdot 2}\\
+    &\vdots\\
+    &a_{2k} = \frac{a_0}{(2k)!!}
+\end{align*}
+
+Notice that \begin{align*}
+    (2k)!! = 2k (2k - 2)(2k-4) \dots \cdot 4\cdot 2 = 2^k (k (k-1)(k-2) \dots 2 \cdot 1) = 2^k k!
+\end{align*}
+
+Hence renaming \(k = n\) we have 
+\begin{align*}
+    f(z) = \sum_{n = 0}^\infty \frac{a_0}{n! 2^n} z^{2n} = a_0 \sum_{n = 0}^\infty \frac{1}{n! 2^n} z^{2n} = a_0 e^{z ^{2} / 2}.
+\end{align*}
+
+\begin{problem}{Homework 6, problem 3}
+Suppose that \(f\) is analytic at infinity, with power series at infinity given by
+\[
+f(1/z)=\sum_{n=0}^{\infty} a_n z^{n}.
+\]
+Write \(f(\infty)=a_0\) and \(f'(\infty)=a_1\).
+Show that
+\[
+f'(\infty)=\lim_{z\to\infty} z\big(f(z)-f(\infty)\big).
+\]
+\end{problem}
+It is a straightforward manipulation of limits: \begin{align*}
+    \lim_{z \to \infty} z (f(z) - f(\infty)) &= \lim_{z \to 0} \frac{1}{z} \left( f\left(\frac{1}{z}\right) - f(\infty) \right) \\
+    &= \lim_{z \to 0} \frac{1}{z} \left( a_ 0 + \sum_{n = 1} ^\infty a_{n}z^n - a_0  \right) \\
+    &= \lim_{z \to 0}\sum_{n = 1} ^\infty a_n z^{n - 1}\\
+    &= \lim_{z \to 0} \sum_{n = 0}^\infty a_{n + 1} z^n\\
+    &= a_1 
+\end{align*}
+
+Since \(f^{\prime} (\infty) = a_1\), we have shown that \begin{align*}
+    f^{\prime} (\infty) = \lim_{z \to \infty} z (f(z) - f(\infty))
+\end{align*} 
+Note that these manipulations were valid exactly because \(f\) was analytic at infinity, and hence then also continuous, allowing us to do algebraic manipulations inside the limit.\qedst
+
+\newpage\lecture{17}{Wed 22 Oct}{Series Expansions at Infinity and Zeroes of order \(n\)}
+
+\newpage\lecture{18}{Fri 24th of Oct}{Zeroes, Isolated Points and Analytic Continuation}
+
+\textbf{Key Concepts}
+\begin{itemize}
+    \item Recall definition of expansions at infinity and its definition
+    \item Recall definition of "order of zero" definition and its equivalent formulation in terms of \(f(z) = (z - z_0)^n h(z)\) with \(h(z_0) \neq 0\)
+    \item Prove the "big theorem": \begin{theorem}[Isolated Points]
+        Let \(f: D \to \mathbb{C} \) be an analytic function and \(S = \left\{ z \in D : f(z) = 0\right\} \subseteq D\). Then either \(S\) contains only isolated points or \(f(z)\) vanishes identically on \(D\), i.e. \(S = D\). 
+    \end{theorem}
+    \item Proved corollaries about functions agreeing. If \(f, g\) are both analytic functions on \(D\), try and apply above to \(f - g\) and see what you get!
+    \item Proved the corollary "Permanence Principle for Functional Equalites". Apply the above theorem to a bi-analytic function \(F(z, w)\) in multiple iterations to conclude cool stuff. 
+\end{itemize} 
+
+\end{document}
+
+
+
+
