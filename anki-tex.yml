@@ -25,6 +25,11 @@ courses:
       - "QFT/**/*.tex"
     deck: "Quantum Field Theory"
 
+  Test:
+    paths:
+      - "Test/**/*.tex"
+    deck: "Test"
+
 # LaTeX environments to extract
 # Add any custom environments you use
 envs_to_extract:
