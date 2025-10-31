@@ -14,6 +14,7 @@
 # Add/remove lines as your active courses change.
 # ──────────────────────────────────────────────────────────────────────────────
 !DiffTop/
+!DiffTop2/
 !PDE/
 !ComAn/
 !QFT/
@@ -23,6 +24,7 @@
 # (We’ll selectively unignore .tex next.)
 # ──────────────────────────────────────────────────────────────────────────────
 DiffTop/*
+DiffTop2/*
 PDE/*
 Complex/*
 QFT/*
@@ -30,6 +32,9 @@ QFT/*
 # …but allow .tex files anywhere within them (top-level and subfolders)
 !DiffTop/*.tex
 !DiffTop/**/*.tex
+
+!DiffTop2/*.tex
+!DiffTop2/**/*.tex
 
 !PDE/*.tex
 !PDE/**/*.tex
