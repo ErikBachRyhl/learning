@@ -17,7 +17,7 @@
 # ──────────────────────────────────────────────────────────────────────────────
 !DiffTop/
 !DiffTop2/
-# !PDE/
+!PDE/
 !ComAn/
 !QFT/
 
@@ -27,7 +27,7 @@
 # ──────────────────────────────────────────────────────────────────────────────
 DiffTop/*
 DiffTop2/*
-# PDE/*
+PDE/*
 Complex/*
 QFT/*
 
@@ -38,8 +38,8 @@ QFT/*
 !DiffTop2/*.tex
 !DiffTop2/**/*.tex
 
-# !PDE/*.tex
-# !PDE/**/*.tex
+!PDE/*.tex
+!PDE/**/*.tex
 
 !Complex/*.tex
 !Complex/**/*.tex
