@@ -91,12 +91,7 @@ Before we prove Poisson, we introduce the idea of integral kernels and dummy var
 
 Anyway, we prove Poisson's formula as the first example of going directly to an integral solution of a Partial Differential Equaion. 
 
-Testing
-
-
-\textbf{Key Concepts} 
-
-\newpage\subsection{Example Problems}
+\newpage\subsubsection{Example Problems}
 \begin{note}
     Solve these problems you missed: 
     
@@ -106,6 +101,96 @@ Testing
 
     \textbf{Olver 4.3.45}: Let \(p(x,y)\) be a polynomial (not necessarily harmonic). Suppose \(u(x,y)\) is harmonic and equals \(p(x,y)\) on the unit circle \(x^{2} + y^{2} = 1\). Prove that \(u(x, y)\) is a harmonic polynomial. 
 \end{note}
+
+\newpage\lecture{24.5}{Wed 29 Oct}{Regularity for Poisson and Maximum Principle for Heat Equation}
+\paragraph{Abstract} Last lecture we proved existence and uniqueness for Poisson's equation. In this lecture, we first look at the regularity of such solutions. The regularity question is concerned with relating the smoothness of \(f\) in the problem \begin{align*}
+    \Delta u = f
+\end{align*}
+to the smoothness of the solution function \(u\). The \textbf{Elliptic Regularity} theorem says that if \(f \in \mathcal{C} ^\infty(\Omega : \mathbb{R} )\), then indeed \(u \in \mathcal{C} ^\infty (\operatorname{Int} \Omega : \mathbb{R}  )\). 
+
+We introduced the notion of \textbf{analytic functions} and showed how they are a subset of smooth functions. We then strengthened the elliptic regularity theorem. This strenghtened version is just a special case of a the "non-isolated points of analytic functions"-theorem from complex analysis and the fact that analytic functions give rise to harmonics. 
+
+We then proved the \textbf{Maximum Principle for the Heat Equation} in a simple case. From this, we obtain the minimum principle and use this to prove uniqueness to solutions of the heat equation. This allowed us to conclude that the solution we've already obtained through separation of variables is the only one. Existence and regularity is handled in a similar fasion as with Poisson's equation. We might return to this.
+
+Finally, it was noted that there is no maximum principle to the wave equation; this makes intuitive sense, since a plane wave solution has no (global) maximum or minimum. However, it is still possible to prove uniqueness, existence and regularity, albeit it is more difficult. 
+
+\paragraph{Questions} 
+\begin{itemize}
+    \item \(\mathcal{C} ^\infty (\Omega : \mathbb{R} )\) is not a Banach space. Greg said "there is no norm for it" - but I thought it was because it was incomplete (i.e. we can make smooth functions converge to a step-function etc). Which one is it?
+\end{itemize}
+
+
+\newpage\lecture{25}{Fri 31 Oct}{Distributions and the Dirac Delta Function}[Olver 6.1]
+
+\paragraph{Abstract} Fill out
+
+\paragraph{Questions} Fill out
+
+\begin{example}[Dirac delta function]
+    The Dirac delta function is sometimes written as \begin{align*}
+        \delta (x) = \begin{dcases}
+            \infty \quad &x = 0\\
+            0 \quad &x \neq 0
+        \end{dcases}
+    \end{align*}
+    while \begin{align*}
+        \int _{- \infty} ^\infty \delta (x) dx = 1.
+    \end{align*}
+
+    This is clearly not a function, as \(\infty\) isn't a number even. So what do we actually mean when writing this, and how can we make such a concept well-defined? 
+\end{example}  
+
+\subsubsection{The Duality Definition}
+From finite vector spaces, one can construct many new vector spaces, including \(\operatorname{Hom}(V, W)\), the direct sum \(V \oplus W\) and the tensor space \(V \otimes W\). 
+
+If a finite dimensional vector space \(V\) is equipped with an inner product, we can canonically identify it with the space \(\operatorname{Hom}(V, \mathbb{R})\) through the pairing \begin{align*}
+    v \mapsto \left\langle v, \cdot \right\rangle \in  \operatorname{Hom}(V, \mathbb{R})
+\end{align*}
+for \(v \in V\). We define \(V^{\ast} \coloneqq \operatorname{Hom}(V, \mathbb{R} ) \) as the dual space of \(V\).  
+
+This canonical isomorphism doesn't hold in general for infinite-dimensional vector spaces, but we can still make a sensible definition of the dual space that generalizes to infinite-dimensional vector spaces. 
+
+\begin{definition}[The Dual Space]
+    Given any vector space \(V\), define the \textbf{dual space of \(V\)} as
+    \begin{align*}
+        V^{\ast} \coloneqq \Set{\xi: V \to \mathbb{R} }{\xi \text{ is a continuous linear map}}. 
+    \end{align*} 
+\end{definition}
+\begin{remark}
+    Note that for finite dimensional vector spaces, the continuity requirement is redundant, since every linear map between finite dimensional vector spaces is smooth. Hence in this case, \(V^{\ast}\) just collapses to \(\operatorname{Hom}(V, \mathbb{R} ) \), i.e. the space of linear maps from \(V\) to \(\mathbb{R} \).  
+\end{remark}
+
+\begin{proposition}
+    \(V^{\ast} \) is a vector space. 
+\end{proposition}
+
+If we represent elements from \(V\) as column vectors, then elements of \(V^{\ast}\) can be represented by row vectors.
+
+\begin{example}[Integration]
+    \textred{Fill out}
+\end{example}
+
+\begin{example}[Dual of \(L^2(\Omega: \mathbb{R} )\)]
+    Given some function \(g \in L^2 (\Omega : \mathbb{R} )\), we can define an element \(\xi _g \in L^2 (\Omega : \mathbb{R} )^{\ast} \) by its action on other \(f \in L^2(\Omega: \mathbb{R} )\) \begin{align*}
+        \xi _g [f] \coloneqq \left\langle g, f \right\rangle _{L^2(\Omega: \mathbb{R} )} = \int _\Omega g f dV
+    \end{align*}
+\end{example}
+
+This is exactly the same pairing that gave us a canonical isomorphism in the case with finite dimensional vector spaces. An immediate question follows: Are \(L^2\) and \(\left( L^2 \right)^{\ast}  \) equally "big"? 
+
+\begin{proposition}[Duality Reverses Inclusion]
+    Recall that \begin{align*}
+        L^2(\Omega : \mathbb{R} ) \supseteq \mathcal{C}^0 (\Omega : \mathbb{R} ) \supseteq \mathcal{C} ^1 (\Omega : \mathbb{R} ) \supseteq \cdots \supseteq \mathcal{C} ^\infty(\Omega : \mathbb{R} ) 
+    \end{align*}
+    However, with dual spaces, it goes the other way. 
+\end{proposition}
+
+% Intuition
+
+\newpage\lecture{26}{Mon 03 Nov}{Green's Functions}[Olver 6.2]
+\paragraph{Abstract} We recalled the definition of the Diract delta function. Then, we took a step back and looked at the series solution to Poisson's equation in terms of the eigenfunctions. In other words, we revisited the \textbf{superposition principle} and rewrote our series solution in terms of an integral over a discrete dummy variable.  
+
+
 
 \end{document}
 

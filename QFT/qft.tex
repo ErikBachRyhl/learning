@@ -12,7 +12,117 @@
 \tableofcontents
 \newpage
 
-\section{Extra Resources}
+\section*{Quantum Field Theory — Course Summary (Weeks 1–8)}
+
+\subsection*{Week 1 (Aug 27 \& 29)}
+\begin{itemize}
+  \item Broad overview of why QFT is universal — connects to many areas beyond particle physics.
+  \item Introduction to \textbf{Wilsonian renormalization} and the \textbf{Renormalization Group (RG)} (conceptually).
+  \item \textbf{Klein paradox} discussed (following Alvarez-Gaumé \& Vázquez-Mozo).
+  \item Preview: surface growth and the \textbf{KPZ equation}.
+  \item Recommended reading:
+    \begin{itemize}
+      \item Alvarez-Gaumé \& Vázquez-Mozo, \emph{Invitation to QFT}, Ch.~1
+      \item Barabási \& Stanley, \emph{Fractal Concepts in Surface Growth}, Ch.~VI.6, VI.8
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Week 2 (Sept 3 \& 5)}
+\begin{itemize}
+  \item Introduction to the \textbf{path integral} formulation for a single particle.
+  \item Gaussian integrals — importance in QFT.
+  \item Preview of \textbf{Wick rotation} (analytic continuation between real and imaginary time).
+  \item Recommended reading:
+    \begin{itemize}
+      \item Feynman \& Hibbs, \emph{Quantum Mechanics and Path Integrals}
+      \item Guillemin \& Sternberg, \emph{Symplectic Techniques in Physics}, §8
+      \item Haber (UCSC), Notes on Gaussian Integrals
+    \end{itemize}
+  \item Homework 1: [Zee] I.2.1, I.2.2
+\end{itemize}
+
+\subsection*{Week 3 (Sept 10 \& 12)}
+\begin{itemize}
+  \item Review of \textbf{Lagrangian} and \textbf{Hamiltonian} mechanics.
+  \item Path integral trajectories: fractal dimension~2.
+  \item Transition from quantum mechanics → quantum field theory.
+  \item Recommended reading:
+    \begin{itemize}
+      \item Hand \& Finch, \emph{Analytical Mechanics}
+      \item Landau \& Lifshitz, \emph{Mechanics}
+      \item Zinn-Justin, \emph{Path Integrals in QM}, §§2.2–3.1
+      \item [Zee], Chs.~I.2–I.3
+    \end{itemize}
+  \item Homework 2: [Zee] I.3.1–I.3.3
+\end{itemize}
+
+\subsection*{Week 4 (Sept 17 \& 19)}
+\begin{itemize}
+  \item Path integrals in \textbf{relativistic scalar field theory}.
+  \item Steepest descent / semiclassical approximation.
+  \item Example: free particle on a circle → \textbf{instantons}.
+  \item Perturbative expansions as \textbf{asymptotic}, not convergent.
+  \item Propagators and \textbf{analytic continuation} (Cauchy theorem).
+  \item Introduction to the \textbf{Schwinger–Keldysh (in-in)} formalism.
+  \item Recommended reading:
+    \begin{itemize}
+      \item Zinn-Justin, \emph{QFT \& Critical Phenomena}, §3.3
+      \item Gelis, \emph{QFT: From Basics to Modern Topics}
+      \item Cartan, \emph{Elementary Theory of Analytic Functions}
+      \item Wikipedia: “Cauchy’s Integral Formula”
+    \end{itemize}
+  \item Homework 3: [Zee] I.4.1, I.5.1
+\end{itemize}
+
+\subsection*{Week 5 (Sept 24 \& 26)}
+\begin{itemize}
+  \item \textbf{Free-field propagators}.
+  \item \textbf{Generating functionals} and Green’s functions.
+  \item Perturbative expansion and the combinatorics of \textbf{Feynman diagrams}.
+  \item Recommended reading:
+    \begin{itemize}
+      \item [Zee], Chs.~I.3–I.5 (into I.7)
+      \item Zinn-Justin, discussion of asymptotic series
+    \end{itemize}
+  \item Homework 4: [Zee] I.7.2, I.7.3
+\end{itemize}
+
+\subsection*{Week 6 (Oct 1 \& 3)}
+\begin{itemize}
+  \item Detailed examples of Feynman diagrams (Zee I.7).
+  \item Additional topics:
+    \begin{itemize}
+      \item Ch.~I.6: Braneworlds — 3+1D membrane in higher-dimensional spacetime.
+      \item Ch.~VIII.1: Massive gravity and the \textbf{Vainshtein radius}.
+    \end{itemize}
+  \item Homework 5: [Zee] I.7.4, I.8.1, I.8.2
+\end{itemize}
+
+\subsection*{Week 7 (Oct 6–20)}
+\begin{itemize}
+  \item Higher-order Feynman diagrams (Zee I.8).
+  \item Beginning of \textbf{Renormalization Group (RG)} concepts.
+  \item \textbf{Take-home Midterm} (Oct 19–21).
+  \item Recommended reading:
+    \begin{itemize}
+      \item [Zee], Chs.~I.8, III.1–III.2, VI.8
+    \end{itemize}
+  \item Homework 6:
+    \begin{itemize}
+      \item Part I: [Zee] I.8.3, I.8.4
+      \item Part II: [Zee] III.1.2, III.1.3, III.2.1
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Week 8 (Oct 27–Nov 3)}
+\begin{itemize}
+  \item \textbf{Renormalization Group flow}: scale dependence of couplings.
+  \item Running coupling, logarithmic divergences, $\beta$-functions.
+  \item Recommended reading: [Zee], Ch.~VI.8
+  \item Homework 7: [Zee] VI.8.1, VI.8.2
+\end{itemize}
+
+\newpage\section{Extra Resources}
 \subsection{Contour Integration}
 \href{https://www.youtube.com/playlist?list=PLD2r7XEOtm-AgQStjv6dkhiidEMcp3ey5}{This YouTube Series} proves first some of the central results and then has plenty of examples!
 
@@ -332,6 +442,39 @@ Hence upon integrating out \(\mathbf{k}^{\prime} \) we see that
 \qedst
 
 \newpage\section{Renormalization}
+\paragraph{Abstract} In QFT, infinites and divergent integrals abound. But as it turns out, these infinites are not a problem with the theory, but in fact a necessity for the theory to make sense in the context of experiments at different energy scales. 
+
+\subsection*{Week 7 (Oct 6–20)}
+\begin{itemize}
+  \item Higher-order Feynman diagrams (Zee I.8).
+  \item Beginning of \textbf{Renormalization Group (RG)} concepts.
+  \item \textbf{Take-home Midterm} (Oct 19–21).
+  \item Recommended reading:
+    \begin{itemize}
+      \item [Zee], Chs.~I.8, III.1–III.2, VI.8
+    \end{itemize}
+  \item Homework 6:
+    \begin{itemize}
+      \item Part I: [Zee] I.8.3, I.8.4
+      \item Part II: [Zee] III.1.2, III.1.3, III.2.1
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Week 8 (Oct 27–Nov 3)}
+\begin{itemize}
+  \item \textbf{Renormalization Group flow}: scale dependence of couplings.
+  \item Running coupling, logarithmic divergences, $\beta$-functions.
+  \item Recommended reading: [Zee], Ch.~VI.8
+  \item Homework 7: [Zee] VI.8.1, VI.8.2
+\end{itemize}
+\newpage
+\subsection{UV Divergence and The Cutoff Regulator}
+Quantum Field Theory turns out to be a low energy effective field theory. There is no single energy scale at which it makes sense, but rather one has to zoom in on a regime and "make" the theory make sense \textit{there}. What does this actually mean?
+
+
+
+
+
 \subsection{Example Problems}
 \begin{problem}{Zee III.2.1}
     Consider the $d$-dimensional scalar field theory
@@ -437,6 +580,65 @@ Hence if \(\lambda \to \lambda + 6 \epsilon C \lambda ^{2} + \mathcal{O} (\lambd
     &= \mathcal{M},
 \end{align*}
 which shows that \(\delta \mathcal{M} = 0\) to the given order of \(\lambda \).  
+
+\newpage\begin{problem}{Zee problem VI.8.1}
+    Show that the solution of \(dg / dt = - bg^3 + \cdots\) is given by \begin{align*}
+        \frac{1}{\alpha (t)} = \frac{1}{\alpha (0)} + 8 \pi b t + \cdots
+    \end{align*} 
+    where we defined \(\alpha (t) = g(t)^2 / 4 \pi \). 
+\end{problem}
+
+It is clear from plugging in on both sides that \(\alpha (t)\) solves the equation to the order indicated. Using the chain rule on the left hand side: \begin{align*}
+    \frac{d}{dt} \frac{1}{\alpha (t)} = \frac{d}{dt} \left( \frac{4 \pi}{g(t)^2}  \right) = - \frac{8\pi }{g(t)^3} \frac{dg}{dt}
+\end{align*} 
+while the right hand side gives \begin{align*}
+    8 \pi b + \cdots
+\end{align*}
+
+Hence \begin{align*}
+    \frac{dg}{dt} = - b g(t)^3 + \cdots
+\end{align*}
+
+All terms except for \(\alpha (0) ^{-1} \) are either linear or higher order in \(t\), and hence at \(t = 0\), the only term surviving is \(\alpha (0)^{-1} \). This must then be the integration constant, and we've solved the problem. 
+
+It is just as easy to solve by separation of variables: \begin{align*}
+    \frac{dg}{dt} &= -b g(t)^3 + \cdots \\
+    &\implies \int_{g(0)}^{g(t)} \frac{dg}{-g(t)^3} = b \int _0 ^t dt + \cdots\\
+    &\implies - \frac{1}{2} \frac{1}{g(t)^2} = -\frac{1}{2}\frac{1}{g(0)^2} + bt + \cdots 
+\end{align*}
+
+Rescaling by letting \(\alpha (t) = g(t)^2 / 4 \pi \) we solve \begin{align*}
+    \frac{1}{\alpha (t)} = \frac{1}{\alpha (0)} + 8 \pi bt + \cdots
+\end{align*}.
+
+\qedst   
+
+\begin{problem}{Zee problem VI.8.2}
+In our discussion of the renormalization group, in $\lambda \varphi^4$ theory or in QED, for the sake of simplicity we assumed that the mass $m$ of the particle is much smaller than $\mu$ and thus set $m$ equal to zero. But nothing in the renormalization group idea tells us that we can’t flow to a mass scale below $m$. Indeed, in particle physics many orders of magnitude separate the top quark mass $m_t$ from the up quark mass $m_u$. We might want to study how the strong interaction coupling flows from some mass scale far above $m_t$ down to some mass scale $\mu$ below $m_t$ but still large compared to $m_u$. As a crude approximation, people often set any mass $m$ below $\mu$ equal to zero and
+any $m$ above $\mu$ to infinity (i.e., not contributing to the renormalization group flow). In reality, as $\mu$ approaches $m$ from above the particle starts to contribute less and drops out as $\mu$ becomes much less than $m$. Taking either the $\lambda \varphi^4$ theory or QED study this so-called threshold effect.
+\end{problem}
+\begin{selfnote}
+    Fill out solution once you understand how!
+\end{selfnote}
+
+\newpage
+\section{Colloquim: Universality Classes of Turbulence}
+"The last great unsolved problem of classical physics"
+\begin{definition}[Turbulence]
+    A state of a system where many degrees of freedom are deviated from thermal equilibrium. 
+\end{definition}
+
+We wish to describe such states statstically, but the guiding principles must be different from detailed balance and entropy maximum. \textred{why?}
+
+If one is given a certain configuration of a system, the probability isn't just \(e^H\), but it depends on the entire history up until this state (or maybe just some history at least). THe only state where the probability \textit{is} given by \(e^H\) is the maximum entropy one, the Gibbs distribution. But for non-equilibria states, this is an extremely difficult problem!
+
+For example, with high waves, we get foam formation, which is very important for the ecology of the ocean. But we cannot actually predict foam production basically, because this only happens when the small-amplitude Fourier approximations of the ocean model breaks down. 
+
+Screening suppresses one's interaction. 
+
+Self-focusing and enhancement. For spin waves, we always get enhancement! Hence possible multi-wave bound states - spin droplets and domain walls. How could this be relevant for super-condensate? Can we do fluid mechanics on that state of matter?
+
+
 
 
 

@@ -281,6 +281,7 @@ Hence if a manifold \(M\) can be covered by a single chart, then \(\varphi (M) =
 
 \textred{Manifold chart lemma is used to finish the proof that \(TM\) is a \(2n\) dimensional smooth manifold}
 
+% anki-tex-guid: 95fd6210abdb
 \begin{example}
     \(TS^1 \cong S^1 \times R\).   
 \end{example}
@@ -501,7 +502,7 @@ As the last example hinted at, the failure to be exact even when the 1-form sati
 
 \subsubsection{Introduction to 2-forms}
 \begin{definition}[2-form]
-    A \textbf{2-form} on \(\mathcal{M} \) is a smooth section \(\beta \) of the vector bundle \((TM \otimes TM)^{\ast} \), which is antisymmetric. That is, for each \(p \in \mathcal{M} \), \(\beta (p): T_{p} \mathcal{M} \times T_p \mathcal{M}  \to \mathbb{R} \) is a function that \begin{enumerate}
+    A \textbf{2-form} on \(\mathcal{M} \) is a smooth section \(\beta \) of the vector bundle \((TM \otimes TM)^{\ast} = \operatorname{Hom}(TM \otimes TM, \mathbb{R} ) \), which is antisymmetric. That is, for each \(p \in \mathcal{M} \), \(\beta (p): T_{p} \mathcal{M} \times T_p \mathcal{M}  \to \mathbb{R} \) is a function that \begin{enumerate}
         \item is bilinear.
         \item is antisymmetric. 
         \item depends smoothly on \(p\).  
@@ -546,6 +547,168 @@ In other words, we showed that
 \begin{align*}
     H^1_{\text{dR}} \left(\mathbb{R} ^n\right) = \left\{ 0 \right\} 
 \end{align*}
+\newpage
+\paragraph{Recall} that a 1-form on \(M \) is a smooth section of \(T^{\ast} M\) while a 0-form is a smooth function \(f: M \to \mathbb{R} \). Note that if nothing else is stated, everything is smooth actually. Last lecture we also introduced the operator \begin{align*}
+    d : \left\{ \text{ 0-forms } \right\} \to \left\{ \text{ 1-forms } \right\}.
+\end{align*}
+Given a 0-form \(f \in C^\infty(M)\), the resulting 1-form at a point \(p \in M\) with \(v \in T_p M\) acts by \begin{align*}
+    df(p) (v) = df_p (v) = v(f).
+\end{align*}
+
+We also saw that a basis for 1-forms is given by \(dx^i\), such that any global differential / exterior derivative can in local coordinates \(x^1, \dots , x^n\) be written as \begin{align*}
+    df = \frac{\partial f}{\partial x^i} dx^{i}. 
+\end{align*}
+
+Recall also the definition of a 2-form. Note that in the definition of a 2-form, we need only specify its action on two arbitrary basis vectors since a 2-form is bilinear.
+
+Any 1-form can be uniqueley written as \(\alpha _i dx^i\) where \(\alpha _i (x^1, \dots , x^n)\) is a smooth function.  
+
+\begin{proposition}
+    Locally, any 2-form can be uniqueley written as \begin{align*}
+        \sum_{i < j} \beta _{ij} dx^i dx^j
+    \end{align*}
+    where \(\beta _{ij}(x^1, \dots , x^n)\) is a smooth function.
+\end{proposition}
+\begin{proof}
+    This will be done later in a more general setting.
+\end{proof}
+
+\begin{definition}[Exterior Derivative on 1-forms]
+    Given local coordinates \(x^1, \dots , x^n\) and a 1-form \(\alpha = \alpha _i dx^i\) we define \begin{align*}
+        d: \left\{ \text{ 1-forms } \right\} \to \left\{ \text{ 2-forms } \right\} 
+    \end{align*}
+    by its action \begin{align*}
+        d \alpha = d(\alpha _i dx^i) = \frac{\partial \alpha _i}{\partial x^j} dx^j dx^i 
+    \end{align*}
+    Note that the term with \(i = j\) vanishes due to antisymmetry of the 2-form basis.  
+\end{definition}
+
+At this point, one may wonder why we even introduced antisymmetry in the first place. The reason for this will be clear later when we will introduce integration on manifolds, in which case orientations matter a whole lot. And these orientations will be "tracked" by \(k\)-forms, and their sign changes under index exchanges, I believe.
+
+\begin{remark}
+    Immediately one should be skeptical about the definition above, since it relies on local coordinates. This is one of the first definitions that we've made \textit{in} local coordinates. Note that there is a big difference between making the definition in local coordinates, and checking one of its properties in local coordinates. The former requires that we check that the definition is actually independent of that arbitrary choice used in the definition.
+\end{remark}
+ 
+\textred{Fill out the coordinate independence check here.}
+
+\begin{proposition}
+    If \(f\) is a 0-form, then \(d(df) = 0\). 
+\end{proposition}
+\begin{proof}
+    Using local coordinates \(x^1, \dots , x^n\) we can write \begin{align*}
+        d (df) = d\left(\frac{\partial f}{\partial x^i} dx^i\right) = \frac{\partial ^{2} f}{\partial x^i \partial x^j} dx ^j dx ^i  
+    \end{align*} 
+
+    Since this is a contraction of a symmetric object with an antisymmetric object, it must be zero.
+
+    \textred{Again, are these the "global" partial Euclidean derivatives? Or how should this be understood? In fact, Hutchings wrote out} \begin{align*}
+        \textred{\frac{\partial }{\partial x^j} \left( \frac{\partial f}{\partial x^i}  \right)  dx ^i dx^j}
+    \end{align*}
+\end{proof}
+
+
+
+\newpage\lecture{20}{Tue 04 Nov}{\(k\)-forms and the wedge product}[Lee \textred{??}]
+\paragraph{Abstract} In the coming lectures, we want to generalize the notion of 0-, 1- and 2-forms which we have been working on the last few lectures. Specifically, we'll introduce certain operations on \(k\)-forms: \begin{itemize}
+    \item Wedge product, \(\wedge\) 
+    \item Exterior derivative, \(d\) 
+    \item Pullback, \(\phi ^{\ast} \)
+    \item Interior product, \(i_X\)
+    \item Lie derivative, \(\mathcal{L} _X\)   
+\end{itemize}In this lecture, we first introduce the space \(\operatorname{Alt}^k (V)\) and the notion of a wedge product between elements of different alternating spaces.
+
+We use the wedge product to prove that \(\operatorname{Alt}^k(V)\) is a vector space of dimension \(\begin{pmatrix}
+    n\\
+    k
+\end{pmatrix}\) by finding a basis for the space. We then see that given a vector space \(V\) of dimension \(n\), the space \(\operatorname{Alt}^n(V)\) relates to the determinant. 
+
+Then we finally defined a \(k\)-form, and we see that it is indeed a generalization of what has been done in the last few lectures. We also prove an equivalent definition of a \(k\)-form. Introducing the notation \begin{align*}
+    \Omega ^k (M) = \left\{ k\text{-forms on }M \right\} 
+\end{align*}
+we see that we should understand the wedge product as a map defined pointwise between the spaces \begin{align*}
+    \wedge : \Omega ^k (M) \otimes \Omega ^l (M) \to \Omega ^{k + l} (M)
+\end{align*}
+
+We then introduced the exterior derivative and saw that it generalizes the specific \(d\) operators we've introduced on 0- and 1-forms already. We define this in local coordinates, so we must check that it is coordinate independent. Just like we've seen, this can be done by considering a change of charts and reproducing the same expression. But there is a more general way to see this by proving existence and uniqueness of a map satisfying certain properties. This is exactly the properties of the exterior derivative, and it matches the properties of our local coordinate definition (in \(\mathbb{R} ^n\)). Hence we can then conclude that they are they same.  
+
+To extend beyond \(\mathbb{R} ^n\) one can use bump functions. But one can also write down a coordinate-free definition of the exterior derivative, which makes the coordinate independence manifest. 
+
+Finally, we look at what the exterior derivative does in \(\mathbb{R} ^3\) and relates each \(\Omega^k (\mathbb{R} ^3)\) for \(k = 1, 2, 3\) to the gradient, curl and divergence. 
+\newpage
+
+\begin{definition}[Alternating Subspace]
+    Let \(V\) be a finite dimensional vector space and \(k\) a positive integer. Define the \textbf{alternating subspace} 
+    \begin{align*}
+        \operatorname{Alt}^k(V) = \left\{ \text{ Alternating multilinear maps } \alpha : \bigotimes _k V \to \mathbb{R}  \right\} 
+    \end{align*}
+    Note that once we specify that the map is multilinear, we can just use a Cartesian product (since every multilinear map factors through the tensor space). Or we can omit the word multilinear and specify that the map goes out of the tensor space. These are equivalent and doing both is a bit redundant. But we leave it here to emphasize this lesson. 
+
+    In other terms, each element \(\alpha \in \operatorname{Alt}^k(V) \) is a function \(\alpha : V^k \to \mathbb{R} \) such that \begin{align*}
+        &\alpha (c v_1, \dots , v_k) = c \alpha (v_1, \dots , v_k)\\
+        &\alpha (v_1 + v_1^{\prime} , \dots , v_k) = \alpha (v_1, \dots , v_k) + \alpha (v_1^{\prime} , \dots , v_k)
+    \end{align*} 
+    and similarly for each entry. Again, multilinearity of \(\alpha\) means that the map factors through the tensor space. 
+    
+    The alternating property specifically means that if \(\sigma \in S_k \) is a permutation, then \begin{align*}
+        \alpha (v_{\sigma (1)}, \dots , v_{\sigma (k)}) = (-1)^{\epsilon (\sigma )}\alpha (v_1, \dots , v_k)
+    \end{align*}
+
+    \(\operatorname{Alt}^k(V)\) is a vector space of dimension \(\begin{pmatrix}
+    n\\
+    k
+\end{pmatrix}\), as we'll see in a second. Furthermore, it is a subspace of all multilinear maps out of \(\bigoplus _k V\). \textred{Prove this final claim at some point! It really just means proving that the bigger space is a vector space and showing that concluding that there exists multilinear maps which aren't alternating}.  
+\end{definition}
+
+\begin{definition}[Wedge Product]
+    We define the \textbf{wedge product} \(\wedge: \operatorname{Alt}^k(V) \otimes \operatorname{Alt}^l(V) \to \operatorname{Alt}^{k + l}(V) \) by its action on \(\alpha \in \operatorname{Alt}^k(V)\) and \(\beta \in \operatorname{Alt}^l(V) \): \begin{align*}
+        \alpha \wedge \beta (v_1, \dots , v_{k + l}) = \frac{1}{k! l!} \sum_{\sigma \in S_{k + l}} (-1)^{\epsilon (\sigma )} \alpha (v_{\sigma (1)}, \dots , v_{\sigma (k)}) \beta (v_{\sigma (k + 1)}, \dots , v_{\sigma (k + l)}) 
+    \end{align*}   
+\end{definition}
+
+\begin{intuition}
+    Some intuition for the combinatorial prefactor is that every time we have chosen \(l\) specific vectors to put in \(\beta \), there are still \(k!\) permutations in \(S_k\) that only permute \(k\) vectors that are left to go into \(\alpha \). We want to consider all of these equivalent, i.e. no such permutation is more important than the others and it is only important which vectors go into \(\alpha\), not their order. We will also see that this results in some equations later having nice normalization. 
+\end{intuition}
+\begin{example}
+    If \(k = l = 1\), we explicitly get \textred{Fill this out} 
+\end{example}
+
+\begin{proposition}[Associativity of the wedge product]
+    The wedge product is associative and \begin{align*}
+        \beta \wedge \alpha = (-1)^{kl} \alpha \wedge \beta 
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    Consider \(\alpha \in \operatorname{Alt}^k(V), \beta \in \operatorname{Alt}^l(V)\) and \(\eta \in \operatorname{Alt}^m(V)\). Then \begin{align*}
+        \beta \wedge \eta (v_1, \dots , v_{l + m}) = \frac{1}{l! m!}\sum_{\sigma \in S_{l + m}} (-1)^{\epsilon (\sigma )} \beta (v_{\sigma (1)}, \dots , v_{\sigma (l)}) \eta (v_{\sigma (l + 1)}, \dots , v_{\sigma (l + m)}) 
+    \end{align*}  
+    such that \begin{align*}
+        \alpha \wedge (\beta &\wedge \eta ) (v_1, \dots , v_{k + l + m}) \\
+        &=\frac{1}{k ! (l + m)!} \sum_{\rho \in S_{k + l + m}}(-1)^{\epsilon (\rho )} \alpha (v_{\rho (1)}, \dots , v_{\rho (k)}) (\beta \wedge \eta )(v_{\rho (k + 1)}, \dots , v_{\rho (k + l + m)})\\
+        &= \frac{1}{k ! (l + m)!} \frac{1}{l! m!} \sum_{\rho \in S_{k + l + m}} \sum_{\sigma \in S_{k + l}} (-1)^{\epsilon(\rho  )}(-1)^{\epsilon (\sigma )}  \alpha (v_{\rho (1)}, \dots , v_{\rho (k)}) \\
+        &\hspace{8em} \cdot \beta (v_{\sigma(\rho (k + 1))}, \dots , v _ {\sigma(\rho (k + l))} ) \eta  (v_{\sigma (\rho(k + l + 1))}, \dots , v_{\sigma (\rho(k + l + m))})
+    \end{align*}
+    whereas \begin{align*}
+        \alpha \wedge \beta (v_1, \dots , v_{k + l}) = \frac{1}{k! l!}\sum_{\sigma \in S_{k + l}} (-1)^{\epsilon (\sigma )} \alpha (v_{\sigma (1)}, \dots , v_{\sigma (k)}) \beta (v_{\sigma (k + 1)}, \dots , v_{\sigma (k + l)})
+    \end{align*}
+    such that \begin{align*}
+        (\alpha \wedge \beta ) &\wedge \eta (v_1, \dots , v_{k + l + m}) 
+        \\ &= \frac{1}{(k + l)! m!} \sum_{\rho \in S_{k + l + m}} (-1)^{\epsilon (\rho )}  (\alpha \wedge \beta ) (v_{\rho (1)}, \dots , v_{\rho (k + l)}) \eta (v_{\rho (k + l + 1)}, \dots , v_{\rho (k + l + m)} )\\
+        &= \frac{1}{(k + l)! m!} \frac{1}{k! l!} \sum_{\rho \in S_{k + l + m}} \sum_{\sigma  \in S_{k + l}}  (-1)^{\epsilon (\rho )} (-1)^{\epsilon (\sigma )} \alpha (v_{\sigma (\rho (1))}, \dots , v_{\sigma (\rho (k))}) \\
+        &\hspace{8em} \cdot \beta (v_{\sigma (\rho (k + 1))}, \dots , v_{\sigma (\rho (k + l))})\eta (v_{\rho (k + l + 1)}, \dots , v_{\rho (k + l + m)} )
+    \end{align*}
+    \textred{There seems to be some problems here. Get back to this!}
+
+\end{proof}
+
+Let \(e_1, \dots , e_n\) be a basis for \(V\) and let \(e^1, \dots , e^n\) be the dual basis, which is defined by \(e^i (e_j) = \delta ^i _j\). \textred{Would be cool to explain why this is well-defined and exists!}
+
+\begin{proposition}
+    A basis for \(\operatorname{Alt}^k(V) \) is given by \begin{align*}
+        e^{i_1} \wedge \dots \wedge e^{i _k}, \qquad 1 \leq i_1 < i_2 < \dots < i_k \leq n
+    \end{align*} 
+\end{proposition}
+
+
 
 \end{document}
 
