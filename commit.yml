@@ -6,6 +6,10 @@ courses:
     paths:
       - "DiffTop/**/*.tex"
     deck: "Differential Topology"
+  PDE:
+    paths:
+      - "PDE/**/*.tex"
+    deck: "Partial Differential Equations"
 
 envs_to_extract:
   - definition
