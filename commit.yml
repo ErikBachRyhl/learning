@@ -20,6 +20,7 @@ llm:
   provider: openai
   model: gpt-4o-mini
   temperature: 0.2
+  max_output_tokens: 4096
   enable_generated: true
   max_cards_per_block: 2
   selection_conservativeness: 0.1
