@@ -340,6 +340,7 @@ So just like the tangent bundle, we think of attaching a vector space to each po
     Write some more intuition for it here
 \end{note} 
 
+% anki-tex-guid: b9cfcab32483
 \begin{example}[Trivial Vector Bundle]
     The trivial vector bundle has \(E = \mathcal{M}\times \mathbb{R} ^k\), \(\pi = \pi _1 : \mathcal{M}\times \mathbb{R} ^k \to M\). 
 \end{example}
@@ -372,6 +373,7 @@ So just like the tangent bundle, we think of attaching a vector space to each po
 \begin{note}
     Contrast this to the local trivialization condition.
 \end{note}
+% anki-tex-guid: 728e35a86472
 
 \begin{definition}{Trivial Bundle}
     A vector bundle \(E \overset{\pi }{\longrightarrow} \mathcal{M} \) is \textbf{trivial} if there is a vector bundle isomorphism \(E \cong \mathcal{M}\times \mathbb{R} ^k\). 
@@ -394,6 +396,7 @@ However, if we want to check for exactness, and we can't infer a function \(f : 
 It turns out that in \(\mathbb{R} ^n\), one can show that exactness is equivalent to the statement that \begin{align*}
     \frac{\partial \alpha _i}{\partial x^j} = \frac{\partial \alpha _j}{\partial x^i}  
 \end{align*} 
+% anki-tex-guid: 157690ffdc38
 for all \(i, j = 1, \dots , n\). We ended with an example of how this can fail when we aren't in \(\mathbb{R} ^n\) by explicit construction of a 1-form that gives back \(2 \pi \) times the winding number of a loop, which is always an integer. This is not trivial to show and will come back when we get to De Rham cohomology. 
 
 \newpage\begin{definition}[1-form]
@@ -882,6 +885,22 @@ After this, we define the \textbf{generalization of integration} to arbitrary ma
 We made our definition concrete by considering integration on \(S^1\) and saw how it reproduces the ordinary Riemann integral we would expect. 
 
 Finally, we stated \textbf{Stoke's Theorem} and outline the structure of the proof, which was left as an exercise to the reader. We will walk through it next lecture. 
+
+
+
+\begin{definition}[Quotient Group]
+    Let \( G \) be a group and \( N \trianglelefteq G \) a normal subgroup.  
+    The \textbf{quotient group} (or \textbf{factor group}) of \( G \) by \( N \) is the set of left cosets of \( N \) in \( G \),
+    \[
+        \quotient{G}{H} = \{ gN \mid g \in G \},
+    \]
+    equipped with the operation
+    \[
+        (gN)(hN) = (gh)N, \quad \text{for all } g, h \in G.
+    \]
+    This operation is well-defined precisely because \( N \) is normal in \( G \).
+\end{definition}
+
 
 \end{document}
 
