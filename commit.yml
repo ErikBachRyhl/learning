@@ -29,7 +29,7 @@ llm:
   max_cards_per_block: 2
   selection_conservativeness: 0.1
 
-daily_new_limit: 30
+daily_new_limit: 300
 
 priorities:
   DiffTop: 5

@@ -655,8 +655,31 @@ In \(\mathbb{R} ^n\), these are equivalent.
         H^1 _{\text{dR}} \left(\mathbb{R}^2 \setminus 0\right) \neq \left\{ 0 \right\} 
     \end{align*}
 
-    In fact, we'll see later that \(H^1 _{\text{dR}} \left(\mathbb{R}^2 \setminus 0\right) \cong \mathbb{R} \). 
+    In fact, we'll see later that \(H^1 _{\text{dR}} \left(\mathbb{R}^2 \setminus 0\right) \cong \mathbb{R} \). We will also see that if \(M\) is compact, then \begin{align*}
+        \dim H^1 _{\text{dR}} \left(M\right) < \infty
+    \end{align*}
+    and learn how to compute the de Rham cohomology of reasonably well-described manifolds later.
 \end{example}
+
+\subsubsection{Coordinate Free Exterior Derivative}
+There is a coordinate free definition of the the differential sending 1-forms to 2-forms. 
+\begin{definition}[Coordinate Free Exterior Derivative on 1-forms]
+    If \(\alpha\) is a 1-form and \(V\) and \(W\) are vector fields, then \begin{align*}
+        d \alpha = V\alpha (W) - W\alpha (V) - \alpha \left( \left[ V, W \right]  \right) 
+    \end{align*} 
+    with the bracket being the Lie bracket. \textred{Make sure that you understand how the vector fields and \(\alpha \) interact above. Is \(V\) acting on \(\alpha (W)\), or should it be a product?}.
+\end{definition}
+
+This is in some ways a strange definition, but this is because we can also think of 2-forms as maps turning vector fields into functions. In fact, a \(\mathbb{R}\)-bilinear antisymmetric function \begin{align*}
+    \beta : \left\{ \text{ Vector fields } \right\} \times \left\{ \text{ Vector fields } \right\} \to \left\{ \text{ functions } \right\} 
+\end{align*} 
+\textit{defines} a 2-form if \(\beta (fV, gW) = fg \beta (V, W)\). The general statement of this is an exercise in the next lecture, so we defer comments. This would show that evaluating \(\beta \) at a point only depends on the vector fields at that point, i.e. on some vectors in \(T_p M \times T_p M\). \textred{which means what exactly?}. So let us check that above definition indeed has this property that makes it into a 2-form. By antisymmetry, it is enough to check the first slot: \begin{align*}
+    \beta (f V, W) = \textred{fill out}
+\end{align*} 
+
+Now that we know that we indeed have a 2-form, we should check that the new coordinate free definition agrees with the first definition given in coordinates: 
+\textred{Check this, very good exercise!}
+
 
 
 
@@ -848,6 +871,17 @@ One can check that this satisfies all the properties listed in the Lemma \ref{le
 \begin{example}[\(\mathbb{R} ^3\) and vector calculus]
     \textred{Put in the nice diagram and the claims made! I.e. that we have gradient, curl and divergence. Put this together with our exact and closed differential, showing that curl(grad) = 0 and div(curl) = 0. Note however that div(grad) = laplacian - but our results say nothing about such compositions yet I believe.}
 \end{example}
+
+\newpage\lecture{21}{Thu 06 Nov}{Pullback, Integration on Manifolds and Stoke's Theorem Introduction}
+\paragraph{Abstract} We started of introducing the notion of a \textbf{pullback of a \(k\)-form} and studied some nice properties: Contravariant functor and naturality. We discussed the notation used for \(k\)-forms in Lee and how it differs a bit from our notation. 
+
+Then we defined integration of \(n\)-forms on \(n\)-dimensional smooth manifolds in multiple steps. We started in \(\mathbb{R} ^n\) and proved a small lemma: the pullback of an \(n\)-form by an orientation-preserving diffeomorphism behaves nicely with our definition of integration. This is exactly a \textbf{generalisation of ordinary change-of-variables} in multivariable calculus. 
+
+After this, we define the \textbf{generalization of integration} to arbitrary manifolds via. partitions of unity. The proof of well-definedness is left out, since it is rather technical and uses something called a common refinement together with the naturality of the pullback. 
+
+We made our definition concrete by considering integration on \(S^1\) and saw how it reproduces the ordinary Riemann integral we would expect. 
+
+Finally, we stated \textbf{Stoke's Theorem} and outline the structure of the proof, which was left as an exercise to the reader. We will walk through it next lecture. 
 
 \end{document}
 
