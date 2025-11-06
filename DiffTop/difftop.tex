@@ -608,7 +608,7 @@ At this point, one may wonder why we even introduced antisymmetry in the first p
 
 
 
-\newpage\lecture{20}{Tue 04 Nov}{\(k\)-forms and the wedge product}[Lee \textred{??}]
+\newpage\lecture{20}{Tue 04 Nov}{The Wedge Product, \(k\)-forms and the Exterior Derivative}[Lee \textred{??}]
 \paragraph{Abstract} In the coming lectures, we want to generalize the notion of 0-, 1- and 2-forms which we have been working on the last few lectures. Specifically, we'll introduce certain operations on \(k\)-forms: \begin{itemize}
     \item Wedge product, \(\wedge\) 
     \item Exterior derivative, \(d\) 
@@ -635,6 +635,8 @@ To extend beyond \(\mathbb{R} ^n\) one can use bump functions. But one can also 
 
 Finally, we look at what the exterior derivative does in \(\mathbb{R} ^3\) and relates each \(\Omega^k (\mathbb{R} ^3)\) for \(k = 1, 2, 3\) to the gradient, curl and divergence. 
 \newpage
+
+\subsubsection{The Alternating Subspace and the Wedge Product}
 
 \begin{definition}[Alternating Subspace]
     Let \(V\) be a finite dimensional vector space and \(k\) a positive integer. Define the \textbf{alternating subspace} 
@@ -696,8 +698,7 @@ Finally, we look at what the exterior derivative does in \(\mathbb{R} ^3\) and r
         &= \frac{1}{(k + l)! m!} \frac{1}{k! l!} \sum_{\rho \in S_{k + l + m}} \sum_{\sigma  \in S_{k + l}}  (-1)^{\epsilon (\rho )} (-1)^{\epsilon (\sigma )} \alpha (v_{\sigma (\rho (1))}, \dots , v_{\sigma (\rho (k))}) \\
         &\hspace{8em} \cdot \beta (v_{\sigma (\rho (k + 1))}, \dots , v_{\sigma (\rho (k + l))})\eta (v_{\rho (k + l + 1)}, \dots , v_{\rho (k + l + m)} )
     \end{align*}
-    \textred{There seems to be some problems here. Get back to this!}
-
+    \textred{There seems to be some problems here. Finish this at some point!}
 \end{proof}
 
 Let \(e_1, \dots , e_n\) be a basis for \(V\) and let \(e^1, \dots , e^n\) be the dual basis, which is defined by \(e^i (e_j) = \delta ^i _j\). \textred{Would be cool to explain why this is well-defined and exists!}
@@ -708,7 +709,93 @@ Let \(e_1, \dots , e_n\) be a basis for \(V\) and let \(e^1, \dots , e^n\) be th
     \end{align*} 
 \end{proposition}
 
+\begin{proof}
+    Fill this out and truly understand it!
+\end{proof}
 
+\begin{example}[The Determinant]
+    For an \(n\)-dimensional vector space \(V\), the space of "top forms" \begin{align*}
+        \operatorname{Alt}^n(V) = \mathbb{R} \cdot e^1 \wedge \cdots \wedge e^n
+    \end{align*} 
+    is 1-dimensional. Every element takes in \(n\)vectors \(v_1, \dots , v_n\), and writing \(v_i = V_i ^j e_j\) the \(n\)-form acting on those vectors will be (proportional to) \(\det (V^j _ i)\).
+    
+    \textred{Prove why in local coordinates!}
+\end{example}
+
+\subsubsection{\(k\)-forms}
+
+But what does all this have to do with manifolds, one might ask? 
+\begin{definition}[\(k\)-forms]
+    Let \(M\) be an \(n\)-dimensional smooth manifold. We then form the vector bundle \(\operatorname{Alt}^k(TM) \overset{\pi }{\longrightarrow} M\). (This is a subbundle of \((TM \otimes \cdots \otimes TM)^{\ast}\) \textred{prove why}). 
+    
+    The fiber over \(p \in M\) is \(\operatorname{Alt}^k(T_p M) \). A \textbf{\(k\)-form} on \(M\) is a section of this bundle. 
+
+    This definition is indeed the generalization of what we've done so far. In local coordinates \(x^1, \dots , x^n\) a \(k\)-form can be written as \begin{align*}
+        \alpha = \sum_{i_1 < \cdots < i_k} \alpha _{i_1 \cdots i_k} dx^{i_1} \wedge \cdots \wedge dx^{i_k},
+    \end{align*} 
+    where the \(\alpha _{i_1 \cdots i_k}\)'s are smooth functions of \(x^1, \dots , x^n\). When wedging by basis vectors, one often omits the wedges.
+
+    We write \begin{align*}
+        \Omega ^k (M) = \left\{\ k\text{-forms on M } \right\} 
+    \end{align*}
+\end{definition}
+
+\begin{claim}
+    An equivalent definition is that a \(k\)-form is an alternating, multilinear function \begin{align*}
+        \operatorname{Vect}(M) \otimes \cdots \otimes \operatorname{Vect}(M) \to  C^\infty (M, \mathbb{R})  
+    \end{align*}
+    \textred{Exercise: Prove it!}
+\end{claim}
+
+With the new notation for the space of all \(k\)-forms, we see that we can understand the wedge product as a map \begin{align*}
+    \wedge : \Omega ^k (M) \otimes \Omega ^l (M) \to \Omega ^{k + l} (M),
+\end{align*} 
+which is defined pointwise, i.e. we need to specify a point on \(M\) before we know what coordinates for our \(k\)-form that our section outputs \textred{I think?}.
+
+\subsubsection{The Exterior Derivative}
+\begin{definition}[Exterior Derivative in Local Coordinates]
+    The \textbf{exterior derivative} is a map \(d : \Omega ^k (M) \to \Omega ^{k + 1} (M)\). Let \(I\) denote a \(k\)-tuple \((i_1, \dots , i_k)\) with \(1 \leq i_1 < \cdots < i_k \leq n\). Write \(\alpha = \alpha _I dx^I\). We then define \begin{align*}
+        d \alpha = \frac{\partial \alpha _I}{\partial x^i} dx^i \wedge dx^I
+    \end{align*} 
+\end{definition}
+
+\begin{example}
+    Fill out \(k = 0\) and \(k = 1\). These exactly agree with our previous definitions from previous lectures. 
+\end{example}
+
+In general, \begin{align*}
+    d(\alpha _I dx^I) = d \alpha _I \wedge dx^I
+\end{align*}
+\textred{Show this!}
+
+Again, with a definition given in local coordinates, we have to be careful. Like last time, one can do an explicit computation to show that a change of coordinates leaves the form invariant. But there is a more sleek approach. 
+
+\begin{lemma}\label{lemma:unique_exterior_deriv}
+    There is a unique \(\mathbb{R} \)-linear map \(d: \Omega ^k (M) \to \Omega ^{k + 1} (M)\) such that \begin{enumerate}
+        \item \(k = 0 \implies \left( df(p) \right)(v) = vf \) for \(v \in T_p M\).
+        \item Obeys a Leibniz rule: If \(\alpha \in \Omega ^k\) and \(\beta \in \Omega ^l\), then \begin{align*}
+            \boxed{d (\alpha \wedge \beta ) = d \alpha \wedge \beta + (-1)^k \alpha \wedge d \beta }
+        \end{align*}
+        \item \(d \circ d = 0\). 
+    \end{enumerate}  
+    Note that the second condition is a kind of differentiation, but that we have put a sign in there to seem mystical and cool. 
+\end{lemma}
+\begin{proof}
+    \textred{Fill it out! Also comment about extension to general manifolds, since the proof is only for \(\mathbb{R} ^n\)}.
+\end{proof}
+
+\begin{definition}[The Exterior Derivative without Coordinates]
+    If \(\alpha \) is a \(k\)-form and \(V_1, \dots , V_{k +1}\) are vector fields on \(M\), then \begin{align*}
+        d \alpha &= \sum_{i} (-1)^{i - 1} V_i \left( \alpha \left( V_1, \dots , \hat{V}_i , \dots , V_{k + 1} \right)  \right) \\
+        &\quad + \sum_{i < j} (-1)^{i + j} \alpha \left( [V_i, V_j], V_1, \dots , \hat{V}_i, \dots , \hat{V}_j, \dots , V_{k + 1} \right) 
+    \end{align*}  
+\end{definition}
+
+One can check that this satisfies all the properties listed in the Lemma \ref{lemma:unique_exterior_deriv}, from which we can conclude that the definitions must be the same map then. And since this definition is coordinate free, the map itself is manifestly coordinate free too. 
+
+\begin{example}[\(\mathbb{R} ^3\) and vector calculus]
+    \textred{Put in the nice diagram and the claims made! I.e. that we have gradient, curl and divergence. Put this together with our exact and closed differential, showing that curl(grad) = 0 and div(curl) = 0. Note however that div(grad) = laplacian - but our results say nothing about such compositions yet I believe.}
+\end{example}
 
 \end{document}
 

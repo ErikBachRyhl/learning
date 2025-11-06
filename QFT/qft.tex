@@ -128,6 +128,26 @@
 
 \section{Motivation and Foundation}
 \textbf{Main idea from field theory:} We get an infinite degree of freedoms \(\phi (x)\) for all \(x \in \mathcal{M}\) and the Euler-Lagrange Equation modification gives the EOM for \(\phi (x)\) \textbf{which holds at each point in space}.  
+
+% \subsubsection{Questions}
+% \begin{itemize}
+%     \item Bottom page 18 start page 19: Lorentz invariance plus second derivative in time maximum results in a certain form of the lagrangian. Why this form?
+%     \item Understand the backwards discretisation that takes place on p. 22. Refer to your notes on how Horava also introduced the double integral over \(x\) and \(y\). 
+%     \item Proving that for spacelike separation, one can "boost" without "changing anything" to \(t = x^0 = 0\) and the opposite for timelike things, where we can boost into \(\vec{x} = 0\) I think.  
+% \end{itemize}
+
+% \newpage
+
+% \begin{align*}
+%     H &= \int \frac{d^D k}{4} \left\{ (\omega _k + \frac{k^{2}}{\omega _k}) (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k - a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k}) + \frac{m^{2}}{\omega _k} (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k + a_k a_{-k} + a ^{\dagger} _k a ^{\dagger} _{-k})\right\} \\
+%     &= \int \frac{d^D k }{2 \omega _k}\left\{ (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k) - k^{2}  (a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k})\right\} 
+% \end{align*}
+
+% \begin{align*}
+%     - \omega _k + \frac{-k ^{2} + m^{2} }{\omega _k} = \frac{- \omega _k ^{2} - k^{2} + m^{2} }{\omega _k} = \frac{1}{\omega _k}(-k ^{2} - m^{2} - k^{2} + m^{2} ) = \frac{-2 k^{2} }{\omega _k}
+% \end{align*}
+
+
 \section{From Lattice to Field}
 Idea: Think about vacuum itself as having quantum degrees of freedom that can "propagate" (in the space of that degree of freedom – the analogy is the double slit, but just for this degree of freedom, not physical position). Then shrink the spacing between the lattice points with these degrees of freedom. Multi-index becomes a continuous parameter. But \((t, \vec{x})\) \textit{is} a parameter, not a quantum observable. It is \(\phi (t, \vec{x})\) that is the quantum observable and the parameter tells us about what part of space we are talking about.  
 
@@ -621,46 +641,122 @@ any $m$ above $\mu$ to infinity (i.e., not contributing to the renormalization g
     Fill out solution once you understand how!
 \end{selfnote}
 
-\newpage
-\section{Colloquim: Universality Classes of Turbulence}
-"The last great unsolved problem of classical physics"
-\begin{definition}[Turbulence]
-    A state of a system where many degrees of freedom are deviated from thermal equilibrium. 
-\end{definition}
 
-We wish to describe such states statstically, but the guiding principles must be different from detailed balance and entropy maximum. \textred{why?}
+\newpage\lecture{20?}{Wed 05 Nov}{The Dirac Spinor and Construction of the Clifford Algebra}[\textred{What material?}]
 
-If one is given a certain configuration of a system, the probability isn't just \(e^H\), but it depends on the entire history up until this state (or maybe just some history at least). THe only state where the probability \textit{is} given by \(e^H\) is the maximum entropy one, the Gibbs distribution. But for non-equilibria states, this is an extremely difficult problem!
+Recall the Klein-Gordon equation \begin{align*}
+    (\partial ^{2} + m^{2} )\phi  = 0
+\end{align*}
+which is second order in its derivatives. Dirac wanted to know whether we could study a field that had \textit{first order} spacetime derivatives, i.e. whether we could find a solution to the following equation \begin{align*}
+    (i \gamma ^\mu \partial _\mu - m) \psi = 0
+\end{align*}
 
-For example, with high waves, we get foam formation, which is very important for the ecology of the ocean. But we cannot actually predict foam production basically, because this only happens when the small-amplitude Fourier approximations of the ocean model breaks down. 
+Does such a \(\psi \) exist? And does such a \(\gamma ^\mu \), called the gamma matrices, exist? \textred{Why a matrix with only 1 free index?}
 
-Screening suppresses one's interaction. 
+We are going to require that such an equation be consisten with the Klein-Gordon equation \textred{what motivates us to do this? Probably to connect it with physics, i.e. the EOMs we expect for a relativistic field, I think}. Hence \begin{align*}
+    (i \gamma ^\mu  \partial _\mu + m)(i \gamma ^\mu \partial _\mu - m) = (\underbrace{\gamma ^\mu \gamma ^\nu \partial _\mu \partial _\nu}_{\partial ^{2} } + m^2) \psi = 0
+\end{align*}
+where \(\mu  = 0, \dots , D-1\). From the form of the equation, we are inspired to impose (or rather this is how we impose consistency with KG equation) that
+\begin{align*}
+    \left\{ \gamma ^\mu , \gamma ^\nu  \right\} = 2 \eta ^{\mu  \nu }
+\end{align*}
+since this is what makes the term \(\gamma ^\mu \gamma ^\nu \partial _\mu \partial _\nu\) correspond to \(\partial ^{2} \). \textred{How exactly does one see this / justify this?}  
 
-Self-focusing and enhancement. For spin waves, we always get enhancement! Hence possible multi-wave bound states - spin droplets and domain walls. How could this be relevant for super-condensate? Can we do fluid mechanics on that state of matter?
+\subsubsection{Construction of the Clifford Algebra}
+\textred{More comments here after filling out last lecture}
+Last time we introduced the notion of a Clifford algebra and the elements \begin{align*}
+    e^{\mu} 
+\end{align*}
+
+We now consider our spacetime as a manifold \(M\). Without loss of generality, we can for now let the metrics on the manifold satisfy \begin{align*}
+    g_{\mu \nu } = \eta _{\mu  \nu }, \quad g^{\mu  \nu } = \eta ^{\mu  \nu }
+\end{align*}
+
+Now, on our manifold we pick a point \(p \in M\) and consider the tangent space \(V\coloneqq T_p M\). From this tangent space we can construct the tensor space \begin{align*}
+    \mathcal{T} _n V \coloneqq V^{\otimes n}, \quad n = 1, 2, \dots 
+\end{align*}
+containing tensors such as \begin{align*}
+    e^{\mu _1} \otimes \dots \otimes e^{\mu _n}
+\end{align*}
+for a given \(n \in \mathbb{N}\). 
+
+From this we form the infinite-dimensional graded tensor-algebra (\textred{is this the right term}?) \begin{align*}
+    \mathcal{T} V \coloneqq \bigoplus _{n = 0}^\infty \mathcal{T} _n V.
+\end{align*}
+
+To get the Clifford algebra, we mod out by the ideal generated by the relation \begin{align}\label{eq:clifford_ideal}
+    \boxed{e^{\mu } e^{\nu } + e^{\nu } e^{\mu } = 2 g^{\mu  \nu }\cdot  \mathds{1} \coloneqq \mathcal{J} }
+\end{align}
+We define \begin{align*}
+    \operatorname{Cliff}(V) = \quotient{\mathcal{T} V}{\mathcal{J}}
+\end{align*}
+So, to recap, for each \(p \in M\) we construct the Clifford algebra "over" that point as \begin{align*}
+    \operatorname{Cliff}_p(M) = \quotient{\bigoplus _{n = 0}^\infty \left( T_p M \right)^{\otimes n} }{\mathcal{J} }  
+\end{align*} 
+
+The important thing to look at is the ideal \(\mathcal{J} \). First of all, we see that the Clifford algebra will be entirely determined by what metric \(g^{\mu  \nu }\) we choose on our manifold, since this is the only "free variable" in the construction. Hence a Clifford algebra is determined \textit{uniquely} by the metric we choose. Another thing to note is that we can think of the \(e^{\mu } \)'s intuitively as an algebraic generalization of square roots of 1. Just consider the Abelian case where the \(e^{\mu } \)'s commute and the Euclidean metric. Then indeed we get \begin{align*}
+    \left( e^{\mu } \right)  ^{2} = 1
+\end{align*}
+for a specific \(\mu\). This is clearly the generalization of that: the "square roots" are now noncommuting algebraic entities, and the metric can be whatever we like. 
+
+Now, if we can find realizations of eq. (\ref{eq:clifford_ideal}), i.e. representations satisfying the identity, then we can find a basis containing the identity matrix etc. \textred{what do I mean by etc. here?}: 
+\begin{align*}
+    \left\{ \mathds{1}, e^{\mu }, e^{[ \mu _1}e^{\mu _2]}, \dots , e^{[ \mu _1}\dots e^{\mu _D]} \right\} 
+\end{align*}
+This should remind us of the space of all differential forms, since if we set the metric to zero, we literally reproduce the theory of differential forms (i.e. the identity becomes antisymmetry under index exchanges). \textred{Explore this further sometime!}. 
+
+As Finn mentioned, this is therefore sometimes called a "quanization of differential forms" or a "deformation of differential forms", since we "deform" the antisymmetry condition between them via. a metric. 
+
+\subsubsection{Spinors and their Representations}
+\begin{theorem}[Chevalley (1954)]
+    There exists a unique, irreducible representation such that \begin{align*}
+        e^{\mu } = \gamma ^\mu 
+    \end{align*}
+    \textred{What exactly does this mean? I think it means the following:} Hence \textit{if} we find a representation satisfying the Clifford algebra identity for the ideal, then we know that it will be isomorphic to any other representation we might find. \textred{Or does irreducible mean that there is only ONE representation that is "as small as possible"?}
+\end{theorem}
+
+In dimensions \(D > 3\) we get the spin-statistics theorem. 
+
+\begin{theorem}[Spin-Statistics Theorem]
+    For \textred{relativistic} theories of dimensions \(D > 3\) \begin{align*}
+        \text{spinors } \cong \text{ fermions}
+    \end{align*} 
+\end{theorem}
+
+\begin{definition}[Spinors]
+    The objects which the \(\gamma \) matrices act on are called \textbf{spinors}, i.e. they satisfy the equation \begin{align*}
+        (i \gamma ^\mu  \partial _\mu - m )\psi = 0,
+    \end{align*} with \(\psi \) being the spinor here. 
+\end{definition} 
+
+Even when looking at \(\operatorname{Cliff}_\mathbb{R} (V) \) (i.e. over real valued vector spaces \textred{I think it means that?}), sometimes the nicest representations of the \(\gamma\) matrices are built with complex numbers. So \(\psi \) will be generically complex-valued because our \(\gamma \) will be rank \(n\) \(\mathbb{C} \)-valued matrices. These are the \textbf{Dirac spinors}.
+
+When working over \(\mathbb{R} \) we could take \(g^{\mu  \nu } = \eta ^{\mu  \nu }\) with \(\mu , \nu = 1, \dots , D- 1\). In fact, it hasn't mattered whether we used the mostly plus or mostly minus convention for \(\eta ^{\mu  \nu }\). But now it will influence the "look" of the Clifford algebras we get, since the metric is directly put into the Clifford algebra identity. Due to Chevalley however, we know that the irreducible representation of our Clifford algebra must be unique, regardless of metric. \textred{I don't actually think that this is what the theorem says. ASK}
+
+There \textit{is} an isomorphism between the representations one gets from choosing either mostly minus or mostly plus, but it is highly non-trivial. 
+
+Side note: We'll look at Fermi liquids soon. These are non-relativistic spinor-fields. The action will be deceptively simple due to being non-relativistic \begin{align*}
+    S = \int dt d \vec{x} \left\{ i \psi \partial _t \psi + \partial _i \psi \partial _i \psi + \cdots \right\} 
+\end{align*} 
+
+Note that \(\psi \) need not satisfy the Clifford algebra identity in this case, since the theory is non-relativistic. But the theory is still describing fermions, since \(\psi \) satisfies Fermi-Dirac statistics in this theory nonetheless.
+
+\subsubsection{Majorana, Weyl and Bott}
+In some dimensions, we can make \textbf{Majorana spinors}, which naively start complex valued, but can be completely restricted to the reals. Again, this is only possible in a few select dimensions. 
+
+In even dimensions, we can make \textbf{Weyl spinors}, which relate to chirality and discrete transformations of spacetime. The Weyl spinors require even dimensions because they are literally the "splitting" of the spinor into two pieces (left and right chirality). 
+
+In 3+1 dimensions, we can in fact use either Majorana or Weyl matrices. The \(\gamma ^\mu \)'s will be \(4 \times 4\) matrices. Hence the \(\psi \) are 4-component vectors. 
+
+Due to \textbf{Bott periodicity}, in \(1 + 1\) (mod 8) dimensions, we can take a Dirac spinor and turn it into a Majorana spinor (half the degrees of freedom) \textit{and} into a Weyl spinor (chiral modes). So in 3+1 dimensions we have the freedom, or rather the obligation, to choose between Majorana and Weyl spinors.
 
 
+\newpage\lecture{21?}{Wed 05 Nov}{Representations of Clifford Algebras Continued}
+
+\paragraph{Abstract} We discussed the structure and ubiquity of Clifford algebras in physics. The fact that they generalize differential forms, which reveal a surprising amount about the topology of your manifold \textit{without the need for a metric} is the underlying reason for their unreasonable effectiveness.
+
+We looked at representations of clifford algebras concerning metrics with \(p\) +'s and \(q\) -'s, which we denote by \(\operatorname{Cliff}(p, q)\). 
 
 
-
-
-
-
-% \subsubsection{Questions}
-% \begin{itemize}
-%     \item Bottom page 18 start page 19: Lorentz invariance plus second derivative in time maximum results in a certain form of the lagrangian. Why this form?
-%     \item Understand the backwards discretisation that takes place on p. 22. Refer to your notes on how Horava also introduced the double integral over \(x\) and \(y\). 
-%     \item Proving that for spacelike separation, one can "boost" without "changing anything" to \(t = x^0 = 0\) and the opposite for timelike things, where we can boost into \(\vec{x} = 0\) I think.  
-% \end{itemize}
-
-% \newpage
-
-% \begin{align*}
-%     H &= \int \frac{d^D k}{4} \left\{ (\omega _k + \frac{k^{2}}{\omega _k}) (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k - a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k}) + \frac{m^{2}}{\omega _k} (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k + a_k a_{-k} + a ^{\dagger} _k a ^{\dagger} _{-k})\right\} \\
-%     &= \int \frac{d^D k }{2 \omega _k}\left\{ (a_k a_k ^{\dagger} + a_k ^{\dagger} a_k) - k^{2}  (a_k a_{-k} - a ^{\dagger} _k a ^{\dagger} _{-k})\right\} 
-% \end{align*}
-
-% \begin{align*}
-%     - \omega _k + \frac{-k ^{2} + m^{2} }{\omega _k} = \frac{- \omega _k ^{2} - k^{2} + m^{2} }{\omega _k} = \frac{1}{\omega _k}(-k ^{2} - m^{2} - k^{2} + m^{2} ) = \frac{-2 k^{2} }{\omega _k}
-% \end{align*}
 
 \end{document}

@@ -1,0 +1,338 @@
+\documentclass[11pt]{article}
+\input{../preamble.tex}   % path is relative to the topic folder
+
+\title{Introduction to Partial Differential Equations}
+\author{Erik Bach Ryhl}
+\date{\today}
+
+\graphicspath{{./figures}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Borthwick Chapter 7 - Function Spaces Basics}
+
+What does it mean for a sequence of functions \(f_n\) to converge to some function \(f\)? To even answer this question, we of course need to specify some norm within we consider this convergence with respect to. Hence there will always be a norm implied when working with convergence (this is true regardless of us considering functions or regular sequences). 
+
+Each function could for example be a partial sum, so this also covers convergence of series when \(n \to \infty\).
+
+\subsection{Hilbert Spaces and Banach Spaces}
+\begin{definition}
+    A \textbf{norm} on a vector space \(V\) is a function \(|| \cdot ||: V \to \mathbb{R} ^{\geq 0}\) satisfying \begin{itemize}
+        \item \(||x|| = 0 \iff x = 0\)
+        \item \(||cx|| = c ||x||\) for any constant \(c\) in the field of \(V\)
+        \item \(||x + y|| \leq ||x|| + ||y||\)       
+    \end{itemize}
+\end{definition}
+
+We can now consider whether we can give the same vector space \(V\) different norms. A common family of norms are the \(p\)-norms: \begin{align*}
+    ||x||_p = \left( |x_1|^p + \dots + |x_n| ^p \right)^{1 / p}, \qquad p \geq 1
+\end{align*}  
+where the condition on \(p\) is necessary for the triangle inequality to not fail (we need our function to be convex, I think is the property). Hence for example \((\mathbb{R} ^n, || \cdot ||_p)\) is a whole family of vector spaces with the same underlying set, but with different notions of norm. 
+
+Any vector space with a norm has a vector space algebra and topology and geometry induced by the norm. \textred{Understand this better!}. We therefore expect that different norms will induce different topologies and geometries. As it turns out, for \textit{finite} dimensional vector spaces, we have the inequality \begin{align*}
+    ||x||_p \leq 2 ||x||_2
+\end{align*}
+which has the consequence that the topologies induced are in fact equivalent. \textred{Get back to showing these things one day!}
+
+But in infinite dimensions, this is \textbf{not} the case.  
+
+\begin{definition}
+    A \textbf{Banach space} is a complete, normed vector space, \((V, || \cdot ||)\).  
+\end{definition}
+
+\begin{example}
+    \(C^0, C^1, \dots , C^k\) are all Banach spaces for finite \(k\). Remember that \(||f||_{C^0} = \operatorname{max} _{x \in \Omega } |f(x)| \), \(||f||_{C^1} = \operatorname{max} _{x \in \Omega } |f(x)| + \operatorname{max} _{x \in \Omega } |\frac{df}{dx}(x)|\) etc.  \textred{fill out these norms!}. 
+
+    But a very frustrating fact is that \(C^\infty\) is \textit{not} a Banach space.  
+\end{example}
+
+\begin{definition}
+    An \textbf{inner product} is a bilinear function \begin{align*}
+        \left\langle \cdot , \cdot \right\rangle : V \times V \to \mathbb{R},
+    \end{align*} 
+that obeys \begin{enumerate}
+    \item \( \left\langle v , v \right\rangle \geq 0\) is a norm (the \textbf{induced norm})
+    \item it is bilinear 
+\end{enumerate}
+If \(V\) is a complex vector space, then the inner products maps into \(\mathbb{C} \) and \(\left\langle  v,\alpha w \right\rangle = \overline{\alpha}  \left\langle v, w \right\rangle \) (yes, the mathematician's convention is opposite the physicists.)
+\end{definition}
+
+\begin{lemma}[Cauchy-Schwartz]
+    \(\forall v, w \in V\), \begin{align*}
+        \left| \left\langle v, w \right\rangle  \right| \leq ||v|| \cdot ||w||.
+    \end{align*} 
+\end{lemma}
+\begin{proof}
+    It is an algebraic trick to prove it in the finite dimensional case. But I do not know how the proof goes in the infinite dimensional case. \textred{This would be cool to learn at one point!}
+\end{proof}
+
+\newpage\section{Numerical Techniques}
+\textbf{Key concepts}
+\begin{itemize}
+    \item Discretisation map \(\mathcal{D} : \mathbb{R} ^N \to  L^2 (\Omega; \mathbb{R} )\) 
+    \item Projection map 
+\end{itemize} 
+
+\newpage\section{Integral Solutions, Green's Functions and Fourier Transforms}
+
+\textbf{Abstract:} Where are we going with this? What do we know now? What is the main motivating question for the next section? What are questions we are still totally unable to answer? 
+
+\newpage\lecture{22}{Fri 24 Oct}{Maximum Principles I: Poisson's Formula}
+\paragraph{Main Idea} We saw in lecture 9 how to solve (Poisson's equation?) in general on a (circular?) disk in general by doing a Fourier series of our boundary condition function which we could then plug in the coefficients for in the general solution. But this is tedious and takes much work to do every time.
+
+So what if we just keep the function on the general abstract form an work with the Fourier coefficients as abstract entities? Can we rewrite the whole expression in a nice way? The answer is affirmative (under certain conditions like uniform convergence (met due to \(L^2\) arguments I think, check this out)) and on certain domains. 
+
+To do this "trick" we will introduce harmonic functions, harmonic polynomials and see that going to complex variables shows that \(z^n\) generates harmonic polynomials in both real and imaginary parts. These in fact generate each "half" of a binomial expansion in the polynomial \((x + y)^n\), but just with some alternating signs due to \(z^n = (x + iy)^n\). Pretty cool stuff. Now, are these a basis for all harmonic polynomials? It will turn out that the answer is yes I think. Of course we have strong shades of \(z^n\) being a basis for all analytic functions, and each analytic function can be split into harmonic conjugate real and imaginary parts. So I don't think this should be too hard to prove with some methods from complex analysis. Maybe it is lowkey already proven, just not stated in that way. 
+
+Before we prove Poisson, we introduce the idea of integral kernels and dummy variables. With this form, 
+
+Anyway, we prove Poisson's formula as the first example of going directly to an integral solution of a Partial Differential Equaion. 
+
+\newpage\subsubsection{Example Problems}
+\begin{note}
+    Solve these problems you missed: 
+    
+    \textbf{Olver 4.3.25 (d)}: \begin{align*}
+        \Delta u = 0,\quad x^{2}+y^{2}<1,\qquad \dfrac{\partial u}{\partial \mathbf n} = x\ \text{on } x^{2}+y^{2}=1.
+    \end{align*}
+
+    \textbf{Olver 4.3.45}: Let \(p(x,y)\) be a polynomial (not necessarily harmonic). Suppose \(u(x,y)\) is harmonic and equals \(p(x,y)\) on the unit circle \(x^{2} + y^{2} = 1\). Prove that \(u(x, y)\) is a harmonic polynomial. 
+\end{note}
+
+\newpage\lecture{24.5}{Wed 29 Oct}{Regularity for Poisson and Maximum Principle for Heat Equation}
+\paragraph{Abstract} Last lecture we proved existence and uniqueness for Poisson's equation. In this lecture, we first look at the regularity of such solutions. The regularity question is concerned with relating the smoothness of \(f\) in the problem \begin{align*}
+    \Delta u = f
+\end{align*}
+to the smoothness of the solution function \(u\). The \textbf{Elliptic Regularity} theorem says that if \(f \in \mathcal{C} ^\infty(\Omega : \mathbb{R} )\), then indeed \(u \in \mathcal{C} ^\infty (\operatorname{Int} \Omega : \mathbb{R}  )\). 
+
+We introduced the notion of \textbf{analytic functions} and showed how they are a subset of smooth functions. We then strengthened the elliptic regularity theorem. This strenghtened version is just a special case of a the "non-isolated points of analytic functions"-theorem from complex analysis and the fact that analytic functions give rise to harmonics. 
+
+We then proved the \textbf{Maximum Principle for the Heat Equation} in a simple case. From this, we obtain the minimum principle and use this to prove uniqueness to solutions of the heat equation. This allowed us to conclude that the solution we've already obtained through separation of variables is the only one. Existence and regularity is handled in a similar fasion as with Poisson's equation. We might return to this.
+
+Finally, it was noted that there is no maximum principle to the wave equation; this makes intuitive sense, since a plane wave solution has no (global) maximum or minimum. However, it is still possible to prove uniqueness, existence and regularity, albeit it is more difficult. 
+
+\paragraph{Questions} 
+\begin{itemize}
+    \item \(\mathcal{C} ^\infty (\Omega : \mathbb{R} )\) is not a Banach space. Greg said "there is no norm for it" - but I thought it was because it was incomplete (i.e. we can make smooth functions converge to a step-function etc). Which one is it?
+\end{itemize}
+
+
+\newpage\lecture{25}{Fri 31 Oct}{Distributions and the Dirac Delta Function}[Olver 6.1]
+
+\paragraph{Abstract} Fill out
+
+\paragraph{Questions} Fill out
+
+\begin{example}[Dirac delta function]
+    The Dirac delta function is sometimes written as \begin{align*}
+        \delta (x) = \begin{dcases}
+            \infty \quad &x = 0\\
+            0 \quad &x \neq 0
+        \end{dcases}
+    \end{align*}
+    while \begin{align*}
+        \int _{- \infty} ^\infty \delta (x) dx = 1.
+    \end{align*}
+
+    This is clearly not a function, as \(\infty\) isn't a number even. So what do we actually mean when writing this, and how can we make such a concept well-defined? 
+\end{example}  
+
+\subsubsection{The Duality Definition}
+From finite vector spaces, one can construct many new vector spaces, including \(\operatorname{Hom}(V, W)\), the direct sum \(V \oplus W\) and the tensor space \(V \otimes W\). 
+
+If a finite dimensional vector space \(V\) is equipped with an inner product, we can canonically identify it with the space \(\operatorname{Hom}(V, \mathbb{R})\) through the pairing \begin{align*}
+    v \mapsto \left\langle v, \cdot \right\rangle \in  \operatorname{Hom}(V, \mathbb{R})
+\end{align*}
+for \(v \in V\). We define \(V^{\ast} \coloneqq \operatorname{Hom}(V, \mathbb{R} ) \) as the dual space of \(V\).  
+
+This canonical isomorphism doesn't hold in general for infinite-dimensional vector spaces, but we can still make a sensible definition of the dual space that generalizes to infinite-dimensional vector spaces. 
+
+\begin{definition}[The Dual Space]
+    Given any vector space \(V\), define the \textbf{dual space of \(V\)} as
+    \begin{align*}
+        V^{\ast} \coloneqq \Set{\xi: V \to \mathbb{R} }{\xi \text{ is a continuous linear map}}. 
+    \end{align*} 
+    which is equivalent to saying that \begin{align*}
+        \sup _{|v| = 1} \xi (v) < \infty
+    \end{align*} 
+    for \(v \in V\). 
+    \textred{Or is this yet another requirement, that we forgot?}
+\end{definition}
+\begin{remark}
+    Note that for finite dimensional vector spaces, the continuity requirement is redundant, since every linear map between finite dimensional vector spaces is smooth. Hence in this case, \(V^{\ast}\) just collapses to \(\operatorname{Hom}(V, \mathbb{R} ) \), i.e. the space of linear maps from \(V\) to \(\mathbb{R} \).  
+\end{remark}
+
+\begin{proposition}
+    \(V^{\ast} \) is a vector space. 
+\end{proposition}
+
+If we represent elements from \(V\) as column vectors, then elements of \(V^{\ast}\) can be represented by row vectors.
+
+\begin{example}[Integration]
+    \textred{Fill out}
+\end{example}
+
+\begin{definition}[Dual of \(L^2(\Omega: \mathbb{R} )\)]
+    Given some function \(g \in L^2 (\Omega : \mathbb{R} )\), we can define an element \(\xi _g \in L^2 (\Omega : \mathbb{R} )^{\ast} \) by its action on other \(f \in L^2(\Omega: \mathbb{R} )\) \begin{align*}
+        \xi _g [f] \coloneqq \left\langle g, f \right\rangle _{L^2(\Omega: \mathbb{R} )} = \int _\Omega g f dV
+    \end{align*}
+\end{definition}
+
+This is exactly the same pairing (leaving a slot in the inner product open) that gave us a canonical isomorphism in the case with finite dimensional vector spaces. An immediate question follows: Are \(L^2\) and \(\left( L^2 \right)^{\ast}  \) equally "big"? 
+
+\begin{proposition}[Duality Reverses Inclusion]
+    Recall that \begin{align*}
+        L^2(\Omega : \mathbb{R} ) \supseteq \mathcal{C}^0 (\Omega : \mathbb{R} ) \supseteq \mathcal{C} ^1 (\Omega : \mathbb{R} ) \supseteq \cdots \supseteq \mathcal{C} ^\infty(\Omega : \mathbb{R} ) 
+    \end{align*}
+    However, with dual spaces, it goes the other way: \begin{align*}
+        L^{2} (\Omega : \mathbb{R} )^{\ast} \subseteq \mathcal{C} ^0 (\Omega : \mathbb{R} )^{\ast}  \subseteq \mathcal{C}^1 (\Omega : \mathbb{R} )^{\ast}  \subseteq \cdots \subseteq \mathcal{C} ^\infty (\Omega : \mathbb{R} )^{\ast} 
+    \end{align*} 
+\end{proposition}
+
+\begin{intuition}   
+    Think about it this way: we are using the "integral convolution" inner product on \(\Omega\) to \textit{notationally} define how our dual vectors act in general
+    \textred{Is this the right way to think about / the generalization of the \(L^2\) definition above?}. In other words, the \textit{product} \(g f\) for \(\xi _g \in V^{\ast} \) and \(f \in V\) (where \(V\) can be any of the function spaces above) needs to be nice enough to make sense as an integrable product \textred{(in the Lebesgue sense, I think)}. So the \textit{nicer} the functions are that you are acting on with \(\xi _g\), the \textit{uglier} \(g\) can be and still have the product be integrable. I.e. there are a lot of functions that we can multiply a smooth function with and still have it be integrable, whereas there are not as many only continuous functions which will still be integrable after multiplication by another not very nice function. \textred{Make sure these statements hold}   
+\end{intuition}
+
+\begin{selfnote}
+    If it is only notational, the above intuition might not hold that well, since there is no notion of actual integration then.
+\end{selfnote}
+
+The largest such dual space is exactly what we mean by distributions.
+\begin{definition}[(Schwarz) Distribution]
+    An element of \(\mathcal{C} ^\infty( \Omega : \mathbb{R} )^{\ast} \) is called a \textbf{distribution}. 
+    
+    Schwarz distributions are also called \textbf{generalized functions}, since they aren't all functions, but often have representations reminiscent of a function or function-like behavior under suitable identifications. 
+\end{definition}
+
+\begin{definition}[The Dirac Delta Distribution]
+    The \textbf{Dirac delta distribution} \(\delta \in \mathcal{C} ^0 (\Omega : \mathbb{R} ) \subseteq \mathcal{C} ^\infty (\Omega : \mathbb{R} )^{\ast} \) is the distribution defined by its action on some \(f \in \mathcal{C} ^\infty(\Omega : \mathbb{R} )\) \begin{align*}
+        \delta [f] = f(0)
+    \end{align*}   
+\end{definition}
+
+The Dirac delta distribution is a very nice distribution, since it is in the "next-smallest" dual function space (remember that inclusions reverse!). In other words, the Dirac delta distribution can act on continuous functions. The "smallest" dual space is \(L^2(\Omega : \mathbb{R} )^{\ast} \), but the Dirac delta function isn't quite nice enough to act on all of this space, since there are \(L^2\) functions that don't have well-defined values everywhere, but are still Lebesgue integrable (i.e. in \(L^2\)). 
+
+\begin{example}
+    Take for example \(f = 1 / |x|^{1/3}\). This can be shown to be in \(L^2\) since it is of the form \(x^{- 1/p}\) with \(p = 3 > 2\) (\textred{I don't know about the absolute value though}). But we see that \(\delta [f] = f(0)\) doesn't exist.   
+\end{example}
+
+\begin{notation}
+    Recall that we saw how when \(g \in L^2\) we actually get an element of the dual space as \(\xi _g = \left\langle g, \cdot  \right\rangle _{L^2}\), such that upon acting on a function \(f \in L^2\) we get a legitimate integral that we can evaluate. Inspired by this actual correspondence, we introduce the notation 
+    \begin{align*}
+        \xi [f] = \int_{\Omega }  \xi \cdot f dV
+    \end{align*}
+    Note that we have dropped the subscript \(g\), since this is more general than the inner product pairing of the \(L^2\) space; now \(\xi \) is really just a distribution, which is a dual vector acting on \(f\), and the integral notation is a formal denotion of that. 
+\end{notation}
+
+But in fact it is a bit more than that. Let us consider  
+    \begin{align*}
+        \delta [f(x)] \coloneqq \int _{\Omega } \delta (x) f(x) dV = f(0)
+    \end{align*}
+Just to be totally clear: The middle part doesn't exactly make sense if you were to think about it as a product of two functions \textit{because \(\delta(x)\) isn't actually a function} - but it a placeholder notation that respects the algebraic manipulations which we expect for distributions. 
+
+What do I mean by this? Well, say we want a distribution which evaluates functions at the point \(x = 3\). We could call this distribution whatever and not relate it to the Dirac delta function at all. It is, after all, a different distribution! But notice that if we take the integral notation seriously, then had we looked at \begin{align*}
+    \int _\Omega \delta (x - 3) f(x) dV
+\end{align*}
+then we can "change variables" in the integral sign to \(u = x - 3 \implies x = u + 3\), and suddenly we have an integral using the already defined Dirac delta distribution, i.e.  
+\begin{align*}
+    \int _\Omega \delta (x - 3) f(x) dV = \int _\Omega \delta (u) f(u + 3) dV = f(0 + 3) = f(3)
+\end{align*}
+\textred{What happens to integral over \(\Omega \) when we change variables actually? Don't worry too much about it for now}. This is exactly what we wanted our new distribution to do! Hence the notation is more than just arbitrary: under the integral sign, viewing our distributions as functions which can undertake variable substitutions, we can relate distributions with similar actions (i.e. evaluation distributions such as the Dirac delta and its cousins) through algebraic manipulations. The integral notation \textit{respects} relations between different distributions. \textred{These relations are what we would say "makes sense" I guess}.
+
+\begin{example}
+    \textred{Derivative example here, but I think this was handled better in lecture 27 to be honest, where it is introduced properly with a definition}
+\end{example}
+
+\subsubsection{Fourier Series of Distributions}
+Suppose \(f \in L^2(\Omega  : \mathbb{R} )\). Then we know that we can take the Fourier series of \(f\). For example, the Sine series:
+\begin{align*}
+    B_n = \frac{2}{| \Omega |} \int _\Omega \sin \left( \frac{n \pi  x }{L} \right) f(x) dx
+\end{align*}
+But since the \(\sin \) is \(\mathcal{C} ^\infty(\mathbb{R} , \mathbb{R} )\), this could be the formal notation for a distribution \(f \in \mathcal{C} ^\infty (\Omega : \mathbb{R} )^{\ast} \) acting on \(\sin \). So we can \textit{make this the definition} of the Fourier coefficients of a distribution! 
+
+\begin{definition}[Fourier Series of a Distribution]
+    Given a distribution \(\xi \in \mathcal{C} ^\infty([-L, L] : \mathbb{R})^{\ast} \) we define its Fourier coefficients to be \begin{align*}
+        a_n &\coloneqq \frac{1}{L} \xi \left[ \cos \left( \frac{n \pi x }{L} \right)  \right]\\
+        b_n &\coloneqq \frac{1}{L} \xi \left[ \sin \left( \frac{n \pi x }{L} \right)  \right]
+    \end{align*} 
+    etc. for Sine and Cosine series. Then we call
+    \begin{align*}
+        \hat{\xi} = \frac{a_0}{2} + \sum_{n = 1}^\infty \left( a_n \cos \left( \frac{n \pi  x}{L} \right) + b_n \sin \left( \frac{n \pi  x}{L} \right)  \right) 
+    \end{align*}
+    the \textbf{Fourier series of \(\xi \)} (in the distribution sense).
+\end{definition}
+\textred{Example of what "equality means in distribution sense" here?}
+
+\begin{lemma}[The Fourier Series of the Dirac Delta Distribution]
+    Since \begin{align*}
+        a_k &= \frac{1}{\pi } \int _{-\pi} ^\pi \delta (x) \cos (kx) dx = \frac{1}{\pi }\\
+        b_k &= 0
+    \end{align*}
+    we get from the Fourier series that (remember that \(a_0\) is normalized by \(\frac{1}{2}\)) \begin{align*}
+        \delta (x) = \frac{1}{2\pi } + \frac{1}{\pi } \sum_{n = 1}^\infty \cos (n x) 
+    \end{align*}
+    It is very important to state again that this is an equality that makes sense in the distributional sense, i.e. if we act with either side on a test function we get the same real number for all such test functions.
+\end{lemma}
+
+\subsubsection{Convergence of Fourier Series of Distributions and Weak Convergence}
+
+Observe that by Parseval's theorem, if \(f \in L^2\) then \begin{align*}
+    \sum_{n = 1} (|a_{n}| ^{2} + |b_n| ^{2}) < 1 
+\end{align*} 
+If we let \(|b_n| = 0\) for now we get that the sum converges for \(|a_n| < |1 / \sqrt{n}| \) ish (by Harmonic series convergence test). From this we see that if we have a distribution that is in \(\mathcal{C} ^{\infty} (\Omega : \mathbb{R} )^{\ast} \) while \textit{not} being in \(L^2 (\Omega : \mathbb{R} )\), then we can conclude the converse statement holds: the Fourier coefficients of the distribution aren't square summable. \textred{Couldn't they be square summable to something greater than 1 but still finite?}.
+
+\begin{example}
+    Looking at the partial sums for the Fourier series of the Dirac delta distribution, we find that \begin{align*}
+        S_N = \frac{1}{2\pi } + \frac{1}{\pi }\sum_{n = 1} ^N\cos (nx) = \frac{1}{2\pi }\frac{\sin \left( \left( N + \frac{1}{2} \right)x \right) }{\sin \left( \frac{1}{2}x \right) }
+    \end{align*}
+    Obviously, this blows up at \(x = 0\), and hence cannot be square summable. In fact, it is exactly this Fourier "representation" of the Dirac delta distribution that leads to it sometimes being defined as a function by \begin{align*}
+        \delta (x) = \begin{dcases}
+            \infty \quad &x = 0\\
+            0 \quad &x \neq 0
+        \end{dcases}
+    \end{align*}
+    with \begin{align*}
+        \int _{- \infty} ^\infty \delta (x) dx = 1,
+    \end{align*}
+    since (looking at diagrams) it goes to zero away from \(x = 0\) when \(N \to \infty\), whereas it blows up at \(x = 0\) as argued. And at the same time, if we view the integral "normalization condition" in the view of the formal "distribution paired with smooth test function"-notation, then it is just the statement that the constant function 1 is still 1 when "evaluated" at 0 - nothing surprising!
+\end{example}
+
+Finally, we end with an important definition
+\begin{definition}
+    A sequence of functions (or distributions) \(\xi _n\) \textbf{converges weakly} to a distribution \(\xi _\ast\) if \begin{align*}
+        \lim_{n \to \infty} \int _\Omega  \xi _n \cdot g(x) dV = \int _\Omega \xi _\ast g(x) dV, \qquad \forall g \in \mathcal{C} ^\infty(\Omega : \mathbb{R} ).
+    \end{align*}  
+\end{definition}
+
+
+
+\newpage\lecture{26}{Mon 03 Nov}{Green's Functions}[Olver 6.2]
+\paragraph{Abstract} We recalled the definition of the Diract delta function. Then, we took a step back and looked at the series solution to Poisson's equation in terms of the eigenfunctions. In other words, we revisited the \textbf{superposition principle} and rewrote our series solution in terms of an integral over a discrete dummy variable.  
+
+\newpage\lecture{27}{Wed 05 Nov}{Green's Functions and Weak Solutions}[Olver 6.2]
+\paragraph{Abstract} We finished up where we left off finding the Greens function for the 1D Laplacian with simple bounds in lecture 26. 
+
+Then we discussed a good analogy for distributions and made more sense of what it the derivative of a distribution means. 
+
+We then defined \textbf{weak solutions} to partial differential equations and walked through some examples. 
+
+Finally, we generalized Greens functions of the Laplacian to higher dimensions and showed how one can work with closed and bounded domains due to linearity, even though we are solving the equation to be equal to the \(\delta\) distribution, 
+
+
+
+\newpage
+
+The term "generalized function" makes pretty good sense, because we demand that they act like functions (i.e. integrable by parts) when acting on other functions. But they aren't regular functions (generalized) since they aren't functions on their own at all. It is only in being paired with an actual function that we can make sense of their "function-like" behavior.
+
+
+Note that so far we've been saying that distributions act on any \(\mathcal{C} ^\infty(\Omega : \mathbb{R} )\) functions. But usually, one thinks of distributions that act on \textbf{test functions}, which are a subset of smooth functions having certain properties (compact support or periodic). Two lectures ago we introduced the Fourier series of a distribution, which essentially meant letting our distribution act on the trigonometric basis functions (periodic functions). In this lecture, we will have need for our functions to be compactly supported on the interior of \(\Omega \) to have certain behaviors that we "expect". 
+
+\end{document}
+
+
+
+

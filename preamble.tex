@@ -35,6 +35,8 @@
 \usepackage{tikz}                                          % For diagrams and lecture headers
 \usetikzlibrary{calc}                                      % TikZ calculations
 
+\usepackage{dsfont} % For identity symbol in math
+
 % ============================================================
 % ⚡ DRAFT MODE FOR FAST COMPILATION
 % ============================================================
@@ -65,6 +67,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
 \newtheorem{corollary}[theorem]{Corollary}
 
 % Manual theorem environments (for custom numbering)
@@ -146,6 +149,7 @@
 \newtheorem*{note}{Note}
 \newtheorem*{example}{Example}
 \newtheorem*{intuition}{Intuition}
+\newtheorem*{notation}{Notation}
 
 \newtheorem{manualexampleinner}{Example}
 \newenvironment{mexample}[1]{%
@@ -225,6 +229,7 @@
 \tcolorboxenvironment{theorem}{myplain}
 \tcolorboxenvironment{lemma}{myplain}
 \tcolorboxenvironment{proposition}{myplain}
+\tcolorboxenvironment{claim}{myplain}
 \tcolorboxenvironment{corollary}{myplain}
 \tcolorboxenvironment{mtheorem}{myplain}
 \tcolorboxenvironment{mprop}{myplain}
