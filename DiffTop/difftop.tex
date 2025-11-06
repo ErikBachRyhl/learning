@@ -452,7 +452,7 @@ This is \textbf{exactly} what Lee calls the "global differential", and hence we'
 \end{proof}
 
 \begin{definition}[Exact 1-form]
-    Let \(\alpha\) be a 1-form on \(M\). We say that \(\alpha\) is \textbf{exact} if \(\alpha = df\) for some function \(f: \mathcal{M}\to \mathbb{R} \).
+    Let \(\alpha\) be a 1-form on \(M\). We say that \(\alpha\) is \textbf{exact} if \(\alpha = df\) for some smooth function \(f: \mathcal{M}\to \mathbb{R}\).
 \end{definition}
 
 \begin{proposition}[Integrating Exact 1-forms]
@@ -548,6 +548,7 @@ In other words, we showed that
     H^1_{\text{dR}} \left(\mathbb{R} ^n\right) = \left\{ 0 \right\} 
 \end{align*}
 \newpage
+\subsubsection{2-forms and the Exterior Derivative}
 \paragraph{Recall} that a 1-form on \(M \) is a smooth section of \(T^{\ast} M\) while a 0-form is a smooth function \(f: M \to \mathbb{R} \). Note that if nothing else is stated, everything is smooth actually. Last lecture we also introduced the operator \begin{align*}
     d : \left\{ \text{ 0-forms } \right\} \to \left\{ \text{ 1-forms } \right\}.
 \end{align*}
@@ -591,7 +592,9 @@ At this point, one may wonder why we even introduced antisymmetry in the first p
  
 \textred{Fill out the coordinate independence check here.}
 
-\begin{proposition}
+\subsubsection{\(d^2 = 0\) and Closed 1-forms}
+
+\begin{proposition}\label{prop:ddf_equal_0}
     If \(f\) is a 0-form, then \(d(df) = 0\). 
 \end{proposition}
 \begin{proof}
@@ -605,6 +608,55 @@ At this point, one may wonder why we even introduced antisymmetry in the first p
         \textred{\frac{\partial }{\partial x^j} \left( \frac{\partial f}{\partial x^i}  \right)  dx ^i dx^j}
     \end{align*}
 \end{proof}
+
+Recall again the definition of exactness, i.e. that a 1-form \(\alpha\) is exact if there exists some 0-form \(f \in C^\infty(M)\) such that \(\alpha = df\). Here comes anoter important property of 1-forms. 
+
+\begin{definition}[Closed 1-form]
+    A 1-form \(\alpha\) is said to be \textbf{closed} if \(d \alpha = 0\). In local coordinates \(x^1, \dots , x^n\) we can write \(\alpha  = \alpha _i dx^i\), such that \begin{align*}
+        d \alpha = \frac{\partial \alpha _i}{\partial x^j} dx^j dx^i .
+    \end{align*}
+    Since the \(i = j\) term cancel, we can by antisymmetry write \begin{align*}
+        d \alpha = \sum_{j < i} \left[ \frac{\partial \alpha _i}{\partial x^j} - \frac{\partial \alpha _j}{\partial x^i}   \right]  dx ^j dx^i
+    \end{align*} 
+    This means that \begin{align*}
+        \alpha \text{ is closed} \iff \text{in local coordinates } \frac{\partial \alpha _i}{\partial x^j} = \frac{\partial \alpha _j}{\partial x^i}  
+    \end{align*}
+\end{definition}
+
+From Proposition \ref{prop:ddf_equal_0} we see that for a 1-form \(\alpha\) on \(M\) \begin{align*}
+    \alpha \text{ exact} \implies \alpha \text{ closed}
+\end{align*} 
+In \(\mathbb{R} ^n\), these are equivalent. 
+
+\begin{example}[Exact iff Closed in \(\mathbb{R} ^n\)]
+    Last lecture we saw how in \(\mathbb{R} ^n\), \(\alpha\) being exact is equivalent to \begin{align*}
+        \frac{\partial \alpha _i}{\partial x^j} = \frac{\partial \alpha _j}{\partial x^i} 
+    \end{align*}
+    Hence we can immediately conclude that \(\alpha\) is closed in \(\mathbb{R} ^n\) if and only if \(\alpha \) is exact.
+
+    We also saw however that on \(\mathbb{R} ^2 \setminus 0\), the 1-form \begin{align*}
+        \alpha = \frac{x dy - y dx}{x^2 + y^2}
+    \end{align*}
+    is closed, but \textit{not} exact.
+\end{example}
+
+\subsubsection{The First de Rham Cohomology}
+\begin{definition}[The 1st de Rham Cohomology]
+    Define the \textbf{1st de Rham Cohomology} \begin{align*}
+        H^1 _{\text{dR}} \left(M\right) = \frac{\left\{ \text{ closed 1-forms on } M \ \right\} }{\left\{ \text{ exact 1-forms on } M \ \right\} }
+    \end{align*} 
+    Both of the sets are real vector spaces (\textred{check this!}), so this is a quotient space of vector spaces over \(\mathbb{R} \). 
+\end{definition}
+
+\begin{example}
+    We've already shown that \begin{align*}
+        H^1 _{\text{dR}} \left(\mathbb{R} ^n\right) = \left\{ 0 \right\}, 
+    \end{align*} i.e. that every closed 1-form is exact in \(\mathbb{R} ^n\). We've also shown how a 1st de Rham cohomology can be non-trivial, i.e. that at least \begin{align*}
+        H^1 _{\text{dR}} \left(\mathbb{R}^2 \setminus 0\right) \neq \left\{ 0 \right\} 
+    \end{align*}
+
+    In fact, we'll see later that \(H^1 _{\text{dR}} \left(\mathbb{R}^2 \setminus 0\right) \cong \mathbb{R} \). 
+\end{example}
 
 
 
@@ -733,7 +785,7 @@ But what does all this have to do with manifolds, one might ask?
     This definition is indeed the generalization of what we've done so far. In local coordinates \(x^1, \dots , x^n\) a \(k\)-form can be written as \begin{align*}
         \alpha = \sum_{i_1 < \cdots < i_k} \alpha _{i_1 \cdots i_k} dx^{i_1} \wedge \cdots \wedge dx^{i_k},
     \end{align*} 
-    where the \(\alpha _{i_1 \cdots i_k}\)'s are smooth functions of \(x^1, \dots , x^n\). When wedging by basis vectors, one often omits the wedges.
+    where the \(\alpha _{i_1 \cdots i_k}\)'s are smooth functions of \(x^1, \dots , x^n\). When wedging by basis vectors, one often omits the wedges. This is exactly the notation we were actually using the last two lectures when looking only at 1- and 2-forms.
 
     We write \begin{align*}
         \Omega ^k (M) = \left\{\ k\text{-forms on M } \right\} 
