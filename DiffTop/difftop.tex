@@ -999,5 +999,34 @@ We consider another powerful corollary.
 \subsubsection{Teaser: Analytic Continuation}
 \textred{Sketch here and description of main idea. Add questions also on the final page of the lecture notes.}
 
+
+\subsubsection{Spinors and their Representations}
+\begin{theorem}[Chevalley (1954)]
+    There exists a unique, irreducible representation such that \begin{align*}
+        e^{\mu } = \gamma ^\mu 
+    \end{align*}
+    \textred{What exactly does this mean? I think it means the following:} Hence \textit{if} we find a representation satisfying the Clifford algebra identity for the ideal, then we know that it will be isomorphic to any other representation we might find. \textred{Or does irreducible mean that there is only ONE representation that is "as small as possible"?}
+\end{theorem}
+
+In dimensions \(D > 3\) we get the spin-statistics theorem. 
+
+\begin{theorem}[Spin-Statistics Theorem]
+    For \textred{relativistic} theories of dimensions \(D > 3\) \begin{align*}
+        \text{spinors } \cong \text{ fermions}
+    \end{align*} 
+\end{theorem}
+
+\begin{definition}[Spinors]
+    The objects which the \(\gamma \) matrices act on are called \textbf{spinors}, i.e. they satisfy the equation \begin{align*}
+        (i \gamma ^\mu  \partial _\mu - m )\psi = 0,
+    \end{align*} with \(\psi \) being the spinor here. 
+\end{definition} 
+
+Even when looking at \(\operatorname{Cliff}_\mathbb{R} (V) \) (i.e. over real valued vector spaces \textred{I think it means that?}), sometimes the nicest representations of the \(\gamma\) matrices are built with complex numbers. So \(\psi \) will be generically complex-valued because our \(\gamma \) will be rank \(n\) \(\mathbb{C} \)-valued matrices. These are the \textbf{Dirac spinors}.
+
+When working over \(\mathbb{R} \) we could take \(g^{\mu  \nu } = \eta ^{\mu  \nu }\) with \(\mu , \nu = 1, \dots , D- 1\). In fact, it hasn't mattered whether we used the mostly plus or mostly minus convention for \(\eta ^{\mu  \nu }\). But now it will influence the "look" of the Clifford algebras we get, since the metric is directly put into the Clifford algebra identity. Due to Chevalley however, we know that the irreducible representation of our Clifford algebra must be unique, regardless of metric. \textred{I don't actually think that this is what the theorem says. ASK}
+
+There \textit{is} an isomorphism between the representations one gets from choosing either mostly minus or mostly plus, but it is highly non-trivial. 
+
 \end{document}
 
