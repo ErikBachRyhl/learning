@@ -888,19 +888,116 @@ Finally, we stated \textbf{Stoke's Theorem} and outline the structure of the pro
 
 
 
-\begin{definition}[Quotient Group]
-    Let \( G \) be a group and \( N \trianglelefteq G \) a normal subgroup.  
-    The \textbf{quotient group} (or \textbf{factor group}) of \( G \) by \( N \) is the set of left cosets of \( N \) in \( G \),
-    \[
-        \quotient{G}{H} = \{ gN \mid g \in G \},
-    \]
-    equipped with the operation
-    \[
-        (gN)(hN) = (gh)N, \quad \text{for all } g, h \in G.
-    \]
-    This operation is well-defined precisely because \( N \) is normal in \( G \).
+
+
+
+
+
+
+
+\subsubsection{Zeroes of Order \(n\)}
+\begin{definition}[Zeroes of Order \(n\)]
+    Let \(f: D \to \mathbb{C} \) be analytic and \(z_0 \in D\). We say that \(f\) has a \textbf{zero of order \(n\) at \(z_0\)} if \begin{align*}
+        f^{(k)} (z_0) = 0 \quad \text{ for } 0 \leq k \leq n-1.
+    \end{align*}
+    This is equivalent to being able to write \begin{align*}
+        f(z) = (z - z_0)^n h(z)
+    \end{align*}
+    with \(h(z_0) \neq 0\). \textred{Why this last statement is equivalent?}
 \end{definition}
 
+\begin{example}
+    \(f(z) = \sin (z)\) with \(z_0 = \pi\). \textred{Fill it out!}      
+\end{example}
+
+If \(f\) has a zero of order \(m\) at \(z_0\) and \(g\) a zero of order \(n\) at \(z_0\), then \(fg\) has a zero of order \(m + n\) at \(z_0\), since \begin{align*}
+    fg = (z-z_0)^{m + n} h(z)j(z)
+\end{align*}    
+with \((hj)(z_0) \neq 0\).
+
+\begin{definition}[Zeroes at Infinity]
+    Recall that
+    \begin{align*}
+        f(\infty) = \lim_{z \to \infty} f(z)
+    \end{align*} 
+    or, expanding at infinity \begin{align*}
+        f(z) = \sum_{n = 0}^\infty a_n z^{-n} 
+    \end{align*}
+    we have \(f(\infty) = a_0\). 
+    
+    Letting \(g(w) = f (1 / w)\), we say that \(f\) has a \textbf{zero of order \(n\) at \(\infty\)} if and only if \(g(w)\) has a zero of order \(n\) at \(w = 0\).    
+\end{definition}
+
+\begin{example}
+    \begin{align*}
+        \frac{1}{z^{2} + 1}
+    \end{align*}
+    (order 2, find it)
+\end{example}
+
+\begin{example}
+    \begin{align*}
+        e^{-\frac{1}{|z|^2}}
+    \end{align*}
+    has a zero of infinite order at 0.
+\end{example}
+
+\subsubsection{Isolated Points}
+
+\begin{definition}[Isolated Points]
+    Let \(S \subseteq \mathbb{C} \). We say that \(z \in S\) is \textbf{isolated} if there exists some \(r > 0\) such that \begin{align*}
+        \min _{z^{\prime} \in S} | z - z^{\prime} | \geq r.
+    \end{align*}   
+    If all points in \(S\) are isolated, we say that \(S\) is isolated.
+\end{definition}
+
+The following theorem turns out to be extremely powerful. 
+
+\begin{theorem}[Zero on Non-Isolated Sets]
+    Let \(f\) be analytic on \(D\) and let \begin{align*}
+        S = \left\{ z \in D : f(z) = 0 \right\}.
+    \end{align*} 
+    be the set of zero-points of \(f\) on \(D\). Then either \(S\) is isolated or \(f \equiv 0\) on \(D\).
+\end{theorem}
+
+This theorem is what will allow us to develop the theory of analytic continuation and \textred{much much more no?}
+
+\begin{proof}
+    \textred{Fill out! Really cool proof to be honest!}
+\end{proof}
+
+The following corollary is what we will build a lot on the next coming lectures.
+
+\begin{corollary}[Equality of Functions on Non-Isolated Sets]
+    Suppose \(f, g : D \to \mathbb{C} \) are both analytic and \(S \subseteq D\) is some set with non-isolated points. Then if \(f = g\) on \(S\), in fact \(f = g\) on all of \(D\).
+\end{corollary}
+
+\begin{proof}
+    Apply the previous theorem to \(f - g\). 
+\end{proof}
+
+\begin{remark}
+    A couple of lectures ago, or maybe it was in a problem, we showed that analytic functions which agree on a disk inside a domain will agree on the entire domain. But here, \(S\) doesn't need to be a disk anymore, and in fact it doesn't even need to be a subdomain, i.e. \(S\) need not even be connected.
+\end{remark}
+
+We consider another powerful corollary.
+\begin{corollary}[Permanence Principle of Functional Equations]
+    Consider \(F: D \times D \to \mathbb{C} \times \mathbb{C} \) such that \(F(z, \cdot ): D \to \mathbb{C} \) and \(F(\cdot , w): D \to \mathbb{C} \) are both analytic. Suppose \(S \subseteq D\) is a set with non-isolated points. If \(F(z, w) = 0\) for all \(z, w \in S\), then \(F(z, w) \equiv 0\) on \(D \times D\).  
+\end{corollary}
+
+\begin{proof}
+    \textred{Use the previous corollary a couple of times in a row on each map with an "open slot".}
+\end{proof}
+
+\begin{example}[The Additive Property of the Exponential]
+    Finally we can justify something we've taken for granted, but from another viewpoint: \begin{align*}
+        e^{z + w} = e^{z}e^{w}
+    \end{align*}
+    for all \(z, w \in \mathbb{C} \). Here we accept that this property holds in the real sense (which can be shown in standard real analysis). \textred{Use the above corollary to extend to the complex plane}.  
+\end{example}
+
+\subsubsection{Teaser: Analytic Continuation}
+\textred{Sketch here and description of main idea. Add questions also on the final page of the lecture notes.}
 
 \end{document}
 
