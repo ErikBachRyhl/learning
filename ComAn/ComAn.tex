@@ -96,6 +96,48 @@ We will prove this by first concluding stuff about harmonic conjugates and their
 \end{itemize} 
 
 \newpage\section{Cauchy's Theorem and Formula}
+
+\newpage\lecture{11}{Wed 01 Oct}{Applications of Cauchy's Formula}
+
+
+Recall Cauchy's theorem
+\begin{theorem}[Cauchy's Theorem]
+    Let \(D\) is a bounded domain with \(\partial D\) \(C^1\) as a path. If \(f: D \to \mathbb{C} \) is analytic on \(D\) and \textred{extends smoothly (how smooth?)} to the boundary \(\partial D\), then \begin{align*}
+        \int _{\partial D} f(z) dz = 0
+    \end{align*}
+\end{theorem}
+
+Recall the Cauchy's Formula, which is a corollary
+\begin{corollary}[Cauchy's Formula]
+    For any \(z \in D\), we have \begin{align*}
+        f(z) = \frac{1}{2 \pi i} \int _{\partial D} \frac{f(w)}{w - z} dz
+    \end{align*} 
+\end{corollary}
+
+\newpage\lecture{12}{Fri 03 Oct}{Cauchy's Formula and Extensions of Analyticity}
+
+\begin{theorem}[Morera's Theorem]
+    Let \(f : D \to \mathbb{C} \) be a continuous function. If for every subdomain \(D^{\prime}  \subset D\) \begin{align*}
+        \int _{\partial D^{\prime} } f(z) dz = 0
+    \end{align*}      
+    then \(f\) is analytic on \(D\).  
+\end{theorem}
+
+It turns out that we can weaken the statement by the following logic: If we can show that \begin{align*}
+    \int _{\partial D^{\prime} } f(z) dz = 0
+\end{align*}
+for any subdomain \(D^{\prime} \subset D\), the it is certainly also true for any sub-rectangle \(R \subset D\) with sides parallel to the coordinate axes. And it turns out that even this is enough to garuantee analyticity of \(f\) \textred{on \(D\) ??! or only on \(R\), which means we need to argue that every domain can be built like that? It does seem from the proof that in fact we only need the rectangle statement because there is a specific point where we use that the integral around a closed rectangle is zero. From this we find that a function \(F(z)\) is analytic with derivative \(f(z)\). Then by Cauchy's formula, the derivative function itself is also analytic (as we have proven earlier, analyticity implies that all derivatives exist and are analytic too!).}
+
+\begin{theorem}[Goursat's Theorem]
+    If \(f: D \to \mathbb{C} \) is a function such that \begin{align*}
+        f^{\prime} (z_0) = \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}
+    \end{align*} 
+    exists for every \(z_0 \in D\), then \(f\) is analytic on \(D\) (i.e. \(f^{\prime}\) is also continuous, which we previously took as part of the definition of analyticity).   
+\end{theorem}
+
+
+\newpage
+
 \subsection{Example Problems}
 \begin{problem}{Homwork 5, problem 1}
     Say that a function \(f:\mathbb{C}\to\mathbb{C}\) is “of polynomial growth” if there exist constants \(R,C\in\mathbb{R}_{>0}\) and \(d\in\mathbb{Z}_{\ge 0}\) such that for all \(|z|\ge R\), \[|f(z)|\le C|z|^{d}.\] Using the Cauchy estimates, show that if \(f\) is of polynomial growth and analytic, then so is \(f^{(n)}\) for every \(n\ge 0\).
@@ -184,14 +226,428 @@ by Cauchy's formula. Thus, we find that \begin{align*}
 \qedst
 
 \newpage\section{Series Expansions and Analytic Continuation}
+
+\paragraph{Recap} In our first unit, we introduced complex numbers and their algebraic properties, studied complex functions, branch points and branch cuts. We defined the concept of a complex derivative and analaytic functions and saw that these notions were so strong that we got a lot of structure for free: the Cauchy-Riemann equations, harmonic functions and conformal mappings.
+
+In our second unit, we introduced integration in the complex plane. We started by studying line integrals in the plane, since thanks to the fact that \(\mathbb{C} \cong \mathbb{R} ^2\), we could draw a lot on Green's theorem to extend line integrals to the complex setting. We derived the ML bound, Cauchy's theorem and formula, Liouville's theorem, Morera's theorem and Goursat's theorem. We introduced the complex derivative "operators" \(\partial _z\) and \(\partial _{\overline{z}}\)  which gave us a reformulation of the Cauchy-Riemann equations. Finally, we generalized Cauchy's formula to the case of non-analytic (but still smooth) functions, known as Pompeiu's formula. 
+
+\paragraph{Abstract} In this unit, we will greatly extend the theory of functions and integration in the complex plane and learn that these extensions can often be used to study real non-elementary integrals infeasible with standard methods. To do this, we will have to get comfortable with power series and extend the notion of a Taylor series in the real sense to a Taylor series in the complex setting. We will introduce the notion of zeroes of a given order and series expansions at infinity. We will discover that there are powerful uniqueness properties of complex functions which leads to the concept of analytic continuation. From the uniqueness theorems we will extend the notion of Taylor series to that of Laurent series. We will then classify singularities in the complex plane and discover that this will allow us to systematically extend our ability to integrate even over domains that aren't simply connected but contain isolated singularities. This is the celebrated result known as the residue theorem, which concludes this unit.
+
+\newpage
+
 \lecture{14}{Wed 8 Oct}{Series and Convergence}
+\paragraph{Abstract} \textred{Fill out}
+
+\subsubsection{Pointwise and Uniform Convergence}
+
+Just like we can have sequences of real or complex numbers, so can we have sequences of entire functions. With sequences of functions however, there are different notions of convergence. The first notion of convergence, \textit{pointwise convergence}, is naturally defined by thinking of a sequence of functions as being an inifinitely large family of sequences of numbers, i.e. that for every \(x\) in \(\dom f\), \(f_n (x)\) describes a sequence of numbers which can then be studied as before.  
+
+\begin{definition}[Pointwise Convergence]
+    Given a sequence of functions \(f_n : U \to \mathbb{C}\), we say that they \textbf{converge pointwise on \(U\)} to a limit function \(f: U \to \mathbb{C} \) if \begin{align*}
+        \forall z \in U : \lim_{n \to \infty} f_n (z) = f(z)
+    \end{align*} 
+   
+   By definition, this is equivalent to saying that \(f_n \to f\) pointwise on \(U\) if and only if   
+    \begin{align*}
+        \forall z \in U \,\, \forall \epsilon > 0 \,\, \exists N(z) \in \mathbb{N} \,\, \forall n \geq N(z) : |f_n(z) - f (z)| < \epsilon  
+    \end{align*}
+\end{definition}
+
+\begin{remark}
+    Notice that in above definition, we \textit{first} get to focus our attention on a specific \(z\), such that \(f_n(z)\) becomes a sequence of numbers. For each such sequence of numbers, we can pick \(N\) based on both \(\epsilon\) \textit{and} \(z\) (hence \(N = N(z)\)). This is why we call it pointwise convergence: for each point \(z\) we get an "independent" sequence which converges to the point \(f(z)\).      
+\end{remark}
+
+\begin{note}
+    Remember that strict inequalites are stronger than weak inequalities, i.e. that \begin{align*}
+        x < y \implies x \leq y
+    \end{align*}
+    almost vacuously. This is how "or" works: we know by assumption that \(x\) is less than \(y\) always, and hence it is always either less than \(y\) OR equal to \(y\), even though we know that equality will never be achieved. 
+\end{note}
+
+
+\begin{definition}[Uniform Convergence]
+    Given a sequence of functions \(f_n : U \to \mathbb{C}\), we say that they \textbf{converge uniformly on \(U\)} to a limit function \(f : U \to \mathbb{C} \) if \begin{align*}
+        \forall \epsilon > 0 \,\, \exists N \in \mathbb{N} \, \, \forall n \geq N : |f_n(z) - f (z)| < \epsilon,   \quad \forall z \in U
+    \end{align*}
+
+    Equivalently, we say that \(f_n \to f\) uniformly on \(U\) if there exists some sequence of numbers \(\left\{ \epsilon _n \right\}_{n = 0}^{\infty}\) \begin{align*}
+        \forall z \in U : |f_n(z) - f(z) | < \epsilon _n \quad \text{ and } \quad \lim_{n \to \infty} \epsilon _n = 0
+    \end{align*}  
+\end{definition}
+
+\begin{remark}
+    Notice now that given an \(\epsilon > 0\) we have to choose an \(N\) \textit{before} we know what \(z\) we are looking at, i.e. there has to be one single \(N\) we can choose such that for all \(n \geq N\) then at all points along \(f_n(z)\) we are less than \(\epsilon \) away from the limit function \(f\). Since all points along \(f_n\) can "agree" on a single \(N\), they must converge to \(f\) at some comparable rate, and hence we call this uniform convergence: the rate of convergence across \(f_n\) is (in some sense) uniform.
+
+    A way of thinking about this visually is that when you only have pointwise convergence, it will often look like some of the function almost stops converging toward what you think is the limit function, even for \(n\) getting quite large. The functions will converge eventually to the limit function, but it will look like some of the function already converged a long time ago, while it still has a "tail" converging at a snail's pace, looking almost frozen. On the other hand then, uniform convergence will look well almost uniform.
+\end{remark}
+
+It is not feasible to check "by hand" whether a given \(N\) works for all points \(z \in U\) along the function. But if we can find an \(N\) that works for the "worst case scenario", then checking only that sequence will be sufficient to have uniform convergence. 
+
+\begin{definition}[Supremum]
+    For a nonempty, bounded-above set \(U \subset \mathbb{R} \), the \textbf{supremum} \(\sup U \in \mathbb{R}\) is the least upper bound of \(U\). This means that: \begin{itemize}
+        \item \(\forall x \in U: x \leq \sup U\)
+        \item If \(\forall x \in U: x \leq y\) then \(\sup U \leq y\).
+        \item If the supremum is attained on \(U\) then the supremum equals the maximum.   
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Note that the maximum and the supremum are distinct concepts: the supremum always exists, while the maximum only exists for compact sets \textred{check this statement}. I.e. the supremum need not be contained in \(U\), as is the case with open intervals for example. But if a set contains its supremum, as is the case with closed sets, then the maximum is equal to the supremum. One can essentially say that this is the definition of a maximum.
+\end{remark}
+
+\begin{proposition}[Supremum Norm Convergence]
+    Let \(f_n : U \to \mathbb{C} \) be a sequence of functions. Then \(f_n \to f\) uniformly on \(U\) if and only if   
+    \begin{align*}
+        \lim_{n \to \infty} \sup_{z \in U} |f_n (z) - f(z)| = 0
+    \end{align*} 
+\end{proposition}
+\begin{proof}
+    \(\implies\)) By uniform convergence, \begin{align*}
+        \forall \epsilon > 0 \, \, \exists N \in \mathbb{N} \, \, \forall n \geq N : |f_n (z) - f(z)| < \epsilon, \quad \forall z \in U
+    \end{align*}
+    Since \(N\) is chosen independently of \(z \in U\), the statement certainly also holds for the "worst case" \(z\) we could choose. Note that strict inequalities are stronger than weak ones. Hence above statement implies that \begin{align*}
+        \forall \epsilon > 0 \, \, \exists N \in \mathbb{N} \, \, \forall n \geq N : |f_n (z) - f(z)| \leq \epsilon, \quad \forall z \in U
+    \end{align*}
+    By the definition of the supremum, this means that \begin{align*}
+        \sup _{z \in U} |f_n (z) - f(z) | \leq \epsilon
+    \end{align*}
+    Note that weak inequality still implies convergence in the strict sense though, since for any \(\epsilon > 0\) we can go further in the sequence and choose an \(N\) such that \begin{align*}
+        \forall z \in U: |f_n (z) - f(z)| < \frac{\epsilon}{2} \implies \sup _{z \in U} |f_n (z) - f(z) | \leq \frac{\epsilon}{2} < \epsilon.
+    \end{align*}  
+
+    To say it succintly, the key thing to notice is that because \(\epsilon \) is an upper bound of the set \(S_n \coloneqq \left\{ |f_n (z) - f(z)| : z \in U \right\} \), then the \textit{least upper bound} (the supremum!) is less than or equal to \(\epsilon \). This is enough.  
+
+    \(\impliedby\)) The hypothesis now states that \begin{align*}
+        \forall \epsilon > 0 \, \, \exists N \in \mathbb{N} \, \, \forall n \geq N : \sup _{z \in U} | f_n (z) - f(z) | < \epsilon 
+    \end{align*} 
+    We see that given any \(\epsilon > 0\), we can choose the same \(N\) as the hypothesis garuantees exists (i.e. the one needed for the supremum norm to be less than \(\epsilon\)), and then by definition of the suprememum, for a given \(z \in U\) we have that \(|f_n(z) - f(z)| \leq \sup_{z \in U} |f_n(z) - f(z)|\). Since \(\epsilon\) and \(z \in U\) was arbitrary, we satisfy the condition for uniform convergence: \begin{align*}
+        \forall \epsilon > 0 \, \, \exists N \in \mathbb{N} \, \, \forall n \geq N : |f_n (z) - f(z)| < \epsilon, \quad \forall z \in U
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    The proposition above is so immediate that it can almost be stated as part of the definition of uniform convergence. It is called \textbf{supremum norm convergence} and sometimes denoted as \begin{align*}
+        \lim_{n \to \infty} || f_n - f ||_{\infty } = 0
+    \end{align*} 
+    where the domain over which the supremum is taken is implicit.
+\end{remark}
+
+\begin{theorem}[Uniform Convergence Preserves Continuity]
+    If a sequence of continuous functions \(f_n\) \textbf{converges uniformly} to \(f\), then \(f\) is continuous. 
+\end{theorem}
+
+\begin{proof}
+    \textred{Try and do it some time}
+\end{proof}
+
+\subsubsection{Series and Convergence}
+Just like we can have sequences of functions, we can build our sequence of numbers as a sum with successively added terms. 
+
+\begin{definition}[Infinite Series]
+    Given a sequence of numbers \(\left\{ a_n \right\}_{n = 0}^{\infty}  \subset \mathbb{C}\) let \begin{align*}
+        S_n = \sum_{k = 0}^n a_k 
+     \end{align*}  
+    We then define \begin{align*}
+        \sum_{k = 0}^{\infty} a_k \coloneqq \lim_{n \to \infty} S_n = \lim_{n \to \infty} \sum_{k = 0}^n a_k 
+    \end{align*}
+    whenever the limit exists. We call \(S_n\) the \textbf{n'th partial sum} and we say that the series \textbf{converges} (i.e. when the limit of partial sums \textit{exists} the series \textit{converges}). To denote convergence, we write \begin{align*}
+        \sum_{k = 0}^{\infty} a_k < \infty  
+    \end{align*}
+\end{definition}
+
+There are many ways to study convergence of such series. An immediate check is the following
+
+\begin{lemma}
+    If a series converges, then the sequence of coefficients in the series converge to zero. 
+\end{lemma}
+\begin{proof}
+    By hypothesis \begin{align*}
+        \sum_{k = 0}^{\infty} a_k = \lim_{n \to \infty} \sum_{k = 0}^n a_k 
+    \end{align*} exists. We know that the sum of limits is the limit of the sums (when they exist). Notice then that \begin{align*}
+        0 = \lim_{n \to \infty}S_{n + 1} - \lim_{n \to \infty} S_n = \lim_{n \to \infty} (S_{n + 1} - S_n) = \lim_{n \to \infty} a_{n +1}
+    \end{align*}
+\end{proof}
+
+The contrapostive is a useful check: If the coefficients of a series \textit{don't} converge, then neither does the series. In other words, this is a necessary condition. But it is \textbf{not} sufficient. An immediate counterexample is the harmonic series \begin{align*}
+    \sum_{k = 0}^\infty \frac{1}{k} 
+\end{align*} 
+which diverges (i.e. the limit doesn't exist) even though we clearly have \begin{align*}
+    \frac{1}{k} \xlongrightarrow{k \to \infty} 0.
+\end{align*}
+
+Another important check for convergence is to use boundedness the following lemma from real analysis.
+
+\begin{lemma}[A Bounded Monotone Sequence Converges]
+    Suppose \(\left\{ a_n \right\}_{n = 0} ^{\infty}  \) is a monotone sequence of real numbers. Then it converges if and only if it is bounded.  
+\end{lemma}
+\begin{proof}
+    \textred{Do it sometime.}
+\end{proof}
+
+This can be applied to refine our convergence criteria for series. For if we suppose \(\left\{ a_k \right\} \) is a sequence of nonnegative \textit{real} numbers, which implies that \(S_{n + 1} = S_n + a_{n + 1} \geq S_n\), then this further means that \(\lim_{n \to \infty} S_n = \sum_{k = 0}^{\infty} a_k \) converges if and only if the \(S_n\) are bounded above (resp. below if we consider only nonpositive terms in the sum. But this follows from multiplication of limits being well-defined as soon as the limit exists). 
+
+\begin{proposition}[Comparison Test]
+    Suppose \(\left\{ a_k \right\} \) and \(\left\{ b_k \right\} \) are sequences of real numbers and \(0 \leq a_k \leq b_k\) for all \(k \in \mathbb{N} \). If \begin{align*}
+        \sum_{k = 0}^{\infty} b_k 
+    \end{align*} 
+    converges, then so does \begin{align*}
+        \sum_{k = 0}^{\infty} a_k 
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    Since \begin{align*}
+        \sum_{k = 0}^{\infty} b_k \coloneqq \lim_{n \to \infty} S_n < \infty
+    \end{align*}
+    where the partial sums only contain positive terms (monotone sequence), we know that each such partial sum must be bounded. But these partial sums are exactly upper bounds for the partial sums of the series of \(\left\{ a_k \right\} \) by assumption of termwise boundedness \textit{and} nonnegativity. In particular, the partial sums \begin{align*}
+        \sum_{k = 0}^n a_k = S^{\prime} _n
+    \end{align*}
+    are bounded and the sequence of them is monotone. Hence they converge, and therefore 
+    \begin{align*}
+        \lim_{n \to \infty} S^{\prime} _n = \sum_{k = 0}^{\infty} a_k  
+    \end{align*}
+    converges.
+\end{proof}
+
+The contrapositive statement is often how we check this: if we can find some divergent series with monotonically increasing terms that is termwise smaller than the series we are studying, then we know it must diverge too. It is "pushed" up by the smaller series. One such series that we often use for testing is the geometric series.
+
+\begin{lemma}[The Geometric Series]
+    The series \begin{align*}
+        \sum_{k = 0}^{\infty} z ^k = \frac{1}{1 - z}, \quad |z| < 1 
+    \end{align*}
+    with divergence for \(|z| \geq 1\). 
+\end{lemma}
+
+\subsubsection{Absolute Convergence}
+\begin{definition}[Absolute Convergence]
+    Given a series \begin{align*}
+        \sum_{k = 0}^{\infty} a_k,
+    \end{align*}
+    we say that it \textbf{converges absolutely} if \begin{align*}
+        \sum_{k = 0}^{\infty} |a_k| 
+    \end{align*} 
+    converges.
+\end{definition}
+
+As intuition from the triangle inequality suggests, this is indeed a stronger notion of convergence as the following proposition shows. 
+
+\begin{proposition}[Absolute Convergence Implies Convergence]
+    Let \(\left\{ a_k \right\} \) be a sequence of complex numbers. If \begin{align*}
+        \sum_{k = 0}^{\infty} |a_k| 
+    \end{align*}
+    converges, then so does \begin{align*}
+        \sum_{k = 0}^{\infty} a_k 
+    \end{align*}
+    and \begin{align*}
+        \left| \sum_{k = 0}^{\infty} a_k  \right| \leq \sum_{k = 0}^{\infty} |a_k| 
+    \end{align*}
+\end{proposition}
+\begin{remark}
+    Note how the triangle equality statement that guides our intuition is a \textit{consequence} of the fact that absolute convergence implies convergence and \textit{not} the thing that proves it. This is because it is only \textit{after} we have proven that the series on the left is convergent that we can even think about exchanging norms and limits (the norm is a continuous function, but we need to show that the norm is well-defined first).
+\end{remark}
+
+\begin{proof}
+    This statement is more difficult than in the real case since we have to split the sums and make sure that both the real and imaginary parts of the complex numbers converge seperately and can be recombined in a sensible way while preserving the convergence. \textred{Proove this at some point}. 
+\end{proof}
+
+\begin{selfnote}
+    Fill out proofs at some point and include some examples!
+\end{selfnote}
 
 \newpage\lecture{15}{Fri 10 Oct}{Power Series}
+\paragraph{Abstract} \textred{Fill out}
+
+\subsubsection{Uniform Convergence and Analyticity}
+
+\begin{theorem}[Uniform Convergence Preserves Analyticity]\label{thm:uniform_conv_perserves_analyticity}
+    Let \(\left\{ f_n \right\}\) be a sequence of functions from \(D \to \mathbb{C}\) converging uniformly to \(f: D \to \mathbb{C}\). If each \(f_n\) is analytic on \(D\), then \(f\) is analytic on \(D\).      
+\end{theorem}
+
+\begin{remark}
+    This is quite cool! Uniform convergence preserves continuity, which is a topological property. But we see that apparently this is enough to preserve analyticity also, i.e. it respects the existence of complex derivatives everywhere on \(D\). 
+\end{remark}
+
+The proof will be based on the following proposition. 
+
+\begin{proposition}[Interchanging Limits and Path Integrals]
+    Let \(\gamma : [a, b] \to  \mathbb{C} \) be piecewise \(C^1\), and set \(\Gamma = \gamma ([a, b])\). Suppose \( f_n : \Gamma \to \mathbb{C} \) are continuous on a neighborhood of \(\Gamma \) and that they converge uniformly to \(f: \Gamma \to \mathbb{C} \) on \(\Gamma \). Then \begin{align*}
+        \lim_{n \to \infty} \int _\gamma f_n (z) dz = \int _\gamma \lim_{n \to \infty} f_n(z) dz = \int _\gamma f(z) dz
+    \end{align*}
+\end{proposition}
+
+\begin{proof}
+    By definition, this is equivalent to showing that for any \(\epsilon > 0\) 
+    \begin{align*}
+        \left| \lim_{n \to \infty} \int _\gamma f_n dz - \int _\gamma f dz \right| < \epsilon
+    \end{align*}
+    Note that by continuity of the norm and the \textred{triangle inequality for integrals}
+    \begin{align*}
+        \left| \lim_{n \to \infty} \int _\gamma f_n dz - \int _\gamma f dz \right| = \lim_{n \to \infty} \left| \int _\gamma  \left( f_n (z) - f(z) \right)dz  \right| \leq \lim_{n \to \infty} \int _\gamma \left| f_n (z) - f(z) \right| |dz|
+    \end{align*}
+    By the assumption of uniform convergence, we can control the upper bound on the integral \begin{align*}
+        \lim_{n \to \infty} \int _\gamma |f_{n}(z) - f(z)| | dz| \leq \left(\sup _{z \in \Gamma } |f_{n}(z) - f(z)|\right) \int _\gamma  |dz| < \epsilon L
+    \end{align*}
+    with \(L\) equal to the path length of \(\gamma \). By choosing \(\epsilon\) appropriately, we have shown the desired (such routine \(\epsilon\) manipulations need not be stated anymore).
+
+    Even more succintly, we can in fact just note that \begin{align*}
+        \left| \lim_{n \to \infty} \int _\gamma f_n dz - \int _\gamma f dz \right| \leq  \left(\sup _{z \in \Gamma } |f_{n}(z) - f(z)|\right) \int _\gamma  |dz| \to 0
+    \end{align*}
+    since \(\sup _{z \in \Gamma } |f_{n}(z) - f(z)| \to 0\) by uniform convergence on \(\Gamma \).
+\end{proof}
+
+\begin{proof}
+    There are two proofs that are quite standard. 
+    
+    The first one is very direct, but requires extra assumptions (that almost always holds, which is why we consider it a proof): Apart from \(f_n : D \to \mathbb{C} \) being analytic on \(D\), assume \(D\) is bounded and that \(\partial D\) is \(C^1\) as a path and that \(f_n: D \to  \mathbb{C} \) is continuous here (i.e. extends smoothly to the boundary) and converges uniformly here too. Then \begin{align*}
+        f_n (z) = \frac{1}{2 \pi i} \int _{\partial D} \frac{f_n (w)}{w - z} dw,
+    \end{align*}
+    such that taking the limit on both sides gives \begin{align*}
+        f(z) = \frac{1}{2 \pi i} \lim_{n \to \infty} \int _{\partial D} \frac{f_n (w)}{w - z} dw   =  \frac{1}{2 \pi i} \int _{\partial D} \frac{f (w)}{w - z} dw.
+    \end{align*}
+    \textred{I guess Cauchy's formula holds if and only if \(f : D \to \mathbb{C}\) is analytic?}.
+
+
+    A much cleaner proof is given by Morera's theorem (which we seldom get to use!): Since each \(f_n\) is analytic, each \(f_n\) is also continuous. By uniform convergence, we then know that \(f\) is continuous. Hence \begin{align*}
+        \int _{\partial R} f(z) dz = \int _{\partial R} \lim_{n \to \infty} f_n (z) dz = \lim_{n \to \infty} \int _{\partial R } f_n (z) dz = 0
+    \end{align*}
+
+    \textred{Get back to explaining why this actually works and that every assumption for interchanging limits and integration is satisfied. Also the comment on why proof 1 gives us uniform convergence of the derivatives by Cauchy's Formula, which is sometimes handy.}
+    
+\end{proof}
+
+In fact there is a very general statement of interchanging limits and integration from Lebesgue's theory of integration is the following. It of course reduces to the statement of Riemannian integrals whenever the latter is also well-defined.
+\begin{theorem}[Limits and Integration]
+    \textred{Fill this out at some point!}
+\end{theorem}
+
+\subsubsection{Power Series}
+\begin{definition}[Power Series]
+    We define the \textbf{formal power series} of \(f : D \to \mathbb{C} \) as \begin{align*}
+        f(z) = \sum_{n = 0}^{\infty} a_n (z - z_0 )^n 
+    \end{align*}
+    for all \(z \in D\).
+\end{definition}
+
+\begin{remark}
+    The word "formal" in the above is very important. We currently have no clue whether the right hand side exists and how the convergence of the limit of partial sums on the right might depend on \(z\) and \(z_0\). 
+\end{remark}
+
+\begin{theorem}[Existence of Radius of Convergence]
+    For any power series \(\sum_{n = 0}^{\infty} a_n (z - z_0)^n \) there exists some \(R \in [0, \infty ) \cup \left\{ + \infty \right\}\) such that for \(|z - z_0| < R\) the series converges absolutely and for \(|z - z_0| > R\) the series diverges. For each \(r < R\) the series converges uniformly on the closed disk \(\left\{ z \in D: |z - z_0| \leq r \right\} \). 
+\end{theorem}
+
+In the above we think of \(+ \infty\) as being strictly greater than every real number. 
+
+\begin{remark}
+    Note that the series \textit{doesn't} converge uniformly on the open disk of radius \(R\). \textred{I really don't understand that we can say that we have uniform convergence on the closed disk with \(r < R\) since we could then just take the limit and get uniform convergence "as close to \(R\)" as we want - aren't we converging uniformly on the open disk then?} 
+\end{remark}
+
+\begin{remark}
+    Anything can happen on the boundary of the disk. \textred{Give examples of this and elaborate}.
+\end{remark}
+
+Since a change of variables \(w = z - z_0\) is always possible in the formal series, we will study series with \(z_0 = 0\) without loss of generality.
+
+\begin{theorem}[Weierstrass M-test]
+    \textred{Fill this out and practice it a bit!}
+\end{theorem}
+
+Let us now study the formal power series as a sequence of functions defined by partial sums, i.e. \begin{align*}
+    f_n (z) = \sum_{k = 0}^n a_k (z - z_0)^k 
+\end{align*}
+such that \begin{align*}
+    f(z) \coloneqq \lim_{n \to \infty} \sum_{k = 0}^n a_k (z - z_0)^k 
+\end{align*}
+
+Suppose we have a convergent power series with radius of convergence \(R\). Recall that convergence of a series means convergence of the partial sums. Since each partial sum of a power series is a polynomium in \(z \in \mathbb{D}\), each partial sum is in particular analytic. By the above theorem, picking any \(r < R\) we get uniform convergence on the closed disk \(\left\{ z \in D : |z - z_0| \leq r \right\} \). This means that on this closed disk the partial sums are sequences of analytic functions converging uniformly. We then know by the first theorem of this lecture that the limit function is analytic too. \textred{By letting \(r\) vary, we can extend all the way to \(R\). ASK!}. We have proven the following statement: 
+
+\begin{theorem}[Analyticity of Power Series]
+    Let \begin{align*}
+        f(z) = \sum_{n = 0}^{\infty} a_n (z - z_0)^n
+    \end{align*}
+    be a convergent power series with radius of convergence equal to \(R\). Then \(f(z)\) is analytic on \(D = \left\{ z \in \mathbb{C} : |z - z_0| < R \right\} \).
+\end{theorem}
+
+\textred{I am not entirely sure why, since it seems more knowledge is required for termwise differentiation, but the notes write that we by uniform convergence now know that we may differentiate termwise on the entire disk as well.} 
+
+This immediately let's us discover that \begin{align*}
+    a_n = \frac{f^{(n)}(z_0)}{n!},
+\end{align*}
+and hence \(f(z)\) is in fact equal to its own Taylor series on \(|z - z_0| < R\): \begin{align*}
+    f(z) = \sum_{n = 0}^{\infty}  \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n
+\end{align*}  
+
+To be precise: We have shown that a function being locally equal to its Taylor series implies that it is analytic on that region. In the next lecture we show the converse statement: that an analytic function is locally equal to its own Taylor series.
+
+\subsubsection{Finding the Radius of Convergence}
+
+\begin{proposition}[Formulas for Radius of Convergence]
+    If either \begin{align*}
+        \lim_{n \to \infty} \left| \frac{a_{n}}{a_{n + 1}} \right| 
+    \end{align*}
+    or \begin{align*}
+        \lim_{n \to \infty} \frac{1}{|a_n|^{1 / n}}
+    \end{align*}
+    exists, then they are equal to \(R\). 
+\end{proposition}
+
+\begin{remark}
+    Even when \(R\) is well-defined, both tests can fail.
+\end{remark}
+
+A test that never fails is the following.
+\begin{proposition}[The Cauchy-Hadamard Convergence Test]
+    \begin{align*}
+        R = \frac{1}{\lim_{n \to \infty} \sup |a_n|^{1 / n}}
+    \end{align*}
+\end{proposition}
 
 \newpage\lecture{16}{Fri 17 Oct}{Taylor Series}
 
+\begin{theorem}[Analyticity and Taylor Series]
+    Suppose that $f$ is an analytic function on $D=\{\,z:\,|z-z_0|<R\,\}$ for some $R>0$. Then:
+    
+    \noindent(a) For all $|z-z_0|<R$,
+    \begin{align*}
+    f(z) &= \sum_{n=0}^{\infty} a_n\,(z-z_0)^n,\\
+    a_n &= \frac{1}{n!}\,f^{(n)}(z_0),
+    \end{align*}
+    and the power series has radius of convergence greater than or equal to $R$.
 
-\newpage\subsection{Example problems}
+    \noindent(b) For any fixed $0<r<R$ and $n\ge 0$,
+    \begin{align*}
+    a_n
+    &= \frac{1}{2\pi i}\oint_{|z-z_0|=r}\frac{f(z)}{(z-z_0)^{n+1}}\,dz.
+    \end{align*}
+    \noindent(c) For any fixed $0<r<R$ and $n\ge 0$, if $|f(z)|\le M$ for all $|z-z_0|=r$, then
+    \begin{align*}
+    |a_n|\;\le\;\frac{M}{r^{\,n}}\,.
+    \end{align*}
+\end{theorem}
+
+\begin{corollary}[Matching Coefficients of Power Series]
+    Let \(f, g \) be analytic functions on \(D_r = \left\{ z: |z - z_0 | < r \right\} \). If \(f^{(n)} (z_0) = g^{(n)} (z_0)\) for all \(n \geq 0\), then \(f = g\) on \(D_r\). 
+\end{corollary}
+
+\begin{corollary}[Equality Extends from Smaller Disks]
+    Let \(f, g\) be analytic functions on \(D_R = \left\{ z : |z - z_0| < R \right\} \) and \(D_r \subset D_R\) be some disk with radius \(0 < r < R\). If \(f = g\) on \(D_r\), then \(f = g\) on all of \(D_R\).  
+\end{corollary}
+
+\begin{proposition}[Radius of Convergence from Taylor Series]
+    If \(f\) is analytic at \(z_0\) with Taylor series \begin{align*}
+        f(z) = \sum_{n = 0}^{\infty} a_n (z - z_0)^n, 
+    \end{align*} 
+    this power series has radius of convergence given by the largest real number \(R\) (or \(+ \infty\)) such that \(f\) extends to an analytic function on \(\left\{ z : |z - z_0| < R \right\} \). This extension is unique.
+\end{proposition}
+
+\begin{proof}
+    By the main theorem presented at the start of lecture, we know that \(f\) analytic on \(\left\{ z : |z- z_0| < R \right\} \) means that it's Taylor series equals the function on that disk which then has radius of convergence greater than or equal to \(R\). Since we know that there is a point where the function isn't analytic, and hence cannot equal its Taylor series, at radius \(R\), we conclude that the radius of convergence is \(R\) (and not greater than \(R\)).
+    
+    By the previous corollary, the extension is unique since it is analytic and must first agree with \(f\) on some smaller domain. 
+\end{proof}
+    
+
+\newpage
+\subsection{Example problems}
 
 \begin{problem}{Homework 6, problem 1}
     For each of the following functions, find the power series representation centered at the given point \(z_0\), and determine its radius of convergence. \begin{enumerate}[label=(\alph*)]
@@ -451,7 +907,55 @@ We consider another powerful corollary.
 \textred{Sketch here and description of main idea. Add questions also on the final page of the lecture notes.}
 
 \newpage\lecture{19}{Mon 27 Oct}{Laurent Expansions}
+\paragraph{Abstract} So far we have often considered functions that were analytic within some disk centered around a point \(z_0\). We have also recently considered functions analytic \textit{outside} some disk centered at \(z_0\). In this lecture we introduce the concept of an \textbf{annulus} and show how there is a unique decomposition of any analytic function on an annulus, consisting of the sum of a function that is analytic on a disk and a function analytic outside a disk.
 
+Then we use the uniqueness of this composition to prove the existence of a \textbf{Laurent series} for analytic functions. It is a generalisation of the Taylor series and reduces to this under appropriate conditions.
+
+Finally, we note how the proof of the coefficients of the Taylor series directly carries over to the Laurent series.
+
+\newpage
+
+\begin{definition}[Annulus]
+    An \textbf{annulus} is a disk with a smaller disk cut out of it. In other words, given a center point \(z_0 \in \mathbb{C} \) and an inner and outer radius \(0 \leq r < R \leq  + \infty\), the annulus is the set \begin{align*}
+        D_{(z_0, r, R)} = \left\{ z \in \mathbb{C} : r < |z - z_0| < R \right\} 
+    \end{align*}
+    Note that the inner and outer boundaries \textit{aren't} included. In the special case where \(r = 0\) we still consider it an annulus, but often use the term "punctured disk of radius \(R\) around \(z_0\)". 
+\end{definition}
+
+\begin{proposition}
+    Fix \(0 \leq r < R \leq  + \infty\) and let \(D\) be the annulus with those inner and outer radii centered at \(z_0\). Suppose that \(f: D \to  \mathbb{C} \) is an analytic function. Let \(D_0 = \left\{ z : |z - z_0| < R \right\} \) and \(D_1 = \left\{ z : |z - z_0| > r \right\} \). Then \(D = D_0 \cap D_1\). 
+    
+    There exists unique analytic functions \(f_0 : D_0 \to \mathbb{C} \) and \(f_1 : D_1 \to \mathbb{C} \) with \(f_1\) analytic at infinity and \(f_1 (\infty) = 0\) such that for \(z \in D\): 
+    \begin{align*}
+        f(z) = f_0 (z) + f_1(z)
+    \end{align*}
+\end{proposition}
+
+If we now suppose that we have such an \(f\) which is analytic on our annulus. Then since \(f_0\) is analytic on \(D_0\) we can for every \(|z| < R\) write \begin{align*}
+    f_0 (z) = \sum_{n = 0}^\infty a_n z^n 
+\end{align*}   
+and since \(f_1\) is analytic on \(D_1\) and at infinity with \(f_1 (\infty) = 0\) we can write its Taylor series for each \(|z| > r\) as \begin{align*}
+    f_1 (z) = \sum_{n = 1}^\infty b_n z^{-n} = \sum_{n = -\infty}^{-1} b_{- n} z^n  
+\end{align*} 
+
+If we define \(a_{-n} = b_n\) for \(n \geq 1\), we can put the sums together to get \begin{align*}
+    f(z) = \sum_{n = - \infty}^\infty a_n z^n 
+\end{align*}  
+for \(z \in D = D_0 \cap D_1\). 
+
+\begin{definition}[Laurent Series]
+    Let \(D \subseteq \mathbb{C} \) be an annulus and \(f : D \to  \mathbb{C} \) be analytic. The \textbf{Laurent series} of \(f\) is given by \begin{align*}
+        f(z) = \sum_{n = -\infty} ^\infty a_n z^n
+    \end{align*}
+    for every \(z \in D\). 
+\end{definition}
+
+\begin{proposition}[Coefficients of the Laurent Series]
+    Fix \(0 \leq r < R \leq  + \infty\) and let \(D\) be the annulus with those inner and outer radii centered at \(z_0\). Suppose that \(f: D \to  \mathbb{C} \) is an analytic function such that it has a Laurent series representation on \(D\). The coefficients of the Laurent series is given by \begin{align*}
+        a_n = \frac{1}{2 \pi  i} \int _{|z - z_0| = R^{\prime} } \frac{f(z)}{(z - z_0)^{n + 1}} dz
+    \end{align*}
+    where \(r < R^{\prime} < R\).
+\end{proposition}
 
 \newpage\lecture{20}{Wed 29 Nov}{Isolated Singularities}
 
@@ -461,8 +965,34 @@ We consider another powerful corollary.
 \newpage\lecture{22}{Wed 05 Nov}{Applications of the Residue Theorem}
 \paragraph{Abstract} We studied increasingly hard integrals (in the real sense) and showed how integrals that are intractible with real tools become very doable in the complex setting. 
 
+\newpage
+\textred{The final example finishes on lecture papers from lecture 7. nov}
+
+\newpage\lecture{23}{Fri 07 Nov}{Review of Topics}
+
+\subsubsection{Topic 8 - Power Series}
+\begin{itemize}
+    \item Uniform convergence
+    \item Radius of convergence
+    \item Taylor series (at finite points and at infinity)
+    \item Zeroes of analytic functions and uniqueness theorems
+    \item Analytic continuation
+\end{itemize}
+
+\subsubsection{Topic 9 - Laurent Series}
+\begin{itemize}
+    \item Definition and computation of Laurent series
+    \item Isolated singularities and their classification
+    \item Discussion of meromorphic functions and their poles
+\end{itemize}
+
+\subsubsection{Topic 10 - Residue Theorem}
+\begin{itemize}
+    \item The Residue Theorem
+    \item Computing contour integrals
+    \item Computing real integrals using the residue theorem. i.e. integrals of the form \(\int _{- \infty} ^{\infty} \)
+\end{itemize}
+
+
 \end{document}
-
-
-
 

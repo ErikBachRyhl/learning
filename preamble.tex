@@ -187,43 +187,55 @@
 }
 
 % Color scheme definitions
+\definecolor{tcplain}{HTML}{5F94BF}
+\definecolor{tcremark}{HTML}{FFFFFF}
+\definecolor{tcdefn}{HTML}{3A6A92}
+\definecolor{tcnote}{HTML}{FFFFFF}
+\definecolor{tcexample}{HTML}{66B2B2}
+
 \tcbset{
   myplain/.style={                    % For theorems, lemmas, propositions
-    colback=orange!3,
+    colback=tcplain!10,
     colframe=white,
     sharp corners,
     left=3mm,
-    borderline west={3pt}{0pt}{orange!60}
+    borderline west={3pt}{0pt}{tcplain!80}
   },
   myremark/.style={                   % For remarks and notes
-    colback=blue!3,
+    colback=tcremark!30,
     colframe=white,
     sharp corners,
     left=3mm,
-    borderline west={3pt}{0pt}{blue!60}
+    borderline west={3pt}{0pt}{tcremark!70}
   },
   mydefn/.style={                     % For definitions
-    colback=teal!3,
+    colback=tcdefn!15,
     colframe=white,
     sharp corners,
     left=3mm,
-    borderline west={3pt}{0pt}{teal!60}
+    borderline west={3pt}{0pt}{tcdefn!80}
   },
   mynote/.style={                     % For personal notes
-    colback=purple!3,
+    colback=tcnote!30,
     colframe=white,
     sharp corners,
     left=3mm,
-    borderline west={3pt}{0pt}{purple!60}
+    borderline west={3pt}{0pt}{tcnote!70}
   },
   myexample/.style={                  % For examples and problems
-    colback=green!3,
+    colback=tcexample!10,
     colframe=white,
     sharp corners,
     left=3mm,
-    borderline west={3pt}{0pt}{green!60}
+    borderline west={3pt}{0pt}{tcexample!75}
   },
 }
+
+% myremark: #EFE9F4
+% mydefn: #172A3A
+% myplain: #C83E4D
+% myexample: #66B2B2
+% mynote: #EFE9F4
 
 % Apply colors to theorem environments
 \tcolorboxenvironment{theorem}{myplain}
@@ -397,6 +409,7 @@
   {\,#1 \,\,\delimsize\vert\,\, #2\,}
 
 \newcommand{\quotient}[2]{#1 / \mathord{#2}}                % Quotient notation (used with hsnip "quo")
+\newcommand{\dom}{\operatorname{dom}}
 
 \usepackage{tikz-cd}                                        % Commutative diagrams
 \usepackage[scr=rsfs]{mathalpha}                           % Script fonts
