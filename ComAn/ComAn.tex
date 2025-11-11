@@ -143,17 +143,21 @@ for any subdomain \(D^{\prime} \subset D\), the it is certainly also true for an
     Say that a function \(f:\mathbb{C}\to\mathbb{C}\) is “of polynomial growth” if there exist constants \(R,C\in\mathbb{R}_{>0}\) and \(d\in\mathbb{Z}_{\ge 0}\) such that for all \(|z|\ge R\), \[|f(z)|\le C|z|^{d}.\] Using the Cauchy estimates, show that if \(f\) is of polynomial growth and analytic, then so is \(f^{(n)}\) for every \(n\ge 0\).
 \end{problem}
 
-The Cauchy estimate states that if \(f : D \to \mathbb{C} \) is analytic and bounded on \(D\)  as \(|f(z)| \leq M\) for some \(M \geq 0\), then  
+The Cauchy estimate states that if \(f : D \to \mathbb{C} \) is analytic and bounded on \(D\)  as \(|f(z)| \leq M\) for some \(M \geq 0\) and \(|z - z_0| = r\), then  
 \begin{align*}
-    |f^{(n)}(z)| \leq \frac{n!}{R^n} M
+    |f^{(n)}(z_0)| \leq \frac{n!}{r^n} M.
 \end{align*}
-where \(R\) is the radius of some disk centered at \(z_0\) and \(|z - z_0| \leq R\). 
-
-In this case, \(f\) is assumed to be analytic and of polynomial growth. We want to show that this is then also the case for all higher derivatives of \(f\). Consider the radius \(R\) from which point onwards \(f\) grows polynomially fast when \(|z|\) is increased. Such an \(R \in R_{> 0}\) exists by hypothetis. Using the Cauchy estimate for \(f^{(n)} (z)\) for all such \(z\) with \(|z| \geq R\) and \(n \geq 0\), we can set \(M = C |z|^d\), in which case \begin{align*}
-    |f^{(n)} (z)| \leq \frac{n!}{R^n} C |z|^d \coloneqq C^{\prime} |z|^d
+In this case, \(f\) is assumed to be analytic and of polynomial growth. We want to show that this is then also the case for all higher derivatives of \(f\). Consider the radius \(R\) from which point onwards \(f\) grows polynomially fast when \(|z|\) is increased. Such an \(R \in \mathbb{R} _{> 0}\) exists by hypothetis. Pick any point \(z_0\) with \(|z_0| > R\). Define \(R ^{\prime} \coloneqq |z_0| - R \in \mathbb{R} _{> 0}\). Then consider the disk \begin{align*}
+    D(z_0 , R^{\prime} ) = \left\{ z: |z - z_0| \leq R^{\prime} \right\} 
+\end{align*}
+We see that by hypothesis, for all points \(z \in D(z_0 , R^{\prime})\) we have \begin{align*}
+    |f(z)| \leq C |z|^d
+\end{align*}
+and in particular also for \(|z - z_0| = R^{\prime}\). This means that we can use the Cauchy estimate for higher derivatives to conclude that \begin{align*}
+    |f^{(n)} (z_0)| \leq \frac{n!}{R^{\prime n} } C |z|^d = \frac{n!}{(|z_0| - R)^n} C |z|^d
 \end{align*}
 
-Hence \(f^(n) : \mathbb{C} \to \mathbb{C} \) is of polynomial growth using the same radius \(R\) as holds for \(f\), and with the constant \(C^{\prime} = C(n!) /R^n \).  
+We can repeat such a construction for every \(|z| \geq R\), and hence \(f^{(n)} : \mathbb{C} \to \mathbb{C} \) is of polynomial growth using the same radius \(R\) as holds for \(f\), and with the constant \(C^{\prime} = C(n!) /R^n \).  
 \qedst
 
 \newpage\begin{problem}{Homwork 5, problem 2}
@@ -644,6 +648,7 @@ A test that never fails is the following.
     
     By the previous corollary, the extension is unique since it is analytic and must first agree with \(f\) on some smaller domain. 
 \end{proof}
+
     
 
 \newpage
@@ -786,20 +791,37 @@ Since \(f^{\prime} (\infty) = a_1\), we have shown that \begin{align*}
 \end{align*} 
 Note that these manipulations were valid exactly because \(f\) was analytic at infinity, and hence then also continuous, allowing us to do algebraic manipulations inside the limit.\qedst
 
-\newpage\lecture{17}{Wed 22 Oct}{Series Expansions at Infinity and Zeroes of order \(n\)}
+\newpage\lecture{17}{Wed 22 Oct}{Series Expansions at Infinity }
 
-\newpage\lecture{18}{Fri 24th Oct}{Zeroes, Isolated Points and Analytic Continuation}
+\paragraph{Abstract} We introduce the concept of a series expansion at infinity, which can be thought of as expanding in the variable \(\frac{1}{z}\) or equivalently expanding \begin{align*}
+    g(w) \coloneqq f \left( \frac{1}{z} \right) 
+\end{align*} 
+around \(w = 0\).
 
-\textbf{Key Concepts}
-\begin{itemize}
-    \item Recall definition of expansions at infinity and its definition
-    \item Recall definition of "order of zero" definition and its equivalent formulation in terms of \(f(z) = (z - z_0)^n h(z)\) with \(h(z_0) \neq 0\)
-    \item Prove the "big theorem": \begin{theorem}[Isolated Points]
-        Let \(f: D \to \mathbb{C} \) be an analytic function and \(S = \left\{ z \in D : f(z) = 0\right\} \subseteq D\). Then either \(S\) contains only isolated points or \(f(z)\) vanishes identically on \(D\), i.e. \(S = D\). 
-    \end{theorem}
-    \item Proved corollaries about functions agreeing. If \(f, g\) are both analytic functions on \(D\), try and apply above to \(f - g\) and see what you get!
-    \item Proved the corollary "Permanence Principle for Functional Equalites". Apply the above theorem to a bi-analytic function \(F(z, w)\) in multiple iterations to conclude cool stuff. 
-\end{itemize} 
+\vspace{1em}
+\hrule
+
+\begin{definition}[Analytic at infinity]
+    Given a function \(f : D \to \mathbb{C} \) we say that it is \textbf{analytic at infinity} if the function \(g(z) \coloneqq f(1 / z)\) is analytic at 0. 
+    
+    To denote the value of \(f\) at infinity, we introduce \(w = 1 / z\) and when the limit exists, we write \begin{align*}
+        f(\infty ) \coloneqq \lim_{z \to \infty} f(z) = \lim_{w \to 0} g(w) = g(0) 
+    \end{align*}
+    The existence of the above limit is a necessary but not sufficient condition for analyticity at infinity.
+\end{definition}
+
+\begin{intuition}
+    Think about "turning the disk" inside out. Now we have to be far enough away from the origin, i.e. \(f\) might be analytic for \(|z| > R\) etc. It is often easier to study \(g(w) \coloneqq f(1 / z)\) with the usual concepts and then change back varibles after finding the Taylor series. This will then be the Taylor series of "\(f\) at infinity".
+\end{intuition}
+
+
+\newpage\lecture{17 continued}{Fri 24th Oct}{Zeroes and Isolated Points}
+
+\paragraph{Abstract} We recalled the definition of expansions at infinity and its definition and definition of "order of zero" and its equivalent formulation in terms of \(f(z) = (z - z_0)^n h(z)\) with \(h(z_0) \neq 0\).
+
+We then proved the very important theorem about zero points on a non-isolated set: If an analytic function satisfies this, it is identically zero on \(D\)! 
+
+Some very powerful corrolaries followed: Equality of functions and permanence principle of functional equations in the complex plane.
 
 \newpage
 \subsubsection{Zeroes of Order \(n\)}
@@ -812,10 +834,6 @@ Note that these manipulations were valid exactly because \(f\) was analytic at i
     \end{align*}
     with \(h(z_0) \neq 0\). \textred{Why this last statement is equivalent?}
 \end{definition}
-
-\begin{example}
-    \(f(z) = \sin (z)\) with \(z_0 = \pi\). \textred{Fill it out!}      
-\end{example}
 
 If \(f\) has a zero of order \(m\) at \(z_0\) and \(g\) a zero of order \(n\) at \(z_0\), then \(fg\) has a zero of order \(m + n\) at \(z_0\), since \begin{align*}
     fg = (z-z_0)^{m + n} h(z)j(z)
@@ -830,9 +848,10 @@ with \((hj)(z_0) \neq 0\).
     or, expanding at infinity \begin{align*}
         f(z) = \sum_{n = 0}^\infty a_n z^{-n} 
     \end{align*}
-    we have \(f(\infty) = a_0\). 
-    
-    Letting \(g(w) = f (1 / w)\), we say that \(f\) has a \textbf{zero of order \(n\) at \(\infty\)} if and only if \(g(w)\) has a zero of order \(n\) at \(w = 0\).    
+    where \(f(\infty) = a_0\). Letting \(g(w) = f (1 / w)\), we say that \(f\) has a \textbf{zero of order \(n\) at \(\infty\)} if and only if \(g(w)\) has a zero of order \(n\) at \(w = 0\), i.e. if \begin{align*}
+        f(z) = \frac{1}{z^n} h(z)
+    \end{align*}     
+    with \(h(z)\) analytic at infinity and \(h(\infty ) \neq 0\).  
 \end{definition}
 
 \begin{example}
@@ -862,7 +881,7 @@ The following theorem turns out to be extremely powerful.
 
 \begin{theorem}[Zero on Non-Isolated Sets]
     Let \(f\) be analytic on \(D\) and let \begin{align*}
-        S = \left\{ z \in D : f(z) = 0 \right\}.
+        S = \left\{ z \in D : f(z) = 0 \right\}
     \end{align*} 
     be the set of zero-points of \(f\) on \(D\). Then either \(S\) is isolated or \(f \equiv 0\) on \(D\).
 \end{theorem}
@@ -903,8 +922,49 @@ We consider another powerful corollary.
     for all \(z, w \in \mathbb{C} \). Here we accept that this property holds in the real sense (which can be shown in standard real analysis). \textred{Use the above corollary to extend to the complex plane}.  
 \end{example}
 
-\subsubsection{Teaser: Analytic Continuation}
-\textred{Sketch here and description of main idea. Add questions also on the final page of the lecture notes.}
+\newpage\lecture{18}{Mon 27 Oct}{Analytic Continuation}
+
+\paragraph{Abstract} Analytic continuation is an extremely powerful tool. It allows us to calculate the value of a function far away from an initial expansion point, even though there disk containing both points also will contain places at which \(f\) fails to be analytic (poles). 
+
+\textred{There is much more to be said and understood here}
+
+\begin{proposition}
+    The analytic continuation of an analytic function \(f\) along a continuous path \(\gamma\) is unique if it exists. The coefficients \(a_n(t)\) of the power series for \(f\) at \(\gamma (t)\) and the radius of convergence \(R(\gamma (t))\) depend continuously on \(t\). 
+\end{proposition}
+
+\textred{Why not \(a_n (\gamma (t))\)?}
+
+From GPT:
+\begin{definition}[Analytic continuation along a path]
+    Let $\gamma:[a,b]\to\mathbb{C}$ be a continuous path and let $f$ be analytic on a
+    neighborhood $U_a$ of $z_0:=\gamma(a)$.
+    An \emph{analytic continuation of $f$ along $\gamma$} is a family
+    \[
+    \{(U_t,f_t)\}_{t\in[a,b]}
+    \]
+    such that
+    \begin{enumerate}
+    \item for each $t\in[a,b]$, $U_t$ is an open neighborhood of $\gamma(t)$ and
+          $f_t:U_t\to\mathbb{C}$ is analytic;
+    \item for every $t\in[a,b]$ there exists $\varepsilon>0$ with
+          $U_t\cap U_s\neq\varnothing$ whenever $s\in(a,b)$ and $|s-t|<\varepsilon$;
+    \item for all $s,t\in[a,b]$ with $|s-t|$ sufficiently small,
+          we have \emph{agreement on overlaps}:
+          \[
+          f_s=f_t\quad\text{on }U_s\cap U_t;
+          \]
+    \item \textbf{initial condition:} there exists an open set $V\subseteq U_a$
+          with $\gamma(a)\in V$ such that $f_a|_V=f|_V$.
+    \end{enumerate}
+    When such a family exists we say that \emph{$f$ is analytically continuable along $\gamma$}.
+    By (3), the function
+    \[
+    F:U:=\bigcup_{t\in[a,b]}U_t\longrightarrow\mathbb{C},\qquad
+    F|_{U_t}:=f_t,
+    \]
+    is well-defined and analytic; $F$ is the analytic continuation of $f$ along $\gamma$.
+\end{definition}
+    
 
 \newpage\lecture{19}{Mon 27 Oct}{Laurent Expansions}
 \paragraph{Abstract} So far we have often considered functions that were analytic within some disk centered around a point \(z_0\). We have also recently considered functions analytic \textit{outside} some disk centered at \(z_0\). In this lecture we introduce the concept of an \textbf{annulus} and show how there is a unique decomposition of any analytic function on an annulus, consisting of the sum of a function that is analytic on a disk and a function analytic outside a disk.
@@ -958,6 +1018,52 @@ for \(z \in D = D_0 \cap D_1\).
 \end{proposition}
 
 \newpage\lecture{20}{Wed 29 Nov}{Isolated Singularities}
+
+\begin{definition}[Meromorphic Function]
+    A \textbf{meromorphic function} is a ratio of two analytic functions \(f, g : D^{\prime} , D^{\prime\prime}  \to \mathbb{C}\) defined on \begin{align*}
+        D = D^{\prime}  \cap D^{\prime\prime}  \setminus \left\{\text{ zeroes of } g\ \right\},
+    \end{align*}
+    i.e. \(h: D \to \mathbb{C} \) given by \begin{align*}
+        h(z) = \frac{f(z)}{g(z)}
+    \end{align*} 
+    is a meromorphic function. Since we exclude the case where \(g(z) \equiv 0\), we know that meromorphic functions only have isolated singularities. Because if the singularities weren't isolated, then by our previous theorem about isolated sets, we would know that \(g \equiv 0\) on \(D\) since \(g\) is assumed to be analytic. Since this case is excluded by the definition of meromorphic functions, we conclude that they only have isolated singularities.  
+\end{definition}
+
+\begin{definition}[Classification of Singularities]
+    Let \(f\) be an analytic function on some domain. We say that a point \(z_0 \in \mathbb{C}\) is an \textbf{isolated singularity} of \(f\) if \(f\) fails to be analytic at \(z_0\) and there exists some \(r > 0\) such that \(f\) is analytic on the punctured disk \(0 < |z - z_0| < r\). 
+
+    Forming the Laurent series of \(f\) around the singularity \(z_0\) we have \begin{align*}
+        f(z) = \sum_{n = -\infty }^{\infty} a_n (z - z_0)^n 
+    \end{align*} 
+    Since this expansion is unique, we can use it to study the singularity. We classify isolated singularities within three types: \begin{itemize}
+        \item Removable singularity: \(a_n = 0\) for \(n < 0\) (Laurent series is a regular Taylor series)
+        \item Pole: Only finitely many \(a_n \neq 0\) for \(n < 0\)
+        \item Essential singularity: Infinitely many \(a_n \neq 0\) for \(n < 0\)  
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    It looks illegal to expand anything about a singularity, but this is also what we were doing before with Laurent series - the above is \textbf{not} a Taylor series expanded at a non-analytic point (very illegal); it is a Laurent series expanded on an annulus centered at \(z_0\) where \(f\) isn't analytic (very legal - in fact this is what we developed the theory for!). It is still an annulus, the inner radius is just 0. And the expansion is only valid on the annulus (i.e. not at \(z = z_{0} \)).
+\end{remark}
+
+\begin{intuition}
+    The negative powers of \(z\) included in a Laurent expansion "reach inward" and encode information about \(f\) on the region around \(z_0\) where it fails to be analytic. Hence we still get information about \textit{how dramatically} \(f\) fails to be analytic.
+\end{intuition}
+
+\subsubsection{Removable Singularities}
+Suppose we have a removable singularity at \(z_0\). Then \(f\) extends analytically to \(z_0\) and we know that \(f\) is bounded at \(z_0\) also.
+
+\subsubsection{Poles}
+There are finitely many non-zero coefficients \(a_n\) with \(n < 0\). The term with the highest negative power can be pulled outside a parantheses, and we conclude that for a pole or order \(N\) at \(z_0\) we can write \(f\) as \begin{align*}
+    f(z) = \frac{h(z)}{(z - z_0)^N}
+\end{align*} 
+with \(h(z)\) analytic at \(z_0\) with \(h(z_0) = a_N\).
+
+We recognize that \(f(z)\) having a pole of order \(N\) at \(z_0\) is equivalent to \(1 / f(z)\) having a zero of order \(N\) at \(z_0\). If we take a pole of order zero and a zero of order zero to be these kind of artificial definitions when the function is just analytic and nonzero at a point, then in fact a pole of order \(N\) corresponds to a zero or order \(-N\) and vice versa. 
+
+A pole of order 1 is called simple. A pole of order 2 is called a double pole.
+
+\subsubsection{Essential Singularities}
 
 \newpage\lecture{21}{Fri 31 Oct}{The Residue Theorem}
 
