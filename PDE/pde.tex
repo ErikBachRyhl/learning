@@ -339,6 +339,56 @@ Note that so far we've been saying that distributions act on any \(\mathcal{C} ^
 \newpage\lecture{28}{Fri 07 Nov}{Solving Poisson's Equation in 3D with Green's Functions}
 \paragraph{Abstract} Today was an excellent example of using Green's functions to turn a PDE problem into a problem of solving a (difficult but doable) integral.
 
+\newpage\lecture{30}{Wed 12 Nov}{Heat Kernel Continued and Duhamel's Principle}[Olver \textred{WHAT STUFF?}]
+
+\begin{mtheorem}{30.1}[The Heat Kernel]
+    The solution of \begin{align*}
+        \begin{dcases}
+            (\partial _t - \Delta _x) u(t, \mathbf{x}) = 0\\[1.3ex]
+            u(0, \mathbf{x}) = g(\mathbf{x})
+        \end{dcases}
+    \end{align*}
+    if given by convolution with the \textbf{Heat Kernel}
+    \begin{align*}
+        K(t, \mathbf{x} ; \mathbf{y}) = \frac{1}{(4 \pi  t)^{d / 2}} e^{- |\mathbf{x}- \mathbf{y}|^2 / 4t}
+    \end{align*} 
+    solving the boundary value problem \begin{align*}
+        \begin{dcases}
+            (\partial _t - \Delta _x) K(t, \mathbf{x}; \mathbf{y}) = 0\\[1.3ex]
+            \lim_{t \to 0} K (t, \mathbf{x}; \mathbf{y}) = \delta (\mathbf{x}- \mathbf{y}) \\[1.3ex]
+            \lim_{r \to \infty} K (t, \mathbf{x}; \mathbf{y}) = 0 
+        \end{dcases}
+    \end{align*}
+    Note that asking for the delta function in the limit of time going back to \(t = 0\) makes it such that \(K \in \mathcal{C} ^\infty ((0, \infty ) \times \mathbb{R} ^d)\) while if we think of \(t \in [0, \infty )\) then we get a distribution \(K^{\ast} \in \mathcal{C} ^{\infty} ([0, \infty ), \mathbb{R} ^d)^{\ast} \).    
+\end{mtheorem}
+\begin{proof}
+    We show that it is an approximate identity, which will imply that \begin{align*}
+        \lim_{t \to 0} K(t, \mathbf{x}; \mathbf{y}) \rightharpoonup \delta (\mathbf{x} - \mathbf{y}) 
+    \end{align*}
+    This proves it by the theorem from last time on approximate identities.
+\end{proof}
+
+\begin{mtheorem}{}[Duhamel's Principle]
+    The solution of the inhomogeneous problem \begin{align*}
+        \begin{dcases}
+            (\partial _t - \Delta _x) u(t, \mathbf{x}) = f(t, \mathbf{x})\\[1.3ex]
+            u(0, \mathbf{x}) = g(\mathbf{x})\\[1.3ex]
+            u\big|_{\infty } = 0 
+        \end{dcases}
+    \end{align*}
+    is given by \begin{align*}
+        u(t, \mathbf{x}) = \int _{\mathbb{R} ^d} K(t, \mathbf{x}; \mathbf{y}) g(\mathbf{y}) d \mathbf{y} + \int _0 ^t \left( \int _{\mathbb{R} ^d} K(t - s, \mathbf{x}; \mathbf{y})f(s , \mathbf{y}) d \mathbf{y}  \right) d \mathbf{s}
+    \end{align*}
+\end{mtheorem}
+
+\begin{intuition}
+    The idea relates to superposition, envisioning the solution of the homogeneous problem as evolving "continuously" in time, with each instant represented by our Green's function method. One may view this intuitively as the limiting sum (integral) of step functions placed densely along the time axis. For further illustrations and explanations, see \textit{Idea 30.5} in the lecture notes.
+\end{intuition}
+
+\newpage\lecture{31}{Wed 12 Nov}{Introduction to the Fourier Transform}[]
+
+\paragraph{Abstract}
+\textred{Fourier Transform Motivation from lecture 30 last page input some here!}
 
 
 \end{document}
