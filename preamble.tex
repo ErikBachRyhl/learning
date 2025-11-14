@@ -114,7 +114,7 @@
   \manualprobleminner
 }{\endmanualprobleminner}
 
-\newtheorem{manualexerciseinner}{Exercise Result}
+\newtheorem{manualexerciseinner}{Exercise}
 \newenvironment{exercise}[1]{%
   \IfBlankTF{#1}
     {\renewcommand{\themanualexerciseinner}{\unskip}}
@@ -122,7 +122,7 @@
   \manualexerciseinner
 }{\endmanualexerciseinner}
 
-\newtheorem{manualmexerciseinner}{Exercise Result}
+\newtheorem{manualmexerciseinner}{Exercise}
 \newenvironment{mexercise}[1]{%
   \IfBlankTF{#1}
     {\renewcommand{\themanualmexerciseinner}{\unskip}}
@@ -187,11 +187,13 @@
 }
 
 % Color scheme definitions
-\definecolor{tcplain}{HTML}{5F94BF}
+\definecolor{tcplain}{HTML}{C83E4D} % Vibrant, deep poppy red for high contrast and eye-catching "pop"
+% \definecolor{tcplain}{HTML}{3A6A92}
 \definecolor{tcremark}{HTML}{FFFFFF}
-\definecolor{tcdefn}{HTML}{3A6A92}
+\definecolor{tcdefn}{HTML}{66B2B2}
+% 3A6A92
 \definecolor{tcnote}{HTML}{FFFFFF}
-\definecolor{tcexample}{HTML}{66B2B2}
+\definecolor{tcexample}{HTML}{5F94BF}
 
 \tcbset{
   myplain/.style={                    % For theorems, lemmas, propositions
@@ -247,7 +249,6 @@
 \tcolorboxenvironment{mprop}{myplain}
 \tcolorboxenvironment{mlemma}{myplain}
 \tcolorboxenvironment{mcorollary}{myplain}
-\tcolorboxenvironment{mexercise}{myplain}
 
 \tcolorboxenvironment{problem}{myexample}
 \tcolorboxenvironment{mhomework}{myexample}
@@ -257,8 +258,9 @@
 \tcolorboxenvironment{example}{myexample}
 % \tcolorboxenvironment{intuition}{myexample}
 \tcolorboxenvironment{mexample}{myexample}
+\tcolorboxenvironment{mexercise}{myexample}
 
-\tcolorboxenvironment{remark}{myremark}
+% \tcolorboxenvironment{remark}{myremark}
 \tcolorboxenvironment{note}{mynote}
 
 % ============================================================

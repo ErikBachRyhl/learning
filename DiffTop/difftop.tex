@@ -884,7 +884,7 @@ One can check that this satisfies all the properties listed in the Lemma \ref{le
     \textred{Put in the nice diagram and the claims made! I.e. that we have gradient, curl and divergence. Put this together with our exact and closed differential, showing that curl(grad) = 0 and div(curl) = 0. Note however that div(grad) = laplacian - but our results say nothing about such compositions yet I believe.}
 \end{example}
 
-\newpage\lecture{21}{Thu 06 Nov}{Pullback, Integration on Manifolds and Stoke's Theorem Introduction}
+\newpage\lecture{21}{Thu 06 Nov}{Pullback, Integration on Manifolds and Stoke's Theorem Statement}
 \paragraph{Abstract} We started of introducing the notion of a \textbf{pullback of a \(k\)-form} and studied some nice properties: Contravariant functor and naturality. We discussed the notation used for \(k\)-forms in Lee and how it differs a bit from our notation. 
 
 Then we defined integration of \(n\)-forms on \(n\)-dimensional smooth manifolds in multiple steps. We started in \(\mathbb{R} ^n\) and proved a small lemma: the pullback of an \(n\)-form by an orientation-preserving diffeomorphism behaves nicely with our definition of integration. This is exactly a \textbf{generalisation of ordinary change-of-variables} in multivariable calculus. 
@@ -894,6 +894,262 @@ After this, we define the \textbf{generalization of integration} to arbitrary ma
 We made our definition concrete by considering integration on \(S^1\) and saw how it reproduces the ordinary Riemann integral we would expect. 
 
 Finally, we stated \textbf{Stoke's Theorem} and outline the structure of the proof, which was left as an exercise to the reader. We will walk through it next lecture. 
+\vspace{2em}
+\hrule
+\subsubsection{Pullback}
+\begin{definition}[Pullback of a \(k\)-form]
+    Let \(\phi : M \to N\) be a smooth map between smooth manifolds. Let \(\alpha\) be a \(k\)-form on \(N\). We define the \textbf{pullback} \(\phi ^{\ast} \alpha \), a \(k\)-form on \(M\), as follows:
+    
+    Let \(p \in M\), let \(v_1, \dots , v_k \in T_p M\). Then \begin{align*}
+        \left( \phi ^{\ast} \alpha  \right) (v_1, \dots , v_k) = \alpha (d \phi _p (v_1), \dots , d \phi _p (v_k)) \in \mathbb{R} 
+    \end{align*}  
+
+    If \(f \in \Omega ^0 (N) = C^{\infty} (N)\), we define \begin{align*}
+        \phi ^{\ast} f = f \circ \phi 
+    \end{align*}
+\end{definition}
+\begin{remark}
+    Differential forms can be pulled back by \textit{any} smooth map, unlike vector fields where it best makes sense with diffeomorphisms (recall the notion of \textbf{\(F\)-related}).
+\end{remark}
+
+\begin{proposition}
+    The pullback is natural w.r.t. the operations we've already defined on \(k\)-forms. In fact, it is a contravariant functor:
+    \begin{enumerate}[label=(\arabic*)]
+        \item If \(\alpha \in \Omega ^k (N), \beta \in \Omega ^l (N)\), then \(\phi ^{\ast} (\alpha \wedge \beta ) = (\phi ^{\ast} \alpha )\wedge (\phi ^{\ast} \beta ) \in \Omega ^{k + l} (M)\).
+        \item   If \(\alpha \in \Omega ^k (N)\) then \(d(\phi ^{\ast} \alpha ) = \phi ^{\ast} (d \alpha ) \in \Omega ^{k +1 } (M)\)
+        \item If \(\psi : N \to P\) and \(\alpha  \in \Omega ^k(P)\), then \((\psi \circ \phi )^{\ast} \alpha = \phi ^{\ast} (\psi ^{\ast} \alpha ) \in \Omega ^k (M)\)     
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \textbf{(1)}: is symbol-pushing. Good exercise.
+    
+    \textbf{(2)}: Start by showing it works with a 0-form. Then the general case is done by picking local coordinates and calculating. Remember that \(d \circ d = 0\) and stare at the large sum until you convince yourself certain indices drop out.
+    
+    \textbf{(3)}: \textred{Exercise left for us!} 
+\end{proof}
+
+\subsubsection{Integration}
+We define integration in multiple steps.
+
+\begin{definition}[Integration on Manifolds]
+    Let \(M\) be an \textbf{oriented}  \(n\)-dimensional smooth manifold and let \(\alpha\) be a \textbf{compactly supported} \(n\)-form on \(M\), i.e. \begin{align*}
+        \overline{\left\{ p \in M : \alpha_p \neq 0 \right\} } \subseteq M
+    \end{align*}  
+    is compact (if \(M\) is compact, this is automatic). Choose an atlas \begin{align*}
+        \left\{ \phi _i : U_i \xrightarrow{\cong} \hat{U}_i \right\} 
+    \end{align*}
+    (to simplify notation, we've assumed that \(M\) is compact such that the atlas is finite). We can choose a smooth partition of unity, which consists of smooth functions \(\rho _i : M \to \mathbb{R} \) such that \(\operatorname{supp}(\rho _i) \subset U_i \) and \(\sum_{i} \rho _i = 1\).
+    
+    Finally, in the atlas we can chooose the maps to be orientation preserving, since we can always make them orientation preserving by composition with smooth functions.
+
+    We then define \begin{align*}
+        \boxed{\int _M \alpha = \sum_{i} \int _{\hat{U}_i} \left( \phi _i ^{-1}  \right)  ^{\ast} (\rho _i \alpha )}
+    \end{align*}
+\end{definition}
+
+
+\begin{example}[Integration in \(\mathbb{R} ^n\)]
+    We now assume \(M = \mathbb{R} ^n\) or an open subset \(U \subseteq \mathbb{R} ^n\), with standard orientation, i.e. where \begin{align*}
+        \left( \frac{\partial}{\partial x^1}, \dots , \frac{\partial}{\partial x^n}  \right)
+    \end{align*} 
+    is an oriented basis for \(T_p \mathbb{R} ^n\) for every \(p \in \mathbb{R} ^n\) \textred{Should the tangent vectors be evaluated at points?}. What will our integration theory look like=
+    
+    An \(n\)-form can be written as \begin{align*}
+        \alpha  = f dx^1 \wedge \cdots \wedge dx^n
+    \end{align*}
+    where \(f : U \to  \mathbb{R} \) is compactly supported (we know by assumption that at every point, the coordinates of \(\alpha\) is a single non-zero number: hence this assignment of coordinates is a compactly supported function). In this case, the above definition will give \begin{align*}
+        \int _U \alpha = \int _U f,
+    \end{align*} 
+    where the right hand side is the standard Riemann/Lebesgue integral in \(\mathbb{R} ^n\) of the function \(f\)! \textred{Try and figure out why!}
+\end{example}
+
+\begin{lemma}[Generalized change of variables]
+    \textred{Fill out!}
+\end{lemma}
+
+
+\newpage\lecture{22}{Thu 13 Nov}{Stoke's Theorem, Interior Product, Riemannian Metrics and de Rham}[]
+
+\vspace{1em}
+\hrule
+
+\paragraph{Abstract} Write a resume here!
+
+\subsubsection{Stoke's Theorem}
+\begin{theorem}[Stokes Theorem]
+    If \(M\) is a compact, oriented \(n\)-dimensional smooth manifold with boundary and \(\alpha\) an \((n-1)\)-form on \(M\), then \begin{align*}
+        \boxed{\int _M d \alpha  = \int _{\partial M} \alpha }
+    \end{align*}  
+\end{theorem}
+
+\begin{proof}
+    \textred{The proof is very good to go through by yourself. Do this again soon!}
+\end{proof}
+
+\begin{example}[Green's Theorem]
+    This is easily proved now. 
+\end{example}
+
+\begin{remark}
+    The orientation of the path in the plane is fixed by the outward first convention. \textred{But how?}
+\end{remark}
+
+\subsubsection{Riemannian Metrics}
+
+\begin{definition}[Interior Product]
+    Let \(M\) be a smooth manifold, \(\alpha \) a \(k\)-form and \(V\) a vector field. Define a \((k - 1)\)-form \(\imath _V (\alpha)\) by its action on \(k - 1\) vector fields 
+    \begin{align*}
+        \imath _V (\alpha )(W_1, \dots , W_{k - 1}) = \alpha (V, W_1, \dots , W_{k-1})
+    \end{align*}  
+\end{definition}
+
+\begin{exercise}{}[\textred{Not done}]
+    Prove that \begin{align*}
+        \imath _V (\alpha \wedge \beta ) = (\imath _V \alpha ) \wedge \beta + (-1)^k \alpha  \wedge (\imath _V \beta )
+    \end{align*}
+\end{exercise}
+
+\begin{definition}[Riemannian Metric]
+    Let \(M\) be a smooth manifold. A \textbf{Riemannian Metric} \(g\) on \(M\) is a smooth section of \((TM \otimes TM)^{\ast} \) which is a positive definite inner product on \(T_p M\) for each \(p \in M\).
+    
+    That is for each \(p \in M\), \(g : T_{p}M \times T_p M \to  \mathbb{R}  \) is a positive definite inner product which depends smoothly on \(p\).   
+
+    In local coordinates \(x^1, \dots , x^n\) we define \begin{align*}
+        g \left( \frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}  \right) = g_{ij}
+    \end{align*} 
+    and for each \(p\), the matrix \(g_{ij}(p)\) is symmetric with positive eigenvalues. \textred{Prove that this is the same as positive definiteness of the inner product defined.}
+\end{definition}
+
+\begin{remark}
+    Notice that just like a 2-form, it is a smooth section of \((TM \otimes TM)^{\ast} \), but it is not alternating - instead it is a positive definite inner product (so actually symmetric!). 
+\end{remark}
+
+\begin{exercise}{}[\textred{Not done}]
+    If \(g\) and \(g^{\prime} \) are two Riemannian metrics on \(M\), then \begin{align*}
+        (1 - t)g + t g^{\prime} 
+    \end{align*} 
+    is also a Riemannian metric on \(M\) for each \(t \in [0, 1]\).
+\end{exercise}
+
+\begin{corollary}
+    One can put a Riemannian metric on every smooth manifold.
+\end{corollary}
+\begin{proof}
+    Idea: Use above exercise + partitions of unity for an atlas.
+\end{proof}
+
+\subsubsection{Volume Forms}
+\begin{definition}[Volume Form]
+    Let \(M\) be an oriented \(n\)-dimensional smooth manifold with a Riemannian metric \(g\). Define the \textbf{volume form} \(d \operatorname{vol}_g  \in \Omega ^{n} (M)\) as follows: 
+    
+    If \(p \in M\) and \(e_1, \dots ,e_n\) is a basis for \(T_p M\) which is oriented and orthonormal w.r.t. \(g\), then \begin{align*}
+        d\operatorname{vol} _g  (e_1, \dots , e_n ) = 1
+    \end{align*}   
+
+    This makes sense independently of the choice of the oriented orthonormal basis because every \(A \in SO(n)\) has determinant 1, and by the orthonormal requirement we know that every change of basis matrix between the orientations isn't just positive, but in fact 1, i.e. a rotation.
+\end{definition}
+
+\begin{exercise}{(\textred{Not done})}[Volume form in local coordinates]
+    If \(x^1, \dots , x^n\) are oriented local coordinates, then \begin{align*}
+        d\operatorname{vol} _g = \sqrt{\det g_{ij} } dx^1 \cdots dx^n 
+    \end{align*} 
+\end{exercise}
+
+\begin{definition}[Integration of 0-forms]
+    Define the integral of a compactly supported smooth function \(f: M \to \mathbb{R}\) by \begin{align*}
+        \int _M f = \int _M f d\operatorname{vol} _g.
+    \end{align*}
+    E.g. if \(M\) is compact, then \begin{align*}
+        \operatorname{vol} (M) = \int _ M 1 = \int _M d\operatorname{vol} _g
+    \end{align*}
+
+    Compact manifolds have a well-defined notion of volume!
+\end{definition}
+
+\subsubsection{Divergence and the Divergence Theorem}
+\begin{definition}[Divergence of a vector field]
+    Let \((M, g)\) be an \(n\)-dimensional oriented Riemannian manifold. Let \(V \in \mathfrak{X} (M)\). Define the \textbf{divergence} of \(V\), which is a function \(\operatorname{div} (V): M \to  \mathbb{R} \), by \begin{align*}
+        \boxed{d ( \imath _V ( d \operatorname{vol} _g)) = \operatorname{div} (V) d \operatorname{vol} _g} 
+    \end{align*}    
+\end{definition}
+
+\begin{exercise}{(\textred{Not done})}[Euclidean divergence]
+    Let \(M = \mathbb{R} ^n\) with the Euclidean metric, \(V = V^i \frac{\partial }{\partial x^i} \) and \(d \operatorname{vol} _g = dx^1 \cdots dx^n\). Show that you recover the "usual notion" of divergence from multivariable calculus.   
+\end{exercise}
+
+\begin{theorem}[Divergence Theorem]
+    Let \(M\) be a compact oriented \(n\)-dimensional Riemannian manifold with boundary. Let \(V \in \mathfrak{X} (M)\). For \(p \in \partial M\), let \(\eta _p \in T_p M\) be the \textred{outward unit normal vector}, i.e. \(\eta _p \perp T_p \partial M\), \(\eta _p\) points out of \(M\) and \(|| \eta _p ||_g = 1\). Then \begin{align*}
+        \boxed{\int _M \operatorname{div} (V) = \int _{\partial M} V \cdot_g \eta }
+    \end{align*}
+    The right hand side is called "the flux of \(V\) out of \(M\)".     
+\end{theorem}
+
+\begin{exercise}{\textred{(Not done)}}
+    Show that this recovers the usual notion in \(\mathbb{R} ^n\) with the Euclidean metric. 
+\end{exercise}
+
+\begin{proof}
+    \textred{Do this sometime!}.
+    Outline: Define an \((n-1)\)-form \(\alpha\) on \(M\) by \(\alpha = \imath _V (d\operatorname{vol} _g)\). Invoke Stoke's theorem and show that the LHS and RHS give you the desired equality.
+
+    Then Huthcings had some comments I didn't quite appreciate yet:
+
+    Need to show \begin{align*}
+        \int _{\partial M} \alpha  = \int  _{\partial M} V \cdot \eta 
+    \end{align*}
+    where (either this is the definition, or this is a further thing we prove) \begin{align*}
+        \int _{\partial M} V \cdot \eta = \int _{\partial M} (V \cdot \eta ) d\operatorname{vol} _g (\partial M)
+    \end{align*}
+    He then noted that the Riemannian metric on \(M\) restricts to a Riemannian metric on \(\partial M\), which is why we reuse the notation.
+    
+    Furthermore, he also noted that in reality, since \(\alpha \in \Omega ^{n - 1} (M)\) and \textbf{not} in \(\Omega ^{n- 1}(\partial M)\), we actually mean by Stoke's that \begin{align*}
+        \int _M d \alpha = \int _{\partial M} \iota ^{\ast} \alpha 
+    \end{align*}   
+    where \(\iota : \partial M \hookrightarrow M\) is the inclusion map.
+    
+    After this, he said that it is enough to show that on \(\partial M\), we have 
+    \begin{align*}
+        \iota ^{\ast} \alpha = (V \cdot \eta ) d\operatorname{vol} _g (\partial M)
+    \end{align*}
+
+    For both forms to be the same, they need to act similarly on all possible tangent vectors. 
+
+    \textred{See your lecture notes from today on p. 7 for the final arguments if you get stuck. I didn't understand the conclusion at least.}
+\end{proof}
+
+\subsubsection{Chain Complexes and de Rham cohomology}
+\begin{definition}[Chain Complex]
+    A (co)\textbf{chain} complex of modules over a ring \(R\) (for us, real vector spaces) is a sequence of modules and linear maps \begin{align*}
+        \cdots  \xlongrightarrow[]{d} C^0  \xlongrightarrow[]{d} C^1  \xlongrightarrow[]{d} C^2  \xlongrightarrow[]{d} C^3  \xlongrightarrow[]{d} \cdots 
+    \end{align*}
+    such that \(d \circ d = 0\). We call \(d\) the differential (the inspiration is quite clear).  
+\end{definition}
+
+\begin{remark}
+    Complexes lets you define cohomology. \textred{Look into this!}
+\end{remark}
+
+\begin{definition}[The de Rham complex and cohomology]
+    Let \(M\) be an \(n\)-dimensional smooth manifold. We then have the \textbf{de Rham complex} \begin{align*}
+        0 \xlongrightarrow[]{d} \Omega ^0 (M) \xlongrightarrow[]{d} \Omega ^1 (M)  \xlongrightarrow[]{d} \cdots   \xlongrightarrow[]{d}\Omega ^{n - 1} (M) \xlongrightarrow[]{d}\Omega ^{n} (M) \xlongrightarrow[]{d} 0
+    \end{align*} 
+
+    Define the \textbf{\(k^{\text{th}}\) de Rham cohomology} as \begin{align*}
+        H^k _{\text{dR}} \left(M\right) = \frac{\ker (d : \Omega ^k (M) \to \Omega ^{k + 1} (M))}{\Im (d: \Omega ^{k - 1}(M) \to \Omega ^k (M))} = \frac{\left\{  \text{ closed } k \text{-forms } \right\}}{\left\{  \text{ exact } k \text{-forms } \right\}}
+    \end{align*}
+    which is a quotient space of real vector spaces.
+\end{definition}
+
+\begin{remark}
+    We have already shown a few lectures ago that \(d \circ d = 0\) where \(d\) now is the differential operator on \(k\)-forms. Furthermore, real vector spaces are (more than) modules over a ring. So we have a complex. 
+    
+    Finally the reason why the de Rham cohomology is a quotient space of real vector spaces, which requires that the space we quotient by is a subspace of the space on top, is that because \(d \circ d = 0\), reading the definitions starting on the bottom, we see that indeed \begin{align*}
+        \Im (d: \Omega ^{k - 1}(M) \to \Omega ^k (M))\subseteq \ker (d : \Omega ^k (M) \to \Omega ^{k + 1} (M))
+    \end{align*} 
+    Note that this is \textbf{not} an equality. I.e. in general there's no reason why we shouldn't be able to find \(k\)-forms annihilated by the differential operator which don't come from the differential of some \((k-1)\)-form. 
+    
+    To the extent that we fail to have equality is actually the whole idea with studying de Rham cohomology, and it will lead to some interesting results.
+\end{remark}
 
 \end{document}
 
