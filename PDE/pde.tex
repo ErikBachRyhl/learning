@@ -12,6 +12,69 @@
 \tableofcontents
 \newpage
 
+\section{Office Hours}
+
+\subsection{Week of Nov. 10}
+Smooth functions are dense in the weak topology \(\implies \) there always exists a sequence of smooth functions \begin{align*}
+    G_n \rightharpoonup  G
+\end{align*}
+where \(G_n \in C^\infty (\Omega )\) and \(G \in C^{\infty} (\Omega )^{\ast} \). This is how we will make sense of everything when our test functions aren't compactly supported on the interior.
+
+I.e. we can only apply our usual notion of weak derivative when we know that our function \(u\) is infinitely smooth \textbf{AND} compactly supported. THIS is where the notion of weak derivative applies - but not before that.
+
+\begin{example}
+    This example from last time might help:
+    Take \begin{align*}
+        f(x) = |x|
+    \end{align*}
+    Then \begin{align*}
+        \frac{\partial f}{\partial x} = \operatorname{sign}  (x)
+    \end{align*}
+    but this only makes sense away from zero. What is it at 0? Well, this doesn't matter from the perspective of weak derivatives, since if we are integrating \begin{align*}
+        \int \phi \partial _x |x| dx = \int _{-1} ^{1} (-\partial _x \phi) |x| dx
+    \end{align*}
+    where \(\phi \big|_{\pm 1} = 0 \), the integral doesn't see that single point (as far as I understood). 
+\end{example}
+
+Remember that derivatives are always "weak", and when it makes sense, they are also "strong" (i.e. normal) derivatives. In other words, the weak derivative is, not surprisingly, a weaker notion of a derivative, and hence this exists in cases even when the usual derivative doesn't work. 
+
+A clean way to think about the Laplacian is as an operator that, in the case of demanding regular solutions, is described by \begin{align*}
+    - \Delta : \mathcal{C} ^2 (\Omega : \mathbb{R} ) \to  \mathcal{C} ^0 (\Omega : \mathbb{R} )
+\end{align*}
+
+If we can find the inverse of this operator, then we can sole our PDE problems. But right now, this space is way too big and there is no inverse operator. 
+
+However, if we instead restrict the action to be only on the functions satisfying some boundary conditions, then we get a unique solution and the problem is well-posed. Let us denote this space with \(B\) as a subscript, denoting the boundary conditions
+\begin{align*}
+    -\Delta : \mathcal{C} ^2 _ B(\Omega : \mathbb{R} ) \to \mathcal{C} ^0 (\Omega : \mathbb{R} )
+\end{align*}
+where \begin{align*}
+    \mathcal{C} _B ^2 (\Omega : \mathbb{R} ) = \Set{\varphi \in \mathcal{C} ^2}{ B(\varphi ) = 0 } 
+\end{align*}
+\textred{unsure about this notation what is this \(B\)?}.
+
+In this case we can then actually find an inverse operator \begin{align*}
+ \mathbb{G} : \mathcal{C} ^0 (\Omega : \mathbb{R} ) \to \mathcal{C} ^2 _B (\Omega : \mathbb{R} )
+\end{align*}
+Note the boldface: this is \textbf{not} the Green's function, but it turns out that the operator mentioned above is exactly given by finding the correct Green's function \(G(x; y) \in \mathcal{C} ^{\infty} (\Omega \times \mathbb{R} )^{\ast} \) and then doing a convolution with \(f\) \begin{align*}
+    \mathbb{G}(f) = \int _{\Omega } G(x; y) f(y) dy,
+\end{align*}  
+solving the BVP \begin{align*}
+    \begin{dcases}
+        -\Delta u = 0\\[1.3ex]
+         u\big|_{\partial \Omega } = 0\\[1.3ex]  
+         B(\varphi ) = 0
+    \end{dcases}
+\end{align*}
+by \begin{align*}
+    u = \mathbb{G} (f) = \int _\Omega G_{\Omega , - \Delta , B}(x; y)f(y) dy.
+\end{align*}
+
+Sometimes however, we will know the solution to an adjacent or similar problem on another domain or with other boundary conditions. One can then sometimes modify the known solution to fit the problem at hand, basically by pertubation theory (finding correction terms), i.e. \begin{align*}
+    \mathbb{G} (f) = \tilde{\mathbb{G} } + A (f)
+\end{align*}
+where the LHS is the problem at hand we want to solve, and the RHS is known solution plus correction term. 
+
 \section{Borthwick Chapter 7 - Function Spaces Basics}
 
 What does it mean for a sequence of functions \(f_n\) to converge to some function \(f\)? To even answer this question, we of course need to specify some norm within we consider this convergence with respect to. Hence there will always be a norm implied when working with convergence (this is true regardless of us considering functions or regular sequences). 
@@ -389,6 +452,9 @@ Note that so far we've been saying that distributions act on any \(\mathcal{C} ^
 
 \paragraph{Abstract}
 \textred{Fourier Transform Motivation from lecture 30 last page input some here!}
+
+
+
 
 
 \end{document}
